@@ -1,0 +1,68 @@
+.dashboardHeading {
+  color: black;
+  transition-duration: 500ms;
+}
+
+.dashboardHeading:hover {
+  color: black;
+  transition-duration: 1500ms;
+  cursor: pointer;
+}
+
+.dashboardHeadingClicked {
+  border-radius: 60px 0px 0px 61px;
+  background: #fff;
+  color: black;
+  z-index: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 24px;
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+/* Customer */
+.customerSidebar{
+  box-shadow: 6px 0px 6px white;
+  margin-right: 10px;
+}
+.sidebarHeading{
+  margin-top: 4px;
+  margin-bottom: 4px;
+  transition-duration: 1000ms;
+}
+.sidebarHeading:hover{
+  /* background: rgb(102, 7, 190); */
+  background: purple;
+  border-radius: 8px;
+  transition-duration: 100ms;
+  cursor: pointer;
+}
+.offerSlider{
+  border-radius: 16px;
+  border: 1px solid rgba(18, 18, 18, 0.16);
+}
+
+.categoryItem{
+  border-radius: 30px;
+  box-shadow: 0px 6px 18px 0px rgba(48, 48, 48, 0.05);
+  /* box-shadow: 0px 27px 80px 0px rgba(48, 48, 48, 0.08); */
+}
+
+.content::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.sidebarBackground{
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(34, 15, 130, 0.62) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  color: white;
+  overflow: hidden;
+}

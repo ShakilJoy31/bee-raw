@@ -1,0 +1,23 @@
+.tableRoomInput {
+    border-radius: 8px;
+    border: 1px solid rgba(18, 18, 18, 0.15);
+    background: white;
+  }
+  
+  .customInputImageUpload {
+    border-radius: 8px;
+    border: 1px solid rgba(18, 18, 18, 0.15);
+    background: #e5e5e566;
+  }
+  
+  .customInput {
+    border-radius: 8px;
+    border: 1px solid rgba(18, 18, 18, 0.16);
+    background: rgba(229, 229, 229, 0.4);
+  }
+  
+  .customInputSelect{
+    border-radius: 8px;
+    background: rgba(229, 229, 229, 0.179);
+  }
+  
