@@ -25,7 +25,7 @@ const Page = () => {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
                 
                 {
-                    products?.map((product, index) => <div className="card w-full glass">
+                    products?.map((product, index) => <div key={index} className="card w-full glass">
                     <figure><img src={product.productPicture[0]} alt="car!"/></figure>
                     <div className="p-4">
                       <h2 className="card-title mb-3">{product.title}</h2>
