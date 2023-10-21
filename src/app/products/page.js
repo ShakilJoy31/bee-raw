@@ -19,7 +19,7 @@ const Page = () => {
     useEffect(()=>{
         CustomerAPI.handleGettingProducts().then(res => setProducts(res));
     },[])
-    console.log(products); 
+    console.log(products);
     return (
         <div>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
