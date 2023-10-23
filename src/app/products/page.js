@@ -25,17 +25,30 @@ const Page = () => {
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
                 
                 {
-                    products?.map((product, index) => <div key={index} className="card w-full glass">
-                    <figure><img src={product.productPicture[0]} alt="car!"/></figure>
-                    <div className="p-4">
-                      <h2 className="card-title mb-3">{product.title}</h2>
+                    products?.map((product, index) => <div style={{
+                        borderRadius: '8px'
+                    }} key={index} className="w-full glass">
+                        <div className='lg:h-72'>
+                        <figure><img src={product.productPicture[0]} alt="car!" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                        </div>
+                    
+                    
+                    <div className=''>
+                    <div className="lg:px-4 px-1">
+                      <h2 className="mb-3 lg:h-12 h-20">{product.title}</h2>
                       <div className="flex justify-between items-center">
                       <p>{product.price}</p>
-                        <button className="btn btn-primary">Buy Now</button>
+                        <button className="btn btn-primary btn-sm lg:btn-md">Buy Now</button>
                       </div>
                     </div>
-                    <div>
-                    <button className="btn btn-outline btn-error w-full normal-case">Add to cart</button>
+
+
+                    <div className='mt-20'>
+                    <button style={{
+                        position: 'absolute',
+                        bottom: '0'
+                    }} className="btn btn-outline btn-error w-full normal-case">Add to cart</button>
+                    </div>
                     </div>
                   </div>)
                 }
