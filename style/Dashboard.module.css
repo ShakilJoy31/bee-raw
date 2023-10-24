@@ -66,3 +66,18 @@
   color: white;
   overflow: hidden;
 }
+
+
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  transition: transform 0.3s ease;
+}
+
+.imageContainer:hover img {
+  cursor: pointer;
+  transform: scale(1.2);
+}

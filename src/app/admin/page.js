@@ -42,7 +42,8 @@ const Page = () => {
             category: category,
             availability: availability,
             description: description,
-            productPicture: hostedImages
+            productPicture: hostedImages,
+            quantity: 1
         }
         AdminAPI.postingProducts(productData).then(res => console.log(res))
         console.log(productData);

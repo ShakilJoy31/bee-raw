@@ -1,24 +1,47 @@
 "use client"
 import React from 'react';
-import DashboardCSS from "../../style/Dashboard.module.css";
-import { BsCameraFill, BsDashCircleDotted, BsEarbuds, BsFan, BsFillCalculatorFill, BsFillSpeakerFill, BsRouterFill, BsSunglasses, BsUsbDriveFill, BsWatch } from 'react-icons/bs';
-import { GiEarbuds, GiLightBulb, GiOldMicrophone } from 'react-icons/gi';
-import { MdIron, MdLuggage, MdSell } from 'react-icons/md';
-import { TbFridge } from 'react-icons/tb';
-import { BiSolidMemoryCard, BiSolidWebcam } from 'react-icons/bi';
-import { FaBlender } from 'react-icons/fa';
-import { ImHeadphones } from 'react-icons/im';
-import { RiWebcamFill } from 'react-icons/ri';
-import { LuCable } from 'react-icons/lu';
+
 import { useRouter } from 'next/navigation';
+import {
+  BiSolidMemoryCard,
+  BiSolidWebcam,
+} from 'react-icons/bi';
+import {
+  BsCameraFill,
+  BsDashCircleDotted,
+  BsEarbuds,
+  BsFan,
+  BsFillCalculatorFill,
+  BsFillSpeakerFill,
+  BsSunglasses,
+  BsUsbDriveFill,
+  BsWatch,
+} from 'react-icons/bs';
+import { FaBlender } from 'react-icons/fa';
+import {
+  GiEarbuds,
+  GiLightBulb,
+  GiOldMicrophone,
+} from 'react-icons/gi';
+import { ImHeadphones } from 'react-icons/im';
+import { LuCable } from 'react-icons/lu';
+import {
+  MdIron,
+  MdLuggage,
+  MdSell,
+} from 'react-icons/md';
+import { RiWebcamFill } from 'react-icons/ri';
+import { TbFridge } from 'react-icons/tb';
+
+import DashboardCSS from '../../style/Dashboard.module.css';
 
 const CustomerSidebar = () => {
     const router = useRouter(); 
     return (
         <div className={`h-full w-[320px]`}>
-            <div style={{ overflow: 'hidden' }} className={`h-full text-black ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
-                <img onClick={()=> router.push('/products')} className="block mx-auto py-[
-                    6px] w-[150px] h-[100px]" src='https://i.ibb.co/grM5C0K/IMG-20230923-145307-1-removebg-preview.png
+            <div style={{ overflow: 'hidden' }} className={`h-full text-white ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
+                <img style={{width: '150px', height: '100px'}} onClick={()=> router.push('/products')} className="block mx-auto py-[
+                    6px] hover:cursor-pointer" src='https://i.ibb.co/grM5C0K/IMG-20230923-145307-1-removebg-preview.png
                     ' alt="" />
                 {/* <h1 style={{color: 'purple'}} className='flex justify-center font-mono text-3xl font-bold py-[24px]'>Bee Raw</h1> */}
 
