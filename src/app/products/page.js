@@ -7,6 +7,7 @@ import React, {
 import { useRouter } from 'next/navigation';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
+import Spinner from '@/Components/Spinner';
 
 import DashboardCSS from '../../../style/Dashboard.module.css';
 import { UserStore } from '../../../userStore';
@@ -34,7 +35,7 @@ const Page = () => {
         if (!isAlreadyInCart) {
             cart.push(newParticularMenu);
             localStorage.setItem("beeRawCart", JSON.stringify(cart));
-            // router.push('/customer/cart');
+            setUser(cart);
         } else {
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
@@ -42,8 +43,9 @@ const Page = () => {
     }
     console.log(products);
     return (
-        <div>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
+        <div className='h-full'>
+            {
+                products.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
                 
                 {
                     products?.map((product, index) => <div style={{
@@ -79,6 +81,8 @@ const Page = () => {
                 
                 
             </div>
+            }
+            
 
 
             <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
@@ -99,24 +103,6 @@ const Page = () => {
 };
 
 export default Page;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,17 +1,21 @@
 "use client"
-import CustomerSidebar from '../Components/CustomerSidebar';
-import './globals.css'
-import { Inter } from 'next/font/google'
+import './globals.css';
+
 import React from 'react';
-import DashboardCSS from "../../style/Dashboard.module.css";
-import MyServiceCSS from "../../style/MyServiceCSS.module.css";
-import { BiSearch } from 'react-icons/bi';
-import { verificationFieldsRound } from '@/constants/speceing';
-import { HiOutlineMicrophone } from 'react-icons/hi';
-import { BsArrowLeft, BsMinecartLoaded } from 'react-icons/bs';
-import { IoMdNotificationsOutline } from 'react-icons/io';
+
+import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
+import { BiSearch } from 'react-icons/bi';
+import { BsMinecartLoaded } from 'react-icons/bs';
+import { HiOutlineMicrophone } from 'react-icons/hi';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+
+import { verificationFieldsRound } from '@/constants/speceing';
+
+import DashboardCSS from '../../style/Dashboard.module.css';
+import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../userStore';
+import CustomerSidebar from '../Components/CustomerSidebar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,16 +25,18 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 export default function RootLayout({ children }) {
+    // const { user, setUser } = UserStore.useContainer();
   const router = useRouter();
+//   console.log(user);
   return (
+    <UserStore.Provider>
     <html lang="en">
        <body style={{background: 'black'}} className='text-white'>
-        <UserStore.Provider>
         <div className="flex">
               <div style={{position: 'fixed', height: '100%'}} className='hidden lg:block'>
               <CustomerSidebar></CustomerSidebar>
               </div>
-
+              
               <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
               <div>
                 <div className="flex justify-between items-center pt-[24px]">
@@ -73,9 +79,9 @@ export default function RootLayout({ children }) {
               {children}
             </div>
           </div>
-        </UserStore.Provider>
            
       </body>
     </html>
+     </UserStore.Provider>
   )
 }

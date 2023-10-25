@@ -1,11 +1,14 @@
 "use client"
+import React from 'react';
+
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { BiSearch } from 'react-icons/bi';
 import { BsArrowLeft } from 'react-icons/bs';
-// import { CustomerAPI } from '@/redux/sagas/customerAPI';
-import EmptyCartComponent from '@/Components/EmptyCartComponent';
-import Divider from '@/Components/Divider';
+
 import Button from '@/Components/button';
+import { verificationFieldsRound } from '@/constants/speceing';
+
+import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../../userStore';
 
 const Page = () => {
@@ -35,6 +38,158 @@ console.log(user);
                 </div>
                 
                 </div>
+
+
+                <div>
+
+                    <div>
+                        <h1>Receiever Name</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+
+                    <div className='my-3'>
+                        <h1>Full address</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+                    <div>
+                        <h1>Phone number</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+                    <div className='my-3'>
+                        <h1>Email (optional)</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+                    <div>
+                        <h1>Inside dhaka or outside dhaka.</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+                    <div className='my-3'>
+                        <h1>Color</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+
+
+                    <div>
+                        <h1>Payment Transaction id</h1>
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                        <span className="mx-3">
+                            <BiSearch color={'purple'} size={25}></BiSearch>
+                        </span>
+                        <input
+                            style={{
+                                borderRadius: verificationFieldsRound,
+                                background: 'white',
+                            }}
+                            placeholder="Search for anything"
+                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            type="text"
+                            name=""
+                            id=""
+                        />
+                    </div>
+                    </div>
+                    
+                </div>
                 
     
                 <div className='mt-[48px] flex justify-end'>
@@ -51,11 +206,11 @@ console.log(user);
                             <p className='ml-2'>60-120 Taka</p>
                         </div>
     </div>
-                </div>
+                </div> 
     
                 
                 <div className='flex items-center justify-center gap-x-[48px] pb-[66px] mt-[48px]'>
-                    <div>
+                    <div onClick={()=> router.push('/products')}>
                         <Button background='#DC3545' width='250px'><span className='text-white'>Cancel</span></Button>
                     </div>
     
