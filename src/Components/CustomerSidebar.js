@@ -38,7 +38,7 @@ import DashboardCSS from '../../style/Dashboard.module.css';
 const CustomerSidebar = () => {
     const router = useRouter(); 
     return (
-        <div className={`h-full w-[320px] bg-black`}>
+        <div style={{background: 'black', width: '320px'}} className={`h-full`}>
             <div style={{ overflow: 'hidden' }} className={`h-full text-white ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
                 <img style={{width: '150px', height: '100px'}} onClick={()=> router.push('/products')} className="block mx-auto py-[
                     6px] hover:cursor-pointer" src='https://i.ibb.co/grM5C0K/IMG-20230923-145307-1-removebg-preview.png
