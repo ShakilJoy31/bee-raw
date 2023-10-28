@@ -1,16 +1,26 @@
 "use client"
-import { blackColor, uploadingImageBG } from '@/constants/color-constants';
-import { dashboardBottomHead, otpInputBorderRadius, relativePosition } from '@/constants/font-constants';
-import HomeComponentCss from "../../../style/ComponentStyle.module.css";
 import React, { useState } from 'react';
-import { uploadImageSymbol, url } from '@/constants/image-constants';
+
+import { useRouter } from 'next/navigation';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
+
 import { AdminAPI } from '@/APIcalling/adminAPI';
+import { blackColor } from '@/constants/color-constants';
+import {
+  dashboardBottomHead,
+  otpInputBorderRadius,
+  relativePosition,
+} from '@/constants/font-constants';
+import { url } from '@/constants/image-constants';
+
+import HomeComponentCss from '../../../style/ComponentStyle.module.css';
 
 const Page = () => {
+    const router = useRouter();
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
+    const [offerPrice, setOfferPrice] = useState('');
     const [offer, setOffer] = useState('');
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('Best seller');
@@ -37,6 +47,7 @@ const Page = () => {
         const productData = {
             title: title,
             price: price,
+            offerPrice: offerPrice,
             offer: offer,
             color: color,
             category: category,
@@ -45,8 +56,9 @@ const Page = () => {
             productPicture: hostedImages,
             quantity: 1
         }
-        AdminAPI.postingProducts(productData).then(res => console.log(res))
-        console.log(productData);
+        AdminAPI.postingProducts(productData).then(res => {
+
+        })
     }
     const handleRemoveImage = (getImage) => {
         console.log(getImage);
@@ -67,7 +79,9 @@ const Page = () => {
     return (
         <div className='mt-[24px]'>
 
-            <div className='flex justify-end'>
+            <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
+            <button onClick={()=> router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
+
                 <button onClick={handleSubmitProduct} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
             </div>
 
@@ -81,8 +95,16 @@ const Page = () => {
 
             <div>
                 <div>
-                    <span className=''>Price</span>
+                    <span className=''>Main Price</span>
                     <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+                </div>
+            </div>
+
+
+            <div>
+                <div>
+                    <span className=''>Offer Price(Will be cut)</span>
+                    <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
                 </div>
             </div>
 

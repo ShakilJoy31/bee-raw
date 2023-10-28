@@ -7,9 +7,11 @@ import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 import { BiSearch } from 'react-icons/bi';
 import { BsMinecartLoaded } from 'react-icons/bs';
-import { HiOutlineMicrophone } from 'react-icons/hi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
+import { LuMenu } from 'react-icons/lu';
+import { MdSupportAgent } from 'react-icons/md';
 
+// import { SlMenu } from 'react-icons/si';
 import { verificationFieldsRound } from '@/constants/speceing';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
@@ -39,8 +41,38 @@ export default function RootLayout({ children }) {
               
               <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
               <div>
-                <div className="flex justify-between items-center pt-[24px]">
-                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
+                    {/* For mobile user */}
+                    <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
+                        <div>
+                        <span className='hover:cursor-pointer'><LuMenu color={'white'}
+                            size={25}></LuMenu></span>
+                        </div>
+
+                        <div>
+                        <img onClick={()=> router.push('/products')} className="block mx-auto hover:cursor-pointer w-[180px] h-[60px]" src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" /> 
+                        </div>
+
+                        <span className=''>
+                            <IoMdNotificationsOutline
+                                 color={'white'}
+                                size={30}
+                            ></IoMdNotificationsOutline>
+                        </span>
+
+                        <span className=''>
+                            <MdSupportAgent
+                                 color={'white'}
+                                size={30}
+                            ></MdSupportAgent>
+                        </span>
+
+                        <span className='hover:cursor-pointer' onClick={()=> router.push('/cart')}><BsMinecartLoaded  color={'white'}
+                            size={25}></BsMinecartLoaded></span>
+
+                    </div>
+
+                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
                         <span className="mx-3">
                             <BiSearch color={'purple'} size={25}></BiSearch>
                         </span>
@@ -49,29 +81,26 @@ export default function RootLayout({ children }) {
                                 borderRadius: verificationFieldsRound,
                                 background: 'white',
                             }}
-                            placeholder="Search for anything"
-                            className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                            placeholder="Type product's title here"
+                            className="w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                             type="text"
                             name=""
                             id=""
                         />
-                        <span className="mx-3">
-                            <HiOutlineMicrophone color={'purple'} size={25}></HiOutlineMicrophone>
-                        </span>
                     </div>
 
                     <div className="lg:flex items-center hidden">
 
-                        <span className='hover:cursor-pointer' onClick={()=> router.push('/cart')}><BsMinecartLoaded  color={'purple'}
+                        <span className='hover:cursor-pointer' onClick={()=> router.push('/cart')}><BsMinecartLoaded  color={'white'}
                             size={25}></BsMinecartLoaded></span>
 
                         <span className='mx-[24px]'>
                             <IoMdNotificationsOutline
-                                 color={'purple'}
+                                 color={'white'}
                                 size={30}
                             ></IoMdNotificationsOutline>
                         </span>
-                        <i style={{color: 'purple', fontFamily: 'monospace'}} className='text-xl'>Be Raw, Buy Raw</i>
+                        <i style={{color: 'white', fontFamily: 'monospace'}} className='text-xl'>Be Raw, Buy Raw</i>
                         
                     </div>
                 </div>

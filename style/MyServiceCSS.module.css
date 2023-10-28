@@ -1,46 +1,43 @@
 .tableRoomInput {
-    border-radius: 8px;
-    border: 1px solid rgba(18, 18, 18, 0.15);
-    background: white;
-  }
-  
-  .customInputImageUpload {
-    border-radius: 8px;
-    border: 1px solid rgba(18, 18, 18, 0.15);
-    background: #e5e5e566;
-  }
-  
-  .customInput {
-    border-radius: 8px;
-    border: 1px solid rgba(18, 18, 18, 0.16);
-    background: rgba(229, 229, 229, 0.4);
-  }
-  
-  .customInputSelect{
-    border-radius: 8px;
-    background: rgba(229, 229, 229, 0.179);
-  }
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.15);
+  background: white;
+}
 
+.customInputImageUpload {
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.15);
+  background: #e5e5e566;
+}
 
+.customInput {
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.16);
+  background: rgba(229, 229, 229, 0.4);
+}
 
-  .spinner {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 8px solid black;
-    border-top-color: white;
-    animation: spin 0.8s ease-in-out infinite;
+.customInputSelect {
+  border-radius: 8px;
+  background: rgba(229, 229, 229, 0.179);
+}
+
+.spinner {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 8px solid black;
+  border-top-color: white;
+  animation: spin 0.8s ease-in-out infinite;
 }
 
 /* border: 5px solid #247f9e;
 border-top-color: white; */
 
 @keyframes spin {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0);
   }
-  
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,9 @@
+.orderRow{
+    transition-duration: 1500ms;
+}
+
+.orderRow:hover{
+    background: purple;
+    transition-duration: 60ms;
+    cursor: pointer;
+}

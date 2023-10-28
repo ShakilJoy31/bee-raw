@@ -1,5 +1,10 @@
-import { BASE_URL, productsGettingAPI } from "@/constants/routeConstants";
-import axios from "axios";
+import axios from 'axios';
+
+import {
+  BASE_URL,
+  placedOrderAPI,
+  productsGettingAPI,
+} from '@/constants/routeConstants';
 
 const handleGettingProducts = async () => {
     const axiosInstance = axios.create({
@@ -14,7 +19,21 @@ const handleGettingProducts = async () => {
     }
   };
 
+const userInformationForPlacOrderProduct = async (payload) => {
+    const axiosInstance = axios.create({
+        baseURL: BASE_URL
+      });
+    try {
+      const response = await axiosInstance.post(placedOrderAPI, payload);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+  };
+
 
   export const CustomerAPI = {
-    handleGettingProducts
+    handleGettingProducts,
+    userInformationForPlacOrderProduct
   }
