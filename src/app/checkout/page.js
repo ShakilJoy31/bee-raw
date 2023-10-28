@@ -228,7 +228,7 @@ const Page = () => {
                             </thead>
                             <tbody>
                                 {
-                                    user?.map((product, index) => <tr>
+                                    user?.map((product, index) => <tr key={index}>
                                         <th><span className='flex justify-center'>{index + 1}</span></th>
                                         <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '50%' }} className='rounded-full w-10 h-10' /></span></td>
                                         <td><span className='flex justify-center'>{product.title}</span></td>
