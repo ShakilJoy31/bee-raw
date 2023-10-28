@@ -38,12 +38,11 @@ import DashboardCSS from '../../style/Dashboard.module.css';
 const CustomerSidebar = () => {
     const router = useRouter(); 
     return (
-        <div className={`h-full w-[320px]`}>
+        <div className={`h-full w-[320px] bg-black`}>
             <div style={{ overflow: 'hidden' }} className={`h-full text-white ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
                 <img style={{width: '150px', height: '100px'}} onClick={()=> router.push('/products')} className="block mx-auto py-[
                     6px] hover:cursor-pointer" src='https://i.ibb.co/grM5C0K/IMG-20230923-145307-1-removebg-preview.png
                     ' alt="" />
-                {/* <h1 style={{color: 'purple'}} className='flex justify-center font-mono text-3xl font-bold py-[24px]'>Bee Raw</h1> */}
 
                 <div className={`${DashboardCSS.content} pb-8`} style={{ overflowY: 'scroll', height: '90vh' }}>
                     <div onClick={()=>router.push('/products/best-seller')}
@@ -71,7 +70,7 @@ const CustomerSidebar = () => {
                     <div onClick={()=> router.push('/products/tripod')}
                         className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading}`}
                     >
-                        <img src="https://i.ibb.co/HCN5nDF/tripod-icon-white-vector-16068940-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
+                        <img style={{width: '28px', height: '28px'}} src="https://i.ibb.co/HCN5nDF/tripod-icon-white-vector-16068940-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
                         <p>Tripod</p>
                     </div>
 
@@ -112,7 +111,7 @@ const CustomerSidebar = () => {
                     <div  onClick={()=> router.push('/products/fan')}
                         className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading}`}
                     >
-                       <img src="https://i.ibb.co/ChpPqSy/clipper-icon-white-vector-16108954-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
+                       <img style={{width: '28px', height: '28px'}} src="https://i.ibb.co/ChpPqSy/clipper-icon-white-vector-16108954-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
                         <p>Trimmer</p>
                     </div>
 

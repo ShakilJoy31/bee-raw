@@ -44,9 +44,18 @@ export default function RootLayout({ children }) {
                 <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
                     {/* For mobile user */}
                     <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
+
                         <div>
-                        <span className='hover:cursor-pointer'><LuMenu color={'white'}
-                            size={25}></LuMenu></span>
+                        <div className="drawer">
+  <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+  <div className="drawer-content">
+    <label htmlFor="my-drawer" className="drawer-button"><span className='hover:cursor-pointer'><LuMenu color={'white'} size={25}></LuMenu></span></label>
+  </div> 
+  <div style={{zIndex: '1'}} className="drawer-side">
+    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+    <CustomerSidebar></CustomerSidebar>
+  </div>
+</div>
                         </div>
 
                         <div>
