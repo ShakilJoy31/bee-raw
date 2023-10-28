@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
                                 borderRadius: verificationFieldsRound,
                                 background: 'white',
                             }}
-                            placeholder="Type product's title here"
+                            placeholder="Type product title here"
                             className="w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                             type="text"
                             name=""
