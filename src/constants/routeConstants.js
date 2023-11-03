@@ -2,7 +2,7 @@
 // export const BASE_URL = 'https://tradesent-server.onrender.com';
 
 // Development URL
-export const BASE_URL = 'http://localhost:5000';
+export const BASE_URL = 'https://tradesent-server.onrender.com';
 
 
 
