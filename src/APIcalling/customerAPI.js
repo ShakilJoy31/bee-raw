@@ -19,6 +19,22 @@ const handleGettingProducts = async () => {
     }
   };
 
+  const handleGettingProduct = async (productId) => {
+    const axiosInstance = axios.create({
+      baseURL: BASE_URL
+    });
+  
+    try {
+      const response = await axiosInstance.get(`/get-product/${productId}`);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
+
 const userInformationForPlacOrderProduct = async (payload) => {
     const axiosInstance = axios.create({
         baseURL: BASE_URL
@@ -35,5 +51,6 @@ const userInformationForPlacOrderProduct = async (payload) => {
 
   export const CustomerAPI = {
     handleGettingProducts,
-    userInformationForPlacOrderProduct
+    userInformationForPlacOrderProduct,
+    handleGettingProduct
   }

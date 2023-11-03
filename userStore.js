@@ -1,9 +1,9 @@
-import { createContainer } from "unstated-next";
-import {useState} from 'react';
+import { useState } from 'react';
+
+import { createContainer } from 'unstated-next';
 
 function useUserStore () {
     const [user, setUser] = useState(null); 
-    console.log(user);
     return {user, setUser}; 
 }
 export const UserStore = createContainer(useUserStore);

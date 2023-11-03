@@ -55,7 +55,7 @@ const Page = () => {
             placedOrderForProduct: user
         }
         CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res => console.log(res));
-        console.log(userDataForPlaceOrder); 
+        console.log(userDataForPlaceOrder);
 
     }
     return (
@@ -84,7 +84,7 @@ const Page = () => {
                             {/* <span className="mx-3">
                                 <FaUser color={'purple'} size={25}></FaUser>
                             </span> */}
-                            <input onChange={(e)=> setName(e.target.value)}
+                            <input onChange={(e) => setName(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
@@ -103,7 +103,7 @@ const Page = () => {
                     <div className='my-3'>
                         <h1 className='mb-1'>Receiever Address</h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
-                            <input onChange={(e)=> setAddress(e.target.value)}
+                            <input onChange={(e) => setAddress(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
@@ -122,7 +122,7 @@ const Page = () => {
                         <h1 className='mb-1'>Phone number</h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
 
-                            <input onChange={(e)=> setPhoneNumber(e.target.value)}
+                            <input onChange={(e) => setPhoneNumber(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
@@ -141,7 +141,7 @@ const Page = () => {
                         <h1 className='mb-1'>Email (optional)</h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
 
-                            <input onChange={(e)=> setEmail(e.target.value)}
+                            <input onChange={(e) => setEmail(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
@@ -161,7 +161,7 @@ const Page = () => {
                         <h1 className='mb-1'>Payment Transaction id</h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
 
-                            <input onChange={(e)=> setPaymentTrId(e.target.value)}
+                            <input onChange={(e) => setPaymentTrId(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
@@ -204,11 +204,11 @@ const Page = () => {
 
                     </div>
 
-                    <div style={{background: 'purple'}} className='py-4 px-2'>
-                    <h1 style={{color: 'white'}} className=''>আমাদের ডেলিভারি চার্জ:
- ঢাকা সিটি করপোরেশনের মধ্যে -      ৬০ টাকা,
-সারা বাংলাদেশ- (পাঠাও কুরিয়ার)-  ১২০ টাকা,
-৬-৭২ ঘন্টার মধ্যে পন্য হাতে পেয়ে যাবেন🥰</h1>
+                    <div style={{ background: 'purple' }} className='py-4 px-2'>
+                        <h1 style={{ color: 'white' }} className=''>আমাদের ডেলিভারি চার্জ:
+                            ঢাকা সিটি করপোরেশনের মধ্যে -      ৬০ টাকা,
+                            সারা বাংলাদেশ- (পাঠাও কুরিয়ার)-  ১২০ টাকা,
+                            ৬-৭২ ঘন্টার মধ্যে পন্য হাতে পেয়ে যাবেন🥰</h1>
                     </div>
                 </div>
 
@@ -240,7 +240,7 @@ const Page = () => {
                         </table>
                     </div>
 
-                    <div style={{height: '100px', width: '1.5px', border: '1px solid purple'}} className='mt-4 hidden lg:block md:block'></div>
+                    <div style={{ height: '100px', width: '1.5px', border: '1px solid purple' }} className='mt-4 hidden lg:block md:block'></div>
 
                     <div className='lg:w-72 md:w-50 w-full mt-4'>
                         <div>

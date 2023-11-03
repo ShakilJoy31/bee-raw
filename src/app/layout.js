@@ -27,99 +27,99 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 export default function RootLayout({ children }) {
-    // const { user, setUser } = UserStore.useContainer();
+  // const { user, setUser } = UserStore.useContainer();
   const router = useRouter();
-//   console.log(user);
+  //   console.log(user);
   return (
     <UserStore.Provider>
-    <html lang="en">
-       <body style={{background: 'black'}} className='text-white'>
-        <div className="flex">
-              <div style={{position: 'fixed', height: '100%'}} className='hidden lg:block'>
+      <html lang="en">
+        <body style={{ background: 'black' }} className='text-white'>
+          <div className="flex">
+            <div style={{ position: 'fixed', height: '100%' }} className='hidden lg:block'>
               <CustomerSidebar></CustomerSidebar>
-              </div>
-              
-              <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
+            </div>
+
+            <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
               <div>
                 <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
-                    {/* For mobile user */}
-                    <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
+                  {/* For mobile user */}
+                  <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
 
-                        <div>
-                        <div className="drawer">
-  <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content">
-    <label htmlFor="my-drawer" className="drawer-button"><span className='hover:cursor-pointer'><LuMenu color={'white'} size={25}></LuMenu></span></label>
-  </div> 
-  <div style={{zIndex: '1'}} className="drawer-side">
-    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-    <CustomerSidebar></CustomerSidebar>
-  </div>
-</div>
+                    <div>
+                      <div className="drawer">
+                        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+                        <div className="drawer-content">
+                          <label htmlFor="my-drawer" className="drawer-button"><span className='hover:cursor-pointer'><LuMenu color={'white'} size={25}></LuMenu></span></label>
                         </div>
-
-                        <div>
-                        <img onClick={()=> router.push('/products')} className="block mx-auto hover:cursor-pointer w-[180px] h-[60px]" src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" /> 
+                        <div style={{ zIndex: '2' }} className="drawer-side">
+                          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+                          <CustomerSidebar></CustomerSidebar>
                         </div>
-
-                        <span className=''>
-                            <IoMdNotificationsOutline
-                                 color={'white'}
-                                size={30}
-                            ></IoMdNotificationsOutline>
-                        </span>
-
-                        <span className=''>
-                            <MdSupportAgent
-                                 color={'white'}
-                                size={30}
-                            ></MdSupportAgent>
-                        </span>
-
-                        <span className='hover:cursor-pointer' onClick={()=> router.push('/cart')}><BsMinecartLoaded  color={'white'}
-                            size={25}></BsMinecartLoaded></span>
-
+                      </div>
                     </div>
 
-                    <div className={`flex items-center ${MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
-                        <span className="mx-3">
-                            <BiSearch color={'purple'} size={25}></BiSearch>
-                        </span>
-                        <input
-                            style={{
-                                borderRadius: verificationFieldsRound,
-                                background: 'white',
-                            }}
-                            placeholder="Type product title here"
-                            className="w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
-                            type="text"
-                            name=""
-                            id=""
-                        />
+                    <div>
+                      <img onClick={() => router.push('/products')} className="block mx-auto hover:cursor-pointer w-[180px] h-[60px]" src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" />
                     </div>
 
-                    <div className="lg:flex items-center hidden">
+                    <span className=''>
+                      <IoMdNotificationsOutline
+                        color={'white'}
+                        size={30}
+                      ></IoMdNotificationsOutline>
+                    </span>
 
-                        <span className='hover:cursor-pointer' onClick={()=> router.push('/cart')}><BsMinecartLoaded  color={'white'}
-                            size={25}></BsMinecartLoaded></span>
+                    <span className=''>
+                      <MdSupportAgent
+                        color={'white'}
+                        size={30}
+                      ></MdSupportAgent>
+                    </span>
 
-                        <span className='mx-[24px]'>
-                            <IoMdNotificationsOutline
-                                 color={'white'}
-                                size={30}
-                            ></IoMdNotificationsOutline>
-                        </span>
-                        <i style={{color: 'white', fontFamily: 'monospace'}} className='text-xl'>Be Raw, Buy Raw</i>
-                        
-                    </div>
+                    <span className='hover:cursor-pointer' onClick={() => router.push('/cart')}><BsMinecartLoaded color={'white'}
+                      size={25}></BsMinecartLoaded></span>
+
+                  </div>
+
+                  <div className={`flex items-center ${MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
+                    <span className="mx-3">
+                      <BiSearch color={'purple'} size={25}></BiSearch>
+                    </span>
+                    <input
+                      style={{
+                        borderRadius: verificationFieldsRound,
+                        background: 'white',
+                      }}
+                      placeholder="Type product title here"
+                      className="w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
+                      type="text"
+                      name=""
+                      id=""
+                    />
+                  </div>
+
+                  <div className="lg:flex items-center hidden">
+
+                    <span className='hover:cursor-pointer' onClick={() => router.push('/cart')}><BsMinecartLoaded color={'white'}
+                      size={25}></BsMinecartLoaded></span>
+
+                    <span className='mx-[24px]'>
+                      <IoMdNotificationsOutline
+                        color={'white'}
+                        size={30}
+                      ></IoMdNotificationsOutline>
+                    </span>
+                    <i style={{ color: 'white', fontFamily: 'monospace' }} className='text-xl'>Be Raw, Buy Raw</i>
+
+                  </div>
                 </div>
-            </div>
+              </div>
               {children}
             </div>
           </div>
-           
-      </body>
-    </html>
-     </UserStore.Provider>
+
+        </body>
+      </html>
+    </UserStore.Provider>
   )
 }
