@@ -10,31 +10,55 @@ import {
   BsArrowRightCircleFill,
 } from 'react-icons/bs';
 
+import IndividualCSS from '../../style/Individual.module.css';
+import { UserStore } from '../../userStore';
 import Button from './button';
 
 const ProductSlider = ({individualProduct}) => {
+    const { user, setUser } = UserStore.useContainer()
     const router = useRouter();
     const [previewImage, setPreviewImage] = useState('');
+    const [warning, setWarning] = useState(false);   
     useEffect(()=>{
-        setPreviewImage(individualProduct?.productPicture[0])
+        setPreviewImage(individualProduct?.productPicture[0]);
     },[individualProduct?.productPicture[0]])
+    
+    setTimeout(function () {
+        if (warning) {
+            document.getElementById('alReadyExistsOnTheCartModal').close();
+            setWarning(false);
+        }
+    }, 1800);
     const handleReviewImage = (picture) =>{
         setPreviewImage(picture)
+    }
+    const handleAddToCartButton = () => {
+        const newParticularMenu = individualProduct;
+        let cart = JSON.parse(localStorage.getItem("beeRawCart")) || [];
+        const isAlreadyInCart = cart.find(item => item._id === individualProduct._id);
+        if (!isAlreadyInCart) {
+            cart.push(newParticularMenu);
+            localStorage.setItem("beeRawCart", JSON.stringify(cart));
+            setUser(cart);
+        } else {
+            document.getElementById('alReadyExistsOnTheCartModal').showModal();
+            setWarning(true)
+        }
     }
     return (
         <div>
             <div className='text-white mt-[25px]'>
-                <div className='lg:flex'>
+                <div className={`${IndividualCSS.container}`}>
                     <div>
-                        <div style={{width: '350px'}} className='flex items-center'>
-                            <div style={{ zIndex: '1', marginRight: '-12.5px' }}><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
+                        <div className={`flex items-center ${IndividualCSS.previewImage}`}>
+                            <div className={`${IndividualCSS.imageLeftArrow}`} ><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
 
                             <img className='h-[280px] w-full rounded-lg' src={previewImage} />
 
-                            <div style={{ zIndex: '1', marginLeft:'-12.5px' }}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
+                            <div className={`${IndividualCSS.imageRightArrow}`}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
                         </div>
 
-                        <div style={{marginTop: '25px', marginLeft: '12.5px'}} className='grid grid-cols-4 gap-2'>
+                        <div className={`${IndividualCSS.previewImageLittle}`}>
                             {
                                 individualProduct?.productPicture.map((picture, index)=> <img style={{width: '70px', height: '55px'}} onClick={()=>handleReviewImage(picture)} key={index} className='rounded-lg' src={picture} />)
                             }
@@ -51,19 +75,34 @@ const ProductSlider = ({individualProduct}) => {
                     </div>
                 </div>
 
-                <div className='flex items-center justify-center lg:justify-end md:justify-end gap-x-[48px] pb-[66px] mt-[48px]'>
-                    <div onClick={() => {
-                        router.push('/products')
-                    }}>
-                        <Button background='#DC3545' width='150px'><span className='text-white'>Cancel</span></Button>
+                <div className={`${IndividualCSS.decissionButton}`}>
+                    <div onClick={handleAddToCartButton}>
+                        <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
                     </div>
 
-                    <div onClick={()=> router.push('/checkout')}>
-                        <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Checkout</span></Button>
+                    <div className={`${IndividualCSS.theButton}`} onClick={()=> router.push('/checkout')}>
+                        <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
                     </div>
 
                 </div>
+
             </div>
+
+
+            {/* The warning modal to show that it is already added in the cart...... */}
+            <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: '#DC3545',
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <h3 className="flex justify-center text-white">Item already added!</h3>
+
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>);
 };
 

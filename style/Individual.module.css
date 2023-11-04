@@ -1,0 +1,101 @@
+/* Responsive styles for different screen sizes */
+
+/* Mobile devices (up to 767px) */
+@media screen and (max-width: 767px) {
+    .previewImage {
+      width: 100%
+    }
+    .imageLeftArrow{
+        z-index: 1;
+        margin-right: -12.5px;
+    }
+    .imageRightArrow{
+        z-index: 1; 
+            margin-left:-12.5px;
+    }
+    .previewImageLittle{
+        margin-top: 25px;
+        margin-left: 12.5px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    .decissionButton{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+  }
+  
+  /* Tablets (768px to 1023px) */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .container{
+        display: flex;
+    }
+    .previewImage {
+        width: 300px;
+    }
+    .imageLeftArrow{
+        z-index: 1;
+        margin-right: -12.5px;
+    }
+    .imageRightArrow{
+        z-index: 1; 
+            margin-left:-12.5px;
+    }
+    .previewImageLittle{
+        margin-top: 25px;
+        margin-left: 12.5px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    .decissionButton{
+        display: flex;
+        justify-content:end;
+        align-items: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    .theButton{
+        margin-left: 20px;
+    }
+  }
+  
+  /* Large screens (1024px and above) */
+  @media screen and (min-width: 1024px) {
+    .container{
+        display: flex;
+    }
+    .previewImage {
+        width: 350px;
+    }
+    .imageLeftArrow{
+        z-index: 1;
+        margin-right: -12.5px;
+    }
+    .imageRightArrow{
+        z-index: 1; 
+            margin-left:-12.5px;
+    }
+    .previewImageLittle{
+        margin-top: 25px;
+        margin-left: 12.5px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    .decissionButton{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        row-gap: 25px;
+    }
+    .theButton{
+        margin-left: 25px;
+    }
+  }

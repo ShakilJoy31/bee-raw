@@ -41,7 +41,6 @@ const Page = () => {
             setWarning(true)
         }
     }
-    console.log(products);
     return (
         <div className='h-full'>
             {
