@@ -26,28 +26,28 @@ const ProductSlider = ({individualProduct}) => {
             <div className='text-white mt-[25px]'>
                 <div className='lg:flex'>
                     <div>
-                        <div className='flex items-center w-[350px]'>
-                            <div style={{ zIndex: '1' }} className='mr-[-12.5px]'><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
+                        <div style={{width: '350px'}} className='flex items-center'>
+                            <div style={{ zIndex: '1', marginRight: '-12.5px' }}><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
 
                             <img className='h-[280px] w-full rounded-lg' src={previewImage} />
 
-                            <div style={{ zIndex: '1' }} className='ml-[-12.5px]'><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
+                            <div style={{ zIndex: '1', marginLeft:'-12.5px' }}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
                         </div>
 
-                        <div className='grid grid-cols-4 gap-2 mt-[25px] ml-[12.5px]'>
+                        <div style={{marginTop: '25px', marginLeft: '12.5px'}} className='grid grid-cols-4 gap-2'>
                             {
-                                individualProduct?.productPicture.map((picture, index)=> <img onClick={()=>handleReviewImage(picture)} key={index} className='w-[70px] h-[55px] rounded-lg' src={picture} />)
+                                individualProduct?.productPicture.map((picture, index)=> <img style={{width: '70px', height: '55px'}} onClick={()=>handleReviewImage(picture)} key={index} className='rounded-lg' src={picture} />)
                             }
                         </div>
                     </div>
 
 
                     {/* Information part........ */}
-                    <div className='ml-[12px]'>
-                        <h1 className='text-3xl font-bold mb-[12px]'>{individualProduct?.title}</h1>
+                    <div style={{marginLeft: '12px'}}>
+                        <h1 style={{marginBottom: '12px', fontSize: '1.875rem', fontWeight: '800'}}>{individualProduct?.title}</h1>
                         <p style={{height: '120px', overflowY: 'scroll'}}>{individualProduct?.description}</p>
-                        <p className='mt-[12px]'>Price: {individualProduct?.price}</p>
-                        <p className='mt-[12px]'>Color: {individualProduct?.price}</p>
+                        <p style={{marginTop: '12px'}}>Price: {individualProduct?.price}</p>
+                        <p style={{marginTop: '12px'}}>Color: {individualProduct?.price}</p>
                     </div>
                 </div>
 
