@@ -14,22 +14,23 @@ import IndividualCSS from '../../style/Individual.module.css';
 import { UserStore } from '../../userStore';
 import Button from './button';
 
-const ProductSlider = ({individualProduct}) => {
+const ProductSlider = ({ individualProduct }) => {
     const { user, setUser } = UserStore.useContainer()
     const router = useRouter();
     const [previewImage, setPreviewImage] = useState('');
-    const [warning, setWarning] = useState(false);   
-    useEffect(()=>{
+    const [warning, setWarning] = useState(false);
+    useEffect(() => {
         setPreviewImage(individualProduct?.productPicture[0]);
-    },[individualProduct?.productPicture[0]])
-    
+    }, [individualProduct?.productPicture[0]])
+    console.log(individualProduct);
+
     setTimeout(function () {
         if (warning) {
             document.getElementById('alReadyExistsOnTheCartModal').close();
             setWarning(false);
         }
     }, 1800);
-    const handleReviewImage = (picture) =>{
+    const handleReviewImage = (picture) => {
         setPreviewImage(picture)
     }
     const handleAddToCartButton = () => {
@@ -47,20 +48,26 @@ const ProductSlider = ({individualProduct}) => {
     }
     return (
         <div>
-            <div className='text-white mt-[25px]'>
+            <div style={{ marginTop: '25px' }} className='text-white'>
                 <div className={`${IndividualCSS.container}`}>
                     <div>
-                        <div className={`flex items-center ${IndividualCSS.previewImage}`}>
-                            <div className={`${IndividualCSS.imageLeftArrow}`} ><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
 
-                            <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
+                        <div className="indicator">
+                            <span className={`${IndividualCSS.inStock}`}>{individualProduct.availability}</span>
+                            
+                            <div className={`flex items-center ${IndividualCSS.previewImage}`}>
+                                <div className={`${IndividualCSS.imageLeftArrow}`} ><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
 
-                            <div className={`${IndividualCSS.imageRightArrow}`}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
+                                <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
+
+                                <div className={`${IndividualCSS.imageRightArrow}`}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
+                            </div>
                         </div>
+
 
                         <div className={`${IndividualCSS.previewImageLittle}`}>
                             {
-                                individualProduct?.productPicture.map((picture, index)=> <img style={{width: '70px', height: '55px', borderRadius: '8px'}} onClick={()=>handleReviewImage(picture)} key={index} src={picture} />)
+                                individualProduct?.productPicture.map((picture, index) => <img style={{ width: '70px', height: '55px', borderRadius: '8px' }} onClick={() => handleReviewImage(picture)} key={index} src={picture} />)
                             }
                         </div>
                     </div>
@@ -68,10 +75,10 @@ const ProductSlider = ({individualProduct}) => {
 
                     {/* Information part........ */}
                     <div className={`${IndividualCSS.headingLeftBorder}`}>
-                        <h1 style={{marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700'}}>{individualProduct?.title}</h1>
-                        <p style={{height: '120px', overflowY: 'scroll'}}>{individualProduct?.description}</p>
-                        <p style={{marginTop: '12px'}}>Price: {individualProduct?.price}</p>
-                        <p style={{marginTop: '12px'}}>Color: {individualProduct?.price}</p>
+                        <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>{individualProduct?.title}</h1>
+                        <p style={{ marginBottom: '12px' }}>Price: {individualProduct?.price}</p>
+                        <p style={{ height: '120px', overflowY: 'scroll' }}>{individualProduct?.description}</p>
+                        <p style={{ marginTop: '12px' }}>Color: {individualProduct?.color}</p>
                     </div>
                 </div>
 
@@ -80,7 +87,7 @@ const ProductSlider = ({individualProduct}) => {
                         <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
                     </div>
 
-                    <div className={`${IndividualCSS.theButton}`} onClick={()=> router.push('/checkout')}>
+                    <div className={`${IndividualCSS.theButton}`} onClick={() => router.push('/checkout')}>
                         <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
                     </div>
 

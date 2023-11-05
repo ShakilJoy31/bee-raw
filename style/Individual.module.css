@@ -31,6 +31,15 @@
         margin-top: 12px;
         
     }
+    .inStock{
+        position: absolute; 
+        right: -4px; 
+        top: -13px;
+        background: green; 
+        color: white; 
+        padding: 3px;
+        border-radius: 4px;
+    }
   }
   
   /* Tablets (768px to 1023px) */
@@ -65,6 +74,15 @@
     }
     .theButton{
         margin-left: 20px;
+    }
+    .inStock{
+        position: absolute; 
+        right: -10px; 
+        top: -13px;
+        background: green; 
+        color: white; 
+        padding: 3px;
+        border-radius: 4px;
     }
   }
   
@@ -101,6 +119,15 @@
     }
     .theButton{
         margin-left: 25px;
+    }
+    .inStock{
+        position: absolute; 
+        right: -10px; 
+        top: -13px;
+        background: green; 
+        color: white; 
+        padding: 3px;
+        border-radius: 4px;
     }
   }
 
