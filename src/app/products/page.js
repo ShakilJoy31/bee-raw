@@ -52,9 +52,9 @@ const Page = () => {
                         }} key={index} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
                             <div onClick={() => {
                                 {
-                                router.push(`/products/${product._id}`)
-                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                            }
+                                    router.push(`/products/${product._id}`)
+                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
                                 <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
@@ -64,20 +64,20 @@ const Page = () => {
                                 <div className='mt-4'>
                                     <div className="lg:px-4 px-1">
                                         <h2 onClick={() => {
-                                router.push(`/products/${product._id}`)
-                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                            }} className="h-16 hover:underline">{product.title}</h2>
+                                            router.push(`/products/${product._id}`)
+                                            localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                        }} className="h-16 hover:underline">{product.title}</h2>
                                         <div className="flex justify-between items-center py-4">
                                             <div className='grid'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-xl text-slate-400 mb-1' onClick={() => {
-                                router.push(`/products/${product._id}`)
-                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                            }}>{product.price} ৳</p>
+                                                    router.push(`/products/${product._id}`)
+                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                }}>{product.price} ৳</p>
 
                                                 <p className='text-xl' onClick={() => {
-                                router.push(`/products/${product._id}`)
-                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                            }}>{product.price} ৳</p>
+                                                    router.push(`/products/${product._id}`)
+                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                }}>{product.price} ৳</p>
                                             </div>
 
                                             <button onClick={() => {

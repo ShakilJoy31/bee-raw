@@ -67,7 +67,6 @@
     }
     .decissionButton{
         display: flex;
-        justify-content:end;
         align-items: center;
         margin-top: 25px;
         margin-bottom: 25px;
@@ -111,7 +110,6 @@
     }
     .decissionButton{
         display: flex;
-        justify-content: end;
         align-items: center;
         margin-top: 25px;
         margin-bottom: 25px;
@@ -142,3 +140,30 @@
     width: 100%;
     border-radius: 8px;
 }
+
+.littleImageOfProduct{
+    width: 70px; 
+    height: 55px; 
+    border-radius: 8px;
+    background: purple;
+    opacity: 0.4;
+    transition-duration: 370ms;
+}
+
+.littleImageOfProduct:hover{
+    width: 70px; 
+    height: 55px; 
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 1;
+    transition-duration: 100ms;
+}
+.littleImageOfProductSelected{
+    width: 70px; 
+    height: 55px; 
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 1;
+    transition-duration: 100ms;
+}
+

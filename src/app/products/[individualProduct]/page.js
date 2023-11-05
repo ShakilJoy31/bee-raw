@@ -33,7 +33,7 @@ const Page = () => {
         {/* <CenterMode></CenterMode> */}
         {/* <MySlider></MySlider> */}
         {
-          individualProduct?.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct}></ProductSlider>
+          individualProduct?.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
         }
       </div>
     </div>);
