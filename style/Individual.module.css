@@ -166,4 +166,13 @@
     opacity: 1;
     transition-duration: 100ms;
 }
-
+.inStockSuggestion{
+    position: absolute; 
+        right: 0; 
+        top: 0;
+        background: green; 
+        color: white; 
+        padding: 3px;
+        opacity: 0.8;
+        border-radius: 0 8px 0 8px;
+}

@@ -10,6 +10,7 @@ import {
   BsArrowRightCircleFill,
 } from 'react-icons/bs';
 
+import DashboardCSS from '../../style/Dashboard.module.css';
 import IndividualCSS from '../../style/Individual.module.css';
 import { UserStore } from '../../userStore';
 import Button from './button';
@@ -92,10 +93,10 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
 
                     {/* Information part........ */}
-                    <div className={`${IndividualCSS.headingLeftBorder}`}>
+                    <div className={`${IndividualCSS.headingLeftBorder} lg:pl-3 md:pl-2`}>
                         <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>{individualProduct?.title}</h1>
-                        <p style={{ marginBottom: '12px' }}><span style={{textDecoration: 'line-through', marginRight: '12px'}}>{'Taka '+individualProduct.offerPrice+' BDT'}</span> {'Taka '+individualProduct?.price+' BDT'}</p>
-                        
+                        <p style={{ marginBottom: '12px' }}><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct.offerPrice + ' BDT'}</span> {'Taka ' + individualProduct?.price + ' BDT'}</p>
+
                         <div className='flex items-center gap-x-6 mt-[12px]'>
                             <p>Color: </p>
                             <div className='flex items-center ml-4'>
@@ -120,93 +121,136 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                         </div>
 
                         <div className={`${IndividualCSS.decissionButton}`}>
-                    <div onClick={handleAddToCartButton}>
-                        <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
-                    </div>
+                            <div onClick={handleAddToCartButton}>
+                                <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
+                            </div>
 
-                    <div className={`${IndividualCSS.theButton}`} onClick={() => router.push('/checkout')}>
-                        <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
-                    </div>
+                            <div className={`${IndividualCSS.theButton}`} onClick={() => router.push('/checkout')}>
+                                <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
+                            </div>
 
-                </div>
+                        </div>
 
-                <div className='lg:hidden block md:hidden my-[12px]'>
-                        <p className='mb-4'>
-                            <span className='font-bold text-xl'>Feature : </span> <br></br>
-                            RAM: 196KB
-                            <br></br>
-                            ROM: 1MB+64MB
-                            <br></br>
-                            Wireless charging capability
-                            <br></br>
-                            Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
+                        <div className='lg:hidden block md:hidden my-[12px]'>
+                            <p className='mb-4'>
+                                <span className='font-bold text-xl'>Feature : </span> <br></br>
+                                RAM: 196KB
+                                <br></br>
+                                ROM: 1MB+64MB
+                                <br></br>
+                                Wireless charging capability
+                                <br></br>
+                                Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
 
-                        <p>
-                            <span className='font-bold text-xl'>Specification : </span> <br></br>
-                            Product Name : T900 Ultra smart watch
-                            <br></br>
-                            System Requirements : Android5.0+ / ios10.0+
-                            <br></br>
-                            Charge Mode : Wireless charging
-                            <br></br>
-                            Battery Capacity : 230 MAH
-                            <br></br>
-                            Standby time : 65days
-                            <br></br>
-                            Usage time : About 10 days
-                            <br></br>
-                            Button Method : Full screen touch
-                            <br></br>
-                            APP: Hiwatch Pro
-                            <br></br>
-                            Bracelet Memory : 128M
-                            <br></br>
-                            IP67 life waterproof
-                            <br></br>
-                            Screen Display : 2.02-inch IPS screen, resolution 240*286
-                        </p>
+                            <p>
+                                <span className='font-bold text-xl'>Specification : </span> <br></br>
+                                Product Name : T900 Ultra smart watch
+                                <br></br>
+                                System Requirements : Android5.0+ / ios10.0+
+                                <br></br>
+                                Charge Mode : Wireless charging
+                                <br></br>
+                                Battery Capacity : 230 MAH
+                                <br></br>
+                                Standby time : 65days
+                                <br></br>
+                                Usage time : About 10 days
+                                <br></br>
+                                Button Method : Full screen touch
+                                <br></br>
+                                APP: Hiwatch Pro
+                                <br></br>
+                                Bracelet Memory : 128M
+                                <br></br>
+                                IP67 life waterproof
+                                <br></br>
+                                Screen Display : 2.02-inch IPS screen, resolution 240*286
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                
 
-                <div className='lg:flex justify-between hidden md:hidden mt-[25px]'>
-                        <p>
-                            <span className='font-bold text-xl'>Feature : </span> <br></br>
-                            RAM: 196KB
-                            <br></br>
-                            ROM: 1MB+64MB
-                            <br></br>
-                            Wireless charging capability
-                            <br></br>
-                            Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
 
-                        <p>
-                            <span className='font-bold text-xl'>Specification : </span> <br></br>
-                            Product Name : T900 Ultra smart watch
-                            <br></br>
-                            System Requirements : Android5.0+ / ios10.0+
-                            <br></br>
-                            Charge Mode : Wireless charging
-                            <br></br>
-                            Battery Capacity : 230 MAH
-                            <br></br>
-                            Standby time : 65days
-                            <br></br>
-                            Usage time : About 10 days
-                            <br></br>
-                            Button Method : Full screen touch
-                            <br></br>
-                            APP: Hiwatch Pro
-                            <br></br>
-                            Bracelet Memory : 128M
-                            <br></br>
-                            IP67 life waterproof
-                            <br></br>
-                            Screen Display : 2.02-inch IPS screen, resolution 240*286
-                        </p>
+                <div className='lg:flex justify-between hidden md:hidden my-[25px]'>
+                    <p>
+                        <span className='font-bold text-xl'>Feature : </span> <br></br>
+                        RAM: 196KB
+                        <br></br>
+                        ROM: 1MB+64MB
+                        <br></br>
+                        Wireless charging capability
+                        <br></br>
+                        Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
+
+                    <p>
+                        <span className='font-bold text-xl'>Specification : </span> <br></br>
+                        Product Name : T900 Ultra smart watch
+                        <br></br>
+                        System Requirements : Android5.0+ / ios10.0+
+                        <br></br>
+                        Charge Mode : Wireless charging
+                        <br></br>
+                        Battery Capacity : 230 MAH
+                        <br></br>
+                        Standby time : 65days
+                        <br></br>
+                        Usage time : About 10 days
+                        <br></br>
+                        Button Method : Full screen touch
+                        <br></br>
+                        APP: Hiwatch Pro
+                        <br></br>
+                        Bracelet Memory : 128M
+                        <br></br>
+                        IP67 life waterproof
+                        <br></br>
+                        Screen Display : 2.02-inch IPS screen, resolution 240*286
+                    </p>
+                </div>
+
+
+                {/* You may also like (Suggestion part........) */}
+                <div className='mb-6'>
+                    <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>
+                    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
+                        <div style={{
+                            borderRadius: '8px',
+                            position: 'relative',
+                            zIndex: '0'
+                        }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                            <span style={{zIndex: '1'}} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
+                            <div onClick={() => {
+                                {
+                                    router.push(`/products/${individualProduct._id}`)
+                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
+                                }
+                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                            }} className={`${DashboardCSS.imageContainer}`}>
+                                <figure><img src={individualProduct.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                            </div>
+
+                            <div className=''>
+                                <div className='mt-4'>
+                                    <div className="lg:px-4 px-1">
+                                        <h2 onClick={() => {
+                                            router.push(`/products/${individualProduct._id}`)
+                                            localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
+                                        }} className="h-16 hover:underline">{individualProduct.title}</h2>
+
+                                        <div className='flex justify-center'>
+                                            <p className='my-[12px]'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct.offerPrice + ' BDT'}</span> {'Taka ' + individualProduct?.price + '.00 BDT'}</p>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
+                </div>
             </div>
 
 
