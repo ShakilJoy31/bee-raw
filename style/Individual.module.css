@@ -3,7 +3,7 @@
 /* Mobile devices (up to 767px) */
 @media screen and (max-width: 767px) {
     .previewImage {
-      width: 100%
+      width: 340px;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -26,6 +26,10 @@
         align-items: center;
         margin-top: 25px;
         margin-bottom: 25px;
+    }
+    .headingLeftBorder{
+        margin-top: 12px;
+        
     }
   }
   
@@ -99,3 +103,15 @@
         margin-left: 25px;
     }
   }
+
+
+
+  /* Without media query....... */
+  .headingLeftBorder{
+    margin-left: 12px;
+}
+.mainImage{
+    height: 280px;
+    width: 100%;
+    border-radius: 8px;
+}

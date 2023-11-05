@@ -53,22 +53,22 @@ const ProductSlider = ({individualProduct}) => {
                         <div className={`flex items-center ${IndividualCSS.previewImage}`}>
                             <div className={`${IndividualCSS.imageLeftArrow}`} ><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
 
-                            <img className='h-[280px] w-full rounded-lg' src={previewImage} />
+                            <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
 
                             <div className={`${IndividualCSS.imageRightArrow}`}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
                         </div>
 
                         <div className={`${IndividualCSS.previewImageLittle}`}>
                             {
-                                individualProduct?.productPicture.map((picture, index)=> <img style={{width: '70px', height: '55px'}} onClick={()=>handleReviewImage(picture)} key={index} className='rounded-lg' src={picture} />)
+                                individualProduct?.productPicture.map((picture, index)=> <img style={{width: '70px', height: '55px', borderRadius: '8px'}} onClick={()=>handleReviewImage(picture)} key={index} src={picture} />)
                             }
                         </div>
                     </div>
 
 
                     {/* Information part........ */}
-                    <div style={{marginLeft: '12px'}}>
-                        <h1 style={{marginBottom: '12px', fontSize: '1.875rem', fontWeight: '800'}}>{individualProduct?.title}</h1>
+                    <div className={`${IndividualCSS.headingLeftBorder}`}>
+                        <h1 style={{marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700'}}>{individualProduct?.title}</h1>
                         <p style={{height: '120px', overflowY: 'scroll'}}>{individualProduct?.description}</p>
                         <p style={{marginTop: '12px'}}>Price: {individualProduct?.price}</p>
                         <p style={{marginTop: '12px'}}>Color: {individualProduct?.price}</p>
