@@ -35,7 +35,6 @@ const Page = () => {
         {
           individualProduct?.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct}></ProductSlider>
         }
-        
       </div>
     </div>);
 };
