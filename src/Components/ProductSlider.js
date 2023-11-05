@@ -52,7 +52,7 @@ const ProductSlider = ({ individualProduct }) => {
                 <div className={`${IndividualCSS.container}`}>
                     <div>
 
-                        <div className="indicator">
+                        <div style={{position: 'relative'}}>
                             <span className={`${IndividualCSS.inStock}`}>{individualProduct.availability}</span>
                             
                             <div className={`flex items-center ${IndividualCSS.previewImage}`}>
