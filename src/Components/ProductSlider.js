@@ -5,10 +5,6 @@ import React, {
 } from 'react';
 
 import { useRouter } from 'next/navigation';
-import {
-  BsArrowLeftCircleFill,
-  BsArrowRightCircleFill,
-} from 'react-icons/bs';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import IndividualCSS from '../../style/Individual.module.css';
@@ -75,11 +71,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                             <span className={`${IndividualCSS.inStock}`}>{individualProduct.availability}</span>
 
                             <div className={`flex items-center ${IndividualCSS.previewImage}`}>
-                                <div className={`${IndividualCSS.imageLeftArrow}`} ><span><BsArrowLeftCircleFill color='red' size={25}></BsArrowLeftCircleFill></span></div>
-
                                 <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
-
-                                <div className={`${IndividualCSS.imageRightArrow}`}><span><BsArrowRightCircleFill color='red' size={25}></BsArrowRightCircleFill></span></div>
                             </div>
                         </div>
 
