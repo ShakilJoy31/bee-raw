@@ -7,6 +7,7 @@ import React, {
 import { useRouter } from 'next/navigation';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
+import Button from '@/Components/button';
 import Spinner from '@/Components/Spinner';
 
 import DashboardCSS from '../../../style/Dashboard.module.css';
@@ -49,7 +50,7 @@ const Page = () => {
                     {
                         products?.map((product, index) => <div style={{
                             borderRadius: '8px'
-                        }} key={index} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                        }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
                             <div onClick={() => {
                                 {
                                     router.push(`/products/${product._id}`)
@@ -57,18 +58,19 @@ const Page = () => {
                                 }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                                <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
                             </div>
 
                             <div className=''>
-                                <div className='mt-4'>
-                                    <div className="lg:px-4 px-1">
+                                <div className='mt-1'>
+                                    <div className="px-1">
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="h-16 hover:underline">{product.title}</h2>
-                                        <div className="flex justify-between items-center py-4">
-                                            <div className='grid'>
+                                        }} className="hover:underline">{product.title}</h2>
+                                        <div className="flex justify-between items-center">
+                                            <div className='flex justify-between items-center w-full my-2'>
+                                                <div className='lg:hidden block'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-xl text-slate-400 mb-1' onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
@@ -78,26 +80,38 @@ const Page = () => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                 }}>{product.price} ৳</p>
-                                            </div>
+                                                </div>
 
-                                            <button onClick={() => {
-                                                setUser([product]);
-                                                router.push('/checkout');
-                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                            }} className="btn btn-primary btn-sm lg:btn-md">Buy Now</button>
+                                                <p style={{ textDecoration: 'line-through' }} className='hidden lg:block text-slate-400 mb-1' onClick={() => {
+                                                    router.push(`/products/${product._id}`)
+                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                }}>{product.price} ৳</p>
+
+                                                <p className='hidden lg:block' onClick={() => {
+                                                    router.push(`/products/${product._id}`)
+                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                }}>{product.price} ৳</p>
+
+                                                <button onClick={() => {
+                                                    setUser([product]);
+                                                    router.push('/checkout');
+                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                }} className="btn btn-primary btn-xs">Buy Now</button>
+                                            </div>
                                         </div>
                                     </div>
 
 
                                     <div onClick={() => handleItemAddToCart(product)} className=''>
-                                        <button className="btn btn-outline btn-error w-full normal-case">Add to cart</button>
+                                    <Button background={'#9F5AE5'} width='100%'><span className='text-white'>Add to cart</span></Button>
+                                        
                                     </div>
                                 </div>
                             </div>
 
                         </div>)
                     }
-
+                    
 
                 </div>
             }

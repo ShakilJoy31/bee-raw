@@ -71,6 +71,8 @@
 .imageContainer {
   position: relative;
   overflow: hidden;
+  background-color: purple;
+  transition-duration: 450ms;
 }
 
 .imageContainer img {

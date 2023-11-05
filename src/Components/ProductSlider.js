@@ -47,7 +47,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
         const updatedProduct = { ...individualProduct };
         updatedProduct.quantity = updatedProduct.quantity + 1;
         setIndividualProduct(updatedProduct);
-        localStorage.setItem("beeRawCart", JSON.stringify(individualProduct));
     };
 
 
@@ -57,7 +56,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             const updatedProduct = { ...individualProduct };
             updatedProduct.quantity = updatedProduct.quantity - 1;
             setIndividualProduct(updatedProduct);
-            localStorage.setItem("beeRawCart", JSON.stringify(individualProduct));
         }
     };
     console.log(individualProduct?.description);
@@ -91,11 +89,14 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
                         <div className='flex items-center gap-x-6 mt-[12px]'>
                             <p>Color: </p>
-                            <div className='flex items-center ml-4'>
-                                {
-                                    individualProduct.color.split(',').map((color, index) => <p className='px-3 py-1 bg-purple-500 hover:bg-white mr-2 text-white hover:text-black hover:cursor-pointer' key={index}>{color}</p>)
-                                }
-                            </div>
+                            <div className={`grid grid-cols-3 gap-2 ml-4 `}>
+  {individualProduct.color.split(',').map((color, index) => (
+    <p className='px-3 py-1 bg-purple-500 hover:bg-white text-white hover:text-black hover:cursor-pointer' key={index}>
+      {color}
+    </p>
+  ))}
+</div>
+
                         </div>
 
                         {/* Counting quantity */}
