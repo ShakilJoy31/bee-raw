@@ -90,12 +90,12 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                         <div className='flex items-center gap-x-6 mt-[12px]'>
                             <p>Color: </p>
                             <div className={`grid grid-cols-3 gap-2 ml-4 `}>
-  {individualProduct.color.split(',').map((color, index) => (
-    <p className='px-3 py-1 bg-purple-500 hover:bg-white text-white hover:text-black hover:cursor-pointer' key={index}>
-      {color}
-    </p>
-  ))}
-</div>
+                                {individualProduct.color.split(',').map((color, index) => (
+                                    <p className='px-3 py-1 bg-purple-500 hover:bg-white text-white hover:text-black hover:cursor-pointer' key={index}>
+                                        {color}
+                                    </p>
+                                ))}
+                            </div>
 
                         </div>
 
@@ -212,7 +212,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                             position: 'relative',
                             zIndex: '0'
                         }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
-                            <span style={{zIndex: '1'}} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
+                            <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                             <div onClick={() => {
                                 {
                                     router.push(`/products/${individualProduct._id}`)

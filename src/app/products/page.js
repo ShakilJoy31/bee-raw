@@ -67,7 +67,7 @@ const Page = () => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:underline">{product.title}</h2>
+                                        }} className="hover:underline h-16">{product.title}</h2>
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full my-2'>
                                                 <div className='lg:hidden block'>
