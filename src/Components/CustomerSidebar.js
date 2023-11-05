@@ -45,15 +45,15 @@ const CustomerSidebar = () => {
                     ' alt="" />
 
                 <div className={`${DashboardCSS.content} pb-8`} style={{ overflowY: 'scroll', height: '90vh' }}>
-                    <div onClick={()=>router.push('/products/best-seller')}
-                        className={`flex items-center gap-x-4 mx-[24px] ${DashboardCSS.sidebarHeading} py-[4px] pl-[16px]`}>
+                    <div style={{paddingTop:'4px', paddingBottom: '4px', paddingLeft: '16px'}} onClick={()=>router.push('/products/best-seller')}
+                        className={`flex items-center gap-x-4 mx-[24px] ${DashboardCSS.sidebarHeading}`}>
                         <span><MdSell size={25} color={'green'}></MdSell></span>
                         <p>Best seller</p>
                     </div>
 
                     <div onClick={()=>router.push('/products/tws')}
                         className={``}>
-                        <div className={`flex items-center mx-[24px] pl-[16px] py-[4px] gap-x-4 ${DashboardCSS.sidebarHeading}`}>
+                        <div style={{paddingTop:'4px', paddingBottom: '4px', paddingLeft: '16px'}} className={`flex items-center mx-[24px] gap-x-4 ${DashboardCSS.sidebarHeading}`}>
                             <span><BsEarbuds size={25}></BsEarbuds></span>
                             <p className="">TWS (Bluetooth Ear Bud)</p>
                         </div>
