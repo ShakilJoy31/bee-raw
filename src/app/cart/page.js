@@ -1,11 +1,17 @@
 "use client"
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
+
+import Button from '@/Components/button';
+import Divider from '@/Components/Divider';
 // import { CustomerAPI } from '@/redux/sagas/customerAPI';
 import EmptyCartComponent from '@/Components/EmptyCartComponent';
-import Divider from '@/Components/Divider';
-import Button from '@/Components/button';
+
 import { UserStore } from '../../../userStore';
 
 const Page = () => {
@@ -94,36 +100,43 @@ const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.pr
     return (
         <div>
             {
-                cartItem ? <div className='min-h-screen mx-[48px] text-white'>
+                cartItem ? <div className='min-h-screen text-white'>
                     <div className='flex items-center justify-between'>
-                    <div className='flex items-center py-[24px]'>
+                    <div className='flex items-center'>
                     <span onClick={() => router.back()} className='hover:cursor-pointer'>
                         <BsArrowLeft color={'black'}></BsArrowLeft>
                     </span>
                     <p className='text-black ml-[16px]'>Cart</p>
                 </div>
-
-                {
-                    orderDuplicateError === 'Oops! TABLE already booked' ? '' : <div onClick={() => router.back()}>
-                    <Button background={'#9F5AE5'} width='300px'><span className='text-white'>Order Extra Item</span></Button>
-                </div>
-                }
                     </div>
                 
     
                 {
                 
                 cartItem?.map((item, index) => <div key={index}>
-                <div className={`flex items-center justify-between`}>
+                <div className={`lg:flex md:flex grid items-center justify-between`}>
                     <div className='flex items-center'>
-                        <img className='w-[250px] h-[200px]' src={item.productPicture[0]} alt="" />
+                        <img style={{ borderRadius: '8px' }} className='lg:w-[250px] lg:h-[200px] md:w-[200px] md:h-[170px] w-[170px] h-[145px]' src={item.productPicture[0]} alt="" />
                         <div className='ml-[24px]'>
-                            <h1 style={{ fontSize: '24px' }} className='font-bold mb-[8px]'>{item.title}</h1>
+                            <h1 className='font-bold mb-[8px] lg:text-2xl md:text-xl'>{item.title}</h1>
                             <p>{parseFloat(item.price) * parseFloat(item.quantity)}</p>
+
+                            <div className='block lg:hidden md:hidden mt-[8px]'>
+                        <div>
+                        <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
+                            <p onClick={()=>quantityDecrease(item)}><span className=''>-</span></p>
+                            <p>|</p>
+                            <p>{item.quantity}</p>
+                            <p>|</p>
+                            <p onClick={()=>quantityIncrease(item)}><span className=''>+</span></p>
+                        </div>
+                        </div>
+                        
+                    </div>
                         </div>
                     </div>
     
-                    <div>
+                    <div className='hidden lg:block md:block'>
                         <div className='flex justify-end'>
                         <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
                             <p onClick={()=>quantityDecrease(item)}><span className=''>-</span></p>
@@ -159,7 +172,7 @@ const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.pr
                 </div>
     
                 {/* Promo code and order calculation */}
-                <div className='mt-[48px] flex justify-end'>
+                <div className='mt-[48px] flex lg:justify-end md:justify-end'>
                     
 
                     <div>
@@ -177,7 +190,22 @@ const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.pr
                 </div>
     
                 {/* Empty cart and add date time button */}
-                <div className='flex items-center justify-center gap-x-[48px] pb-[66px] mt-[48px]'>
+                <div className='lg:hidden md:hidden items-center justify-center grid my-[12px]'>
+                    <div onClick={()=> {
+                        localStorage.removeItem('beeRawCart')
+                        setCartItem(null);
+                    }} className='mb-[10px]'>
+                        <Button background='#DC3545' width='94vw'><span className='text-white'>Empty Cart</span></Button>
+                    </div>
+    
+                    <div onClick={()=> router.push('/checkout')}>
+                        <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Checkout</span></Button>
+                    </div>
+                    
+                </div>
+
+
+                <div className='lg:flex md:flex items-center justify-end hidden gap-x-[48px] pb-[66px] mt-[48px]'>
                     <div onClick={()=> {
                         localStorage.removeItem('beeRawCart')
                         setCartItem(null);
@@ -186,7 +214,7 @@ const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.pr
                     </div>
     
                     <div onClick={()=> router.push('/checkout')}>
-                        <Button background={'#9F5AE5'} width='300px'><span className='text-white'>Checkout</span></Button>
+                        <Button background={'#9F5AE5'} width='250px'><span className='text-white'>Checkout</span></Button>
                     </div>
                     
                 </div>

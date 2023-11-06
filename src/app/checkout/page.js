@@ -221,7 +221,7 @@ const Page = () => {
                                 <tr>
                                     <th className='text-white'><span className='flex justify-center'>SL No.</span></th>
                                     <th className='text-white'><span className='flex justify-center'>Image</span></th>
-                                    <th className='text-white'><span className='flex justify-center'>Name</span></th>
+                                    <th className='text-white px-20'><span className='flex justify-center'>Name</span></th>
                                     <th className='text-white'><span className='flex justify-center'>Price</span></th>
                                     <th className='text-white'><span className='flex justify-center'>Quantity</span></th>
                                 </tr>
@@ -230,7 +230,7 @@ const Page = () => {
                                 {
                                     user?.map((product, index) => <tr key={index}>
                                         <th><span className='flex justify-center'>{index + 1}</span></th>
-                                        <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '50%' }} className='rounded-full w-10 h-10' /></span></td>
+                                        <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
                                         <td><span className='flex justify-center'>{product.title}</span></td>
                                         <td><span className='flex justify-center'>{product.price}</span></td>
                                         <td><span className='flex justify-center'>{product.quantity}</span></td>
@@ -261,18 +261,30 @@ const Page = () => {
 
 
 
-                <div className='flex items-center justify-center lg:justify-end md:justify-end gap-x-[48px] pb-[66px] mt-[48px]'>
+                <div className='lg:flex items-center justify-center hidden lg:justify-end md:justify-end gap-x-[48px] pb-[66px] mt-[48px]'>
                     <div onClick={() => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
                     }}>
-                        <Button background='#DC3545' width='150px'><span className='text-white'>Cancel</span></Button>
+                        <Button background='#DC3545' width='200px'><span className='text-white'>Cancel</span></Button>
                     </div>
 
                     <div onClick={handlePlaceOrderButton}>
-                        <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Place Order</span></Button>
+                        <Button background={'#9F5AE5'} width='250px'><span className='text-white'>Place Order</span></Button>
+                    </div>
+                </div>
+
+                <div className='grid lg:hidden items-center my-[10px]'>
+                    <div onClick={() => {
+                        localStorage.removeItem('beeRawCartSingle')
+                        router.push('/products')
+                    }}>
+                        <Button background='#DC3545' width='94vw'><span className='text-white'>Cancel</span></Button>
                     </div>
 
+                    <div onClick={handlePlaceOrderButton} className='mt-[10px]'>
+                        <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Place Order</span></Button>
+                    </div>
                 </div>
 
             </div>

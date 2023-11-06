@@ -49,8 +49,14 @@ const Page = () => {
 
                     {
                         products?.map((product, index) => <div style={{
-                            borderRadius: '8px'
+                            borderRadius: '0 8px 0 8px'
                         }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                            <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
+                        <div>
+                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
+                        </div>
+                    </div>
                             <div onClick={() => {
                                 {
                                     router.push(`/products/${product._id}`)
@@ -58,7 +64,7 @@ const Page = () => {
                                 }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                                <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                             </div>
 
                             <div className=''>
@@ -69,41 +75,28 @@ const Page = () => {
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                         }} className="hover:underline h-16">{product.title}</h2>
                                         <div className="flex justify-between items-center">
-                                            <div className='flex justify-between items-center w-full my-2'>
-                                                <div className='lg:hidden block'>
-                                                <p style={{ textDecoration: 'line-through' }} className='text-xl text-slate-400 mb-1' onClick={() => {
+                                            <div className='flex justify-between items-center w-full'>
+                                                <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                 }}>{product.price} ৳</p>
 
-                                                <p className='text-xl' onClick={() => {
+                                                <p onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                 }}>{product.price} ৳</p>
-                                                </div>
-
-                                                <p style={{ textDecoration: 'line-through' }} className='hidden lg:block text-slate-400 mb-1' onClick={() => {
-                                                    router.push(`/products/${product._id}`)
-                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }}>{product.price} ৳</p>
-
-                                                <p className='hidden lg:block' onClick={() => {
-                                                    router.push(`/products/${product._id}`)
-                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }}>{product.price} ৳</p>
-
-                                                <button onClick={() => {
+                                            </div>
+                                        </div>
+                                        <button onClick={() => {
                                                     setUser([product]);
                                                     router.push('/checkout');
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }} className="btn btn-primary btn-xs">Buy Now</button>
-                                            </div>
-                                        </div>
+                                                }} className="btn btn-primary btn-xs mb-1 w-full">Buy Now</button>
                                     </div>
 
 
                                     <div onClick={() => handleItemAddToCart(product)} className=''>
-                                    <Button background={'#9F5AE5'} width='100%'><span className='text-white'>Add to cart</span></Button>
+                                    <Button background={'#9F5AE5'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
                                         
                                     </div>
                                 </div>
@@ -111,8 +104,6 @@ const Page = () => {
 
                         </div>)
                     }
-                    
-
                 </div>
             }
 

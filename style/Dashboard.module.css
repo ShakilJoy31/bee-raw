@@ -72,14 +72,48 @@
   position: relative;
   overflow: hidden;
   background-color: purple;
-  transition-duration: 450ms;
+  transition-duration: 150ms;
+  border-radius: 0;
 }
 
 .imageContainer img {
+  filter: brightness(0.7); 
+  -webkit-filter: brightness(0.7);
   transition: transform 0.3s ease;
+  transition-duration: 150ms;
 }
 
 .imageContainer:hover img {
   cursor: pointer;
   transform: scale(1.2);
+  filter: brightness(1); 
+  -webkit-filter: brightness(1);
+  transition-duration: 450ms;
+}
+
+
+
+
+
+.tableRoomInput {
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.15);
+  background: rgba(229, 229, 229, 0.4);
+}
+
+.customInputImageUpload {
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.15);
+  background: #e5e5e566;
+}
+
+.customInput {
+  border-radius: 8px;
+  border: 1px solid rgba(18, 18, 18, 0.16);
+  background: rgba(229, 229, 229, 0.4);
+}
+
+.customInputSelect{
+  border-radius: 8px;
+  background: rgba(229, 229, 229, 0.179);
 }
