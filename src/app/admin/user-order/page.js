@@ -99,8 +99,8 @@ const Page = () => {
                     background: 'purple',
                     border: '1px solid white'
                 }} className="modal-box">
-                    
-                    <h1 className='mb-[12px] flex justify-center'>{seeOrderByAdmin?.name} orderd from {seeOrderByAdmin.address}</h1>
+
+                    <h1 className='mb-[12px] flex justify-center'>{seeOrderByAdmin?.name} orderd from {seeOrderByAdmin?.address}</h1>
 
                     <div className="overflow-x-auto w-full">
                         <table className="table">
@@ -118,10 +118,10 @@ const Page = () => {
                                 {
                                     seeOrderByAdmin?.placedOrderForProduct?.map((product, index) => <tr key={index}>
                                         <th><span className='flex justify-center'>{index + 1}</span></th>
-                                        <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
-                                        <td><span className='flex justify-center'>{product.title}</span></td>
-                                        <td><span className='flex justify-center'>{product.price}</span></td>
-                                        <td><span className='flex justify-center'>{product.quantity}</span></td>
+                                        <td> <span className='flex justify-center'><img src={product?.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
+                                        <td><span className='flex justify-center'>{product?.title}</span></td>
+                                        <td><span className='flex justify-center'>{product?.price}</span></td>
+                                        <td><span className='flex justify-center'>{product?.quantity}</span></td>
                                         <td><span className='flex justify-center'>Green</span></td>
                                     </tr>)
                                 }
