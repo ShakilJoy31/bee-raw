@@ -4,14 +4,21 @@ import React, {
   useState,
 } from 'react';
 
-import { MdOutlineDeleteForever } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
+import { ImCancelCircle } from 'react-icons/im';
+import {
+  MdDoneOutline,
+  MdOutlineDeleteForever,
+} from 'react-icons/md';
 
 import { AdminAPI } from '@/APIcalling/adminAPI';
+import Button from '@/Components/button';
 import Spinner from '@/Components/Spinner';
 
 import AdminCSS from '../../../../style/AdminCSS.module.css';
 
 const Page = () => {
+    const router = useRouter();
     const [orders, setOrders] = useState([]);
     useEffect(()=>{
         AdminAPI.handleGettingOrders().then(res=> {
@@ -24,12 +31,18 @@ const Page = () => {
             setOrders(filterOrder); 
         });
     }
+    const [seeOrderByAdmin, setSeeOrderByAdmin] = useState(null); 
+    const handleCheckOrderByAdmin = (getOrder) => {
+        document.getElementById('productDetails').showModal();
+        setSeeOrderByAdmin(getOrder);
+    }
+    console.log(seeOrderByAdmin);
     return (
         <div className='mt-[24px]'>
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
                 <button style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
 
-                <button style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
+                <button onClick={()=>router.push('/admin')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
             </div>
 
             {
@@ -54,8 +67,8 @@ const Page = () => {
                     </thead>
                     <tbody>
                         {
-                            orders?.map((order, index) =>  <tr key={index} className={`${AdminCSS.orderRow}`}>
-                            <th><span className='flex justify-center'>{index}</span></th>
+                            orders?.map((order, index) =>  <tr onClick={()=> handleCheckOrderByAdmin(order)} key={index} className={`${AdminCSS.orderRow}`}>
+                            <th><span className='flex justify-center'>{index + 1}</span></th>
 
                             <td> <span className='flex justify-center'>{order.name}</span></td>
 
@@ -80,45 +93,69 @@ const Page = () => {
 
 
 
-            {/* <div className='flex items-center'>
-                <div>
-                    <span>Upload Profile Picture</span>
-                    <div className='flex gap-x-4 mt-[10px] w-full'>
-                        <div
-                            style={{
-                                borderRadius: otpInputBorderRadius,
-                                border: dashboardBottomHead,
-                                background: 'purple',
-                                color: blackColor,
-                            }}
-                            className={`$${HomeComponentCss.customInputImageUpload} w-[120px] h-[120px] hover:cursor-pointer mb-[24px]`}
-                        >
-                            <input onChange={(e) => setPicture(e.target.files[0])}
-                                style={{ position: "absolute", opacity: "0" }}
-                                type="file"
-                                className="h-[120px]"
-                            />
-                            <span className='flex justify-center mt-[32px]'><AiOutlineCloudUpload size={35} color={'white'}></AiOutlineCloudUpload></span>
-                            <p className="flex justify-center text-white">
-                                Click to upload
-                            </p>
-                        </div>
+            <dialog id="productDetails" className="modal">
+                <div style={{
+                    color: 'white',
+                    background: 'purple',
+                    border: '1px solid white'
+                }} className="modal-box">
+                    
+                    <h1 className='mb-[12px] flex justify-center'>{seeOrderByAdmin?.name} orderd from {seeOrderByAdmin.address}</h1>
+
+                    <div className="overflow-x-auto w-full">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th className='text-white'><span className='flex justify-center'>SL No.</span></th>
+                                    <th className='text-white'><span className='flex justify-center'>Image</span></th>
+                                    <th className='text-white px-20'><span className='flex justify-center'>Name</span></th>
+                                    <th className='text-white'><span className='flex justify-center'>Price</span></th>
+                                    <th className='text-white'><span className='flex justify-center'>Quantity</span></th>
+                                    <th className='text-white'><span className='flex justify-center'>Color</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    seeOrderByAdmin?.placedOrderForProduct?.map((product, index) => <tr key={index}>
+                                        <th><span className='flex justify-center'>{index + 1}</span></th>
+                                        <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
+                                        <td><span className='flex justify-center'>{product.title}</span></td>
+                                        <td><span className='flex justify-center'>{product.price}</span></td>
+                                        <td><span className='flex justify-center'>{product.quantity}</span></td>
+                                        <td><span className='flex justify-center'>Green</span></td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5'>
-                        {
-                            hostedImages.map((image, index) => <div key={index} style={{ position: relativePosition }}>
-                                <span onClick={() => handleRemoveImage(image)} style={{ position: 'absolute', top: '5px', right: '5px' }}><RxCross1 size={25} color={'red'}></RxCross1></span>
-                                <img
-                                    className="w-[120px] h-[120px] rounded-sm"
-                                    src={image}
-                                    alt=""
-                                />
-                            </div>)
-                        }
+                    <div className='mt-[25px]'>
+                    <div className='lg:flex items-center hidden lg:justify-between md:justify-between gap-x-[48px]'>
+                    <div>
+                        <Button background='#DC3545' width='150px'><div className='flex justify-between px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={25} color={'white'}></ImCancelCircle></span></div></Button>
+                    </div>
+
+                    <div>
+                        <Button background={'#9F5AE5'} width='150px'><div className='flex justify-between px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={25} color={'white'}></MdDoneOutline></span></div></Button>
                     </div>
                 </div>
-            </div> */}
+
+                <div className='grid lg:hidden items-center my-[10px]'>
+                    <div>
+                        <Button background='#DC3545' width='80vw'><div className='flex justify-between px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={25} color={'white'}></ImCancelCircle></span></div></Button>
+                    </div>
+
+                    <div className='mt-[10px]'>
+                        <Button background={'#9F5AE5'} width='80vw'><div className='flex justify-between px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={25} color={'white'}></MdDoneOutline></span></div> </Button>
+                    </div>
+                </div>
+                    
+                    </div>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     );
 };
