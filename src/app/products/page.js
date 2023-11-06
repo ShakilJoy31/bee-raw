@@ -29,6 +29,7 @@ const Page = () => {
         }
     }, 1800);
 
+    const [cartAddedMessage , setCartAddedMessage] = useState('');
     const handleItemAddToCart = (clickedProduct) => {
         const newParticularMenu = clickedProduct;
         let cart = JSON.parse(localStorage.getItem("beeRawCart")) || [];
@@ -37,7 +38,11 @@ const Page = () => {
             cart.push(newParticularMenu);
             localStorage.setItem("beeRawCart", JSON.stringify(cart));
             setUser(cart);
+            setCartAddedMessage('Product added successfully!')
+            document.getElementById('alReadyExistsOnTheCartModal').showModal();
+            setWarning(true)
         } else {
+            setCartAddedMessage('Item already added!')
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
         }
@@ -73,7 +78,7 @@ const Page = () => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:underline h-16">{product.title}</h2>
+                                        }} className="hover:underline h-[70px]">{product.title}</h2>
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
@@ -91,7 +96,7 @@ const Page = () => {
                                                     setUser([product]);
                                                     router.push('/checkout');
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }} className="btn btn-primary btn-xs mb-1 w-full">Buy Now</button>
+                                                }} className="btn btn-primary btn-sm my-1 w-full">Buy Now</button>
                                     </div>
 
 
@@ -112,11 +117,10 @@ const Page = () => {
             <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
                 <div style={{
                     color: 'white',
-                    background: '#DC3545',
+                    background: (cartAddedMessage === 'Product added successfully!' ? 'green' : '#DC3545'),
                     border: '1px solid white'
                 }} className="modal-box">
-                    <h3 className="flex justify-center text-white">Item already added!</h3>
-
+                    <h3 className="flex justify-center text-white">{cartAddedMessage}</h3>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

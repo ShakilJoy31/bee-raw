@@ -43,6 +43,14 @@ const Page = () => {
             });
         setPicture("");
     }
+    const [cartAddedMessage, setCartAddedMessage] = useState('');
+    const [warning, setWarning] = useState(false);
+    setTimeout(function () {
+        if (warning) {
+            document.getElementById('alReadyExistsOnTheCartModal').close();
+            setWarning(false);
+        }
+    }, 1800);
     const handleSubmitProduct = () => {
         const productData = {
             title: title,
@@ -56,12 +64,25 @@ const Page = () => {
             productPicture: hostedImages,
             quantity: 1
         }
-        AdminAPI.postingProducts(productData).then(res => {
-
-        })
+        if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !description || !hostedImages) {
+            document.getElementById('alReadyExistsOnTheCartModal').showModal();
+            setWarning(true)
+            setCartAddedMessage('All fields are required!')
+        } else {
+            AdminAPI.postingProducts(productData).then(res => {
+                if (res.acknowledged === true) {
+                    document.getElementById('alReadyExistsOnTheCartModal').showModal();
+                    setWarning(true)
+                    setCartAddedMessage('Product added successfully!')
+                } else {
+                    document.getElementById('alReadyExistsOnTheCartModal').showModal();
+                    setWarning(true)
+                    setCartAddedMessage('OoppS! Failed.')
+                }
+            })
+        }
     }
     const handleRemoveImage = (getImage) => {
-        console.log(getImage);
         const restImage = hostedImages.filter(img => img !== getImage);
         setHostedImages(restImage);
     }
@@ -80,7 +101,7 @@ const Page = () => {
         <div className='mt-[24px]'>
 
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
-            <button onClick={()=> router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
+                <button onClick={() => router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
 
                 <button onClick={handleSubmitProduct} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
             </div>
@@ -127,48 +148,49 @@ const Page = () => {
             <div>
                 <div>
                     <span className=''>Category</span>
-                    
-                        {categories.map((cat, index) => (
-                            <div className='mb-[6px]' key={cat.id}>
-                                <div className='flex items-center justify-between gap-x-4'>
-                                    <select
-                                        onChange={(e) => handleCategoryChange(e, cat.id)}
-                                        style={{ background: 'purple' }}
-                                        className="w-full select focus:outline-none"
-                                    >
-                                        <option>Best seller</option>
-                                        <option>Smart Watch</option>
-                                        <option>Tripod</option>
-                                        <option>Speaker</option>
-                                        <option>Microphone</option>
-                                        <option>Webcam</option>
-                                        <option>RGB Light</option>
-                                        <option>Fan</option>
-                                        <option>Ring Light</option>
-                                        <option>Neck Band</option>
-                                        <option>Blender</option>
-                                        <option>Headphone</option>
-                                        <option>Memory card</option>
-                                        <option>IP Camera</option>
-                                        <option>Cable</option>
-                                        <option>Calculator</option>
-                                        <option>Bags & Luggage</option>
-                                        <option>Action Camera</option>
-                                        <option>Iron</option>
-                                        <option>Pen Drive</option>
-                                        <option>Sun Glass</option>
-                                        <option>Clip Lamp</option>
-                                    </select>
 
-                                    {
-                                        index+1 === categories.length ? <button onClick={addCategory} style={{ background: 'purple', borderRadius: '5px' }} className="px-3 py-2">
+                    {categories.map((cat, index) => (
+                        <div className='mb-[6px]' key={cat.id}>
+                            <div className='flex items-center justify-between gap-x-4'>
+                                <select
+                                    onChange={(e) => handleCategoryChange(e, cat.id)}
+                                    style={{ background: 'purple' }}
+                                    className="w-full select focus:outline-none"
+                                >
+                                    <option>Best seller</option>
+                                    <option>Smart Watch</option>
+                                    <option>Tripod</option>
+                                    <option>Speaker</option>
+                                    <option>Microphone</option>
+                                    <option>Webcam</option>
+                                    <option>RGB Light</option>
+                                    <option>Fan</option>
+                                    <option>Trimer</option>
+                                    <option>Ring Light</option>
+                                    <option>Neck Band</option>
+                                    <option>Blender</option>
+                                    <option>Headphone</option>
+                                    <option>Memory card</option>
+                                    <option>IP Camera</option>
+                                    <option>Cable</option>
+                                    <option>Calculator</option>
+                                    <option>Bags & Luggage</option>
+                                    <option>Action Camera</option>
+                                    <option>Iron</option>
+                                    <option>Pen Drive</option>
+                                    <option>Sun Glass</option>
+                                    <option>Clip Lamp</option>
+                                </select>
+
+                                {
+                                    index + 1 === categories.length ? <button onClick={addCategory} style={{ background: 'purple', borderRadius: '5px' }} className="px-3 py-2">
                                         Add
                                     </button> : ''
-                                    }
-                                    
-                                </div>
+                                }
+
                             </div>
-                        ))}
+                        </div>
+                    ))}
 
                 </div>
             </div>
@@ -231,6 +253,19 @@ const Page = () => {
                     </div>
                 </div>
             </div>
+
+            <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: (cartAddedMessage === 'Product added successfully!' ? 'green' : '#DC3545'),
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <h3 className="flex justify-center text-white">{cartAddedMessage}</h3>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     );
 };
