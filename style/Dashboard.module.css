@@ -77,8 +77,6 @@
 }
 
 .imageContainer img {
-  filter: brightness(0.7); 
-  -webkit-filter: brightness(0.7);
   transition: transform 0.3s ease;
   transition-duration: 150ms;
 }
@@ -86,8 +84,6 @@
 .imageContainer:hover img {
   cursor: pointer;
   transform: scale(1.2);
-  filter: brightness(1); 
-  -webkit-filter: brightness(1);
   transition-duration: 450ms;
 }
 

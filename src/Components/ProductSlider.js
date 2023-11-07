@@ -29,6 +29,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
     const handleReviewImage = (picture) => {
         setPreviewImage(picture)
     }
+    const [message, setMessage] = useState('');
     const handleAddToCartButton = () => {
         const newParticularMenu = individualProduct;
         let cart = JSON.parse(localStorage.getItem("beeRawCart")) || [];
@@ -37,9 +38,13 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             cart.push(newParticularMenu);
             localStorage.setItem("beeRawCart", JSON.stringify(cart));
             setUser(cart);
+            document.getElementById('alReadyExistsOnTheCartModal').showModal();
+            setWarning(true)
+            setMessage('Added to cart successfully!');
         } else {
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
+            setMessage('Item already in the cart.');
         }
     }
 
@@ -49,8 +54,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
         setIndividualProduct(updatedProduct);
     };
 
-
-
     const quantityDecrease = () => {
         if (individualProduct?.quantity > 1) {
             const updatedProduct = { ...individualProduct };
@@ -58,6 +61,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             setIndividualProduct(updatedProduct);
         }
     };
+    const [selectedColor, setSelectedColor] = useState(''); 
     console.log(individualProduct?.description);
     return (
         <div>
@@ -65,10 +69,10 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                 <div className={`${IndividualCSS.container}`}>
                     <div>
 
-                        <div style={{ position: 'relative' }}>
+                        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
                             <span className={`${IndividualCSS.inStock}`}>{individualProduct.availability}</span>
 
-                            <div className={`flex items-center ${IndividualCSS.previewImage}`}>
+                            <div className={`${IndividualCSS.previewImage}`}>
                                 <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
                             </div>
                         </div>
@@ -91,7 +95,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                             <p>Color: </p>
                             <div className={`grid grid-cols-3 gap-2 ml-4 `}>
                                 {individualProduct.color.split(',').map((color, index) => (
-                                    <p className='px-3 py-1 bg-purple-500 hover:bg-white text-white hover:text-black hover:cursor-pointer' key={index}>
+                                    <p onClick={()=>setSelectedColor(color)} className={`px-3 py-1 hover:cursor-pointer ${selectedColor === color ? 'bg-purple-200 text-black':'bg-purple-900 text-white'}`} key={index}>
                                         {color}
                                     </p>
                                 ))}
@@ -166,6 +170,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
 
                 <div className='lg:flex justify-between hidden md:hidden my-[25px]'>
+                    {/* <p>{individualProduct.description}</p> */}
                     <p>
                         <span className='font-bold text-xl'>Feature : </span> <br></br>
                         RAM: 196KB
@@ -251,10 +256,10 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
                 <div style={{
                     color: 'white',
-                    background: '#DC3545',
+                    background: (message === 'Added to cart successfully!' ? 'green' : '#DC3545'),
                     border: '1px solid white'
                 }} className="modal-box">
-                    <h3 className="flex justify-center text-white">Item already added!</h3>
+                    <h3 className="flex justify-center text-white">{message}</h3>
 
                 </div>
                 <form method="dialog" className="modal-backdrop">

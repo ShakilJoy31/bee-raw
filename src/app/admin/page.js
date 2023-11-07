@@ -25,7 +25,8 @@ const Page = () => {
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('Best seller');
     const [availability, setAvailability] = useState('In Stock');
-    const [description, setDescription] = useState('');
+    const [feature, setFeature] = useState('');
+    const [specification, setSpecification] = useState('');
     const [picture, setPicture] = useState('');
     const [hostedImage, setHostedImage] = useState()
     const [hostedImages, setHostedImages] = useState([])
@@ -60,11 +61,12 @@ const Page = () => {
             color: color,
             category: category,
             availability: availability,
-            description: description,
+            feature: feature,
+            specification: specification,
             productPicture: hostedImages,
             quantity: 1
         }
-        if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !description || !hostedImages) {
+        if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !hostedImages) {
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
             setCartAddedMessage('All fields are required!')
@@ -99,7 +101,6 @@ const Page = () => {
     };
     return (
         <div className='mt-[24px]'>
-
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
                 <button onClick={() => router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
 
@@ -208,8 +209,15 @@ const Page = () => {
 
             <div className='mt-[6px]'>
                 <div>
-                    <span className=''>Description</span>
-                    <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
+                    <span className=''>Feature</span>
+                    <textarea onChange={(e) => setFeature(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
+                </div>
+            </div>
+
+            <div className='mt-[6px]'>
+                <div>
+                    <span className=''>Specification</span>
+                    <textarea onChange={(e) => setSpecification(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
                 </div>
             </div>
 

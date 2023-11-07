@@ -84,7 +84,7 @@ const Page = () => {
                                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }}>{product.price} ৳</p>
+                                                }}>{product.offerPrice} ৳</p>
 
                                                 <p onClick={() => {
                                                     router.push(`/products/${product._id}`)

@@ -54,8 +54,13 @@ const Page = () => {
             isDhaka: (selectedOption === 'half' ? 'Inside Dhaka' : 'Outside Dhaka'),
             placedOrderForProduct: user
         }
-        CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res => console.log(res));
-        console.log(userDataForPlaceOrder);
+        if(!name || !address || !phoneNumber){
+
+        }else{
+            CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res =>{
+                
+            });
+        }
 
     }
     return (
@@ -289,7 +294,6 @@ const Page = () => {
 
             </div>
         </div>
-
     );
 };
 
