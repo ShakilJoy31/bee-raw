@@ -70,9 +70,14 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                     <div>
 
                         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-                            <span className={`${IndividualCSS.inStock}`}>{individualProduct.availability}</span>
-
                             <div className={`${IndividualCSS.previewImage}`}>
+                            <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
+                        <div>
+                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
+                        </div>
+                    </div>
+                            <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                                 <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
                             </div>
                         </div>
@@ -217,6 +222,12 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                             position: 'relative',
                             zIndex: '0'
                         }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                            <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
+                        <div>
+                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
+                        </div>
+                    </div>
                             <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                             <div onClick={() => {
                                 {
@@ -236,8 +247,8 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
                                         }} className="h-16 hover:underline">{individualProduct.title}</h2>
 
-                                        <div className='flex justify-center'>
-                                            <p className='my-[12px]'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct.offerPrice + ' BDT'}</span> {'Taka ' + individualProduct?.price + '.00 BDT'}</p>
+                                        <div className=''>
+                                            <p className='my-[12px] flex justify-between items-center'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{individualProduct.offerPrice + ' BDT'}</span> {individualProduct?.price + ' BDT'}</p>
                                         </div>
                                     </div>
 

@@ -89,6 +89,27 @@
 
 
 
+.imageContainerDifferent {
+  position: relative;
+  overflow: hidden;
+  transition-duration: 150ms;
+}
+
+.imageContainerDifferent img {
+  transition: transform 0.3s ease;
+  transition-duration: 150ms;
+  border-radius: 10px;
+}
+
+.imageContainerDifferent:hover img {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition-duration: 450ms;
+  border-radius: 10px;
+}
+
+
+
 
 
 .tableRoomInput {

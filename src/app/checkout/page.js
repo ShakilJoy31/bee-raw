@@ -44,6 +44,18 @@ const Page = () => {
     const [email, setEmail] = useState('');
     const [paymentTrId, setPaymentTrId] = useState('');
     const [isDhaka, setIsDhaka] = useState('');
+
+
+    const [cartAddedMessage, setCartAddedMessage] = useState('');
+    const [warning, setWarning] = useState(false);
+    setTimeout(function () {
+        if (warning) {
+            if(cartAddedMessage !== 'Congratulations! Order placed successfully.'){
+                document.getElementById('placeOrderModal').close();
+            setWarning(false);
+            }
+        }
+    }, 1800);
     const handlePlaceOrderButton = () => {
         const userDataForPlaceOrder = {
             name: name,
@@ -55,10 +67,22 @@ const Page = () => {
             placedOrderForProduct: user
         }
         if(!name || !address || !phoneNumber){
-
+            document.getElementById('placeOrderModal').showModal();
+            setWarning(true)
+            setCartAddedMessage('Name, address and phone number are requited!')
         }else{
             CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res =>{
-                
+                if (res.acknowledged === true) {
+                    document.getElementById('placeOrderModal').showModal();
+                    setWarning(true)
+                    setCartAddedMessage('Congratulations! Order placed successfully.')
+                    // Code for sending the email...........
+
+                } else {
+                    document.getElementById('placeOrderModal').showModal();
+                    setWarning(true)
+                    setCartAddedMessage('OoppS! Failed.');
+                }
             });
         }
 
@@ -293,23 +317,29 @@ const Page = () => {
                 </div>
 
             </div>
+
+            <dialog id="placeOrderModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: (cartAddedMessage === 'Congratulations! Order placed successfully.' ? 'green' : '#DC3545'),
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <h3 className="flex justify-center text-white">{cartAddedMessage}</h3>
+                    {
+                        cartAddedMessage === 'Congratulations! Order placed successfully.' ? <div>
+                            <h3 className="flex justify-center text-white mt-2">Now you will have a call from <span className='font-bold ml-1'> 01761043883</span></h3>
+                            <div>
+                            <span className='my-2 flex justify-center items-center'>(Around <span className='font-bold mx-1'>7:00 AM</span> to <span className='font-bold ml-1'>11:59 PM</span>)</span>
+                            </div>
+                        </div> : ''
+                    }
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     );
 };
 
 export default Page;
-
-
-// {/* <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
-//                                     <div style={{
-//                                         color: 'white',
-//                                         background: '#DC3545',
-//                                         border: '1px solid white'
-//                                     }} className="modal-box">
-//                                         <h3 className="flex justify-center text-white">Item already added!</h3>
-
-//                                     </div>
-//                                     <form method="dialog" className="modal-backdrop">
-//                                         <button>close</button>
-//                                     </form>
-//                                 </dialog> */}

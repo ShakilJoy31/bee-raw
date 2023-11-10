@@ -3,7 +3,7 @@
 /* Mobile devices (up to 767px) */
 @media screen and (max-width: 767px) {
     .previewImage {
-      width: 280px;
+      width: 100%;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -48,7 +48,8 @@
         display: flex;
     }
     .previewImage {
-        width: 280px;
+        width: 300px;
+        height: 300px;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -91,7 +92,8 @@
         display: flex;
     }
     .previewImage {
-        width: 280px;
+        width: 320px;
+        height: 320px;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -136,8 +138,14 @@
     margin-left: 12px;
 }
 .mainImage{
-    height: 280px;
     border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.individualImage{
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,7 +178,7 @@
 }
 .inStockSuggestion{
     position: absolute; 
-        right: 0; 
+        right: 1px; 
         top: 0;
         background: green; 
         color: white; 
