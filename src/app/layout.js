@@ -30,6 +30,13 @@ export default function RootLayout({ children }) {
   // const { user, setUser } = UserStore.useContainer();
   const router = useRouter();
   //   console.log(user);
+  const handleCartFromNavbar = () => {
+    if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
+      localStorage.removeItem('addedProduct');
+      localStorage.removeItem('beeRawCartSingle');
+    }
+    router.push('/cart')
+  }
   return (
     <UserStore.Provider>
       <html lang="en">
@@ -76,7 +83,7 @@ export default function RootLayout({ children }) {
                       ></MdSupportAgent>
                     </span>
 
-                    <span className='hover:cursor-pointer' onClick={() => router.push('/cart')}><BsMinecartLoaded color={'white'}
+                    <span className='hover:cursor-pointer' onClick={handleCartFromNavbar}><BsMinecartLoaded color={'white'}
                       size={25}></BsMinecartLoaded></span>
 
                   </div>
@@ -100,7 +107,7 @@ export default function RootLayout({ children }) {
 
                   <div className="lg:flex items-center hidden">
 
-                    <span className='hover:cursor-pointer' onClick={() => router.push('/cart')}><BsMinecartLoaded color={'white'}
+                    <span className='hover:cursor-pointer' onClick={handleCartFromNavbar}><BsMinecartLoaded color={'white'}
                       size={25}></BsMinecartLoaded></span>
 
                     <span className='mx-[24px]'>

@@ -12,7 +12,6 @@ const handleGettingProducts = async () => {
       });
     try {
       const response = await axiosInstance.get(productsGettingAPI);
-      console.log(response);
       return response.data;
     } catch (error) {
         console.log(error)
@@ -41,7 +40,6 @@ const userInformationForPlacOrderProduct = async (payload) => {
       });
     try {
       const response = await axiosInstance.post(placedOrderAPI, payload);
-      console.log(response);
       return response.data;
     } catch (error) {
         console.log(error)

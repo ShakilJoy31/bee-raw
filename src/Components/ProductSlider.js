@@ -63,6 +63,12 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
     };
     const [selectedColor, setSelectedColor] = useState(''); 
     console.log(individualProduct?.description);
+    const handleBuyNowButton =() =>{
+        if(JSON.parse(localStorage.getItem('addedProduct'))){
+            localStorage.removeItem('addedProduct');
+        }
+        router.push('/checkout')
+    }
     return (
         <div>
             <div style={{ marginTop: '25px' }} className='text-white'>
@@ -127,7 +133,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                 <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
                             </div>
 
-                            <div className={`${IndividualCSS.theButton}`} onClick={() => router.push('/checkout')}>
+                            <div className={`${IndividualCSS.theButton}`} onClick={handleBuyNowButton}>
                                 <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
                             </div>
 

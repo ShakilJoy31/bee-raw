@@ -10,6 +10,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { CustomerAPI } from '@/APIcalling/customerAPI';
 import Button from '@/Components/button';
 import { verificationFieldsRound } from '@/constants/speceing';
+import { useForm } from '@formspree/react';
 
 import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../../userStore';
@@ -23,7 +24,7 @@ const Page = () => {
         } else if (JSON.parse(localStorage.getItem("beeRawCart"))) {
             setUser(JSON.parse(localStorage.getItem("beeRawCart")))
         } else {
-            router.push('/products')
+            router.push('/products');
         }
     }, [])
     let totalPrice;
@@ -50,12 +51,13 @@ const Page = () => {
     const [warning, setWarning] = useState(false);
     setTimeout(function () {
         if (warning) {
-            if(cartAddedMessage !== 'Congratulations! Order placed successfully.'){
+            if (cartAddedMessage !== 'Congratulations! Order placed successfully.') {
                 document.getElementById('placeOrderModal').close();
-            setWarning(false);
+                setWarning(false);
             }
         }
     }, 1800);
+    const [state, handleSubmit] = useForm("mvojnplv");
     const handlePlaceOrderButton = () => {
         const userDataForPlaceOrder = {
             name: name,
@@ -66,17 +68,49 @@ const Page = () => {
             isDhaka: (selectedOption === 'half' ? 'Inside Dhaka' : 'Outside Dhaka'),
             placedOrderForProduct: user
         }
-        if(!name || !address || !phoneNumber){
+        if (!name || !address || !phoneNumber) {
             document.getElementById('placeOrderModal').showModal();
             setWarning(true)
             setCartAddedMessage('Name, address and phone number are requited!')
-        }else{
-            CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res =>{
+        } else {
+            CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res => {
                 if (res.acknowledged === true) {
                     document.getElementById('placeOrderModal').showModal();
                     setWarning(true)
                     setCartAddedMessage('Congratulations! Order placed successfully.')
                     // Code for sending the email...........
+                    const newEmail = {
+                        name: name,
+                        email: email,
+                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}`,
+                      }
+                    fetch('https://formspree.io/f/mvojnplv', {
+                        method: 'POST',
+                        body: JSON.stringify(newEmail),
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then((res) => res.json())
+                        .then((result) => {
+                            // console.log(result);
+                        }).then((res) => {
+                            if (!res.ok) {
+                               throw new Error(`HTTP error! Status: ${res.status}`);
+                            }
+                            return res.json();
+                         })
+                         .then((result) => {
+                            console.log(result);
+                         })
+                         .catch((error) => {
+                            console.error('Fetch error:', error);
+                         });
+
+                    console.log(state);
+                    if (state.succeeded) {
+                        return <p>Thanks for joining!</p>;
+                    }
 
                 } else {
                     document.getElementById('placeOrderModal').showModal();
@@ -85,7 +119,6 @@ const Page = () => {
                 }
             });
         }
-
     }
     return (
         <div>
@@ -329,7 +362,7 @@ const Page = () => {
                         cartAddedMessage === 'Congratulations! Order placed successfully.' ? <div>
                             <h3 className="flex justify-center text-white mt-2">Now you will have a call from <span className='font-bold ml-1'> 01761043883</span></h3>
                             <div>
-                            <span className='my-2 flex justify-center items-center'>(Around <span className='font-bold mx-1'>7:00 AM</span> to <span className='font-bold ml-1'>11:59 PM</span>)</span>
+                                <span className='my-2 flex justify-center items-center'>(Around <span className='font-bold mx-1'>7:00 AM</span> to <span className='font-bold ml-1'>11:59 PM</span>)</span>
                             </div>
                         </div> : ''
                     }

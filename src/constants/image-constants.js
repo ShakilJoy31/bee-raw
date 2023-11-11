@@ -19,7 +19,9 @@ export const onboardBannerImage = 'https://i.ibb.co/sbRcV8b/Business.png';
 export const uploadImageSymbol = 'https://i.ibb.co/HrSFsdc/upload-cloud.png';
 export const downloadImageSymbol = 'https://i.ibb.co/Px9RJXS/upload-cloud.png';
 const ImageStorageKey = "1f2e07ae412954d520f52351b07dee66";
-export const url = `https://api.imgbb.com/1/upload?key=${ImageStorageKey}`; 
+export const url = `https://api.imgbb.com/1/upload?key=${ImageStorageKey}`;
+
+export const emailURL = `https://formspree.io/f/mvojnplv`;
 
 export const dashboardIcon = 'https://i.ibb.co/ZLx4Dn2/dashboard-svgrepo-com-2.png'
 

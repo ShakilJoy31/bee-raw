@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.1",
     "autoprefixer": "10.4.16",
     "axios": "^1.5.1",
     "email-js": "^2.0.2",

@@ -20,6 +20,10 @@ const Page = () => {
     const [warning, setWarning] = useState(false);
     useEffect(() => {
         CustomerAPI.handleGettingProducts().then(res => setProducts(res));
+        localStorage.removeItem('beeRawCartSingle');
+        if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
+            localStorage.removeItem('beeRawCartSingle');
+          }
     }, [])
 
     setTimeout(function () {
@@ -29,7 +33,7 @@ const Page = () => {
         }
     }, 1800);
 
-    const [cartAddedMessage , setCartAddedMessage] = useState('');
+    const [cartAddedMessage, setCartAddedMessage] = useState('');
     const handleItemAddToCart = (clickedProduct) => {
         const newParticularMenu = clickedProduct;
         let cart = JSON.parse(localStorage.getItem("beeRawCart")) || [];
@@ -47,6 +51,11 @@ const Page = () => {
             setWarning(true)
         }
     }
+    const handleBuyNowButton = (product) => {
+        setUser([product]);
+        localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+        router.push('/checkout');
+    }
     return (
         <div className='h-full'>
             {
@@ -57,11 +66,11 @@ const Page = () => {
                             borderRadius: '0 8px 0 8px'
                         }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
                             <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
-                        <div>
-                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
-                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
-                        </div>
-                    </div>
+                                <div>
+                                    <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                    <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
+                                </div>
+                            </div>
                             <div onClick={() => {
                                 {
                                     router.push(`/products/${product._id}`)
@@ -92,17 +101,13 @@ const Page = () => {
                                                 }}>{product.price} ৳</p>
                                             </div>
                                         </div>
-                                        <button onClick={() => {
-                                                    setUser([product]);
-                                                    router.push('/checkout');
-                                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                                }} className="btn btn-primary btn-sm my-1 w-full">Buy Now</button>
+                                        <button onClick={()=> handleBuyNowButton(product)} className="btn btn-primary btn-sm my-1 w-full">Buy Now</button>
                                     </div>
 
 
                                     <div onClick={() => handleItemAddToCart(product)} className=''>
-                                    <Button background={'#9F5AE5'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
-                                        
+                                        <Button background={'#9F5AE5'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
+
                                     </div>
                                 </div>
                             </div>
