@@ -82,7 +82,7 @@ const Page = () => {
                     const newEmail = {
                         name: name,
                         email: email,
-                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}`,
+                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}. Please note the customer's email and phone number respectivelly ${email} and ${phoneNumber}. You can also go to the admin panel to check more information about the order. Have a good day chotto bondhu!`,
                       }
                     fetch('https://formspree.io/f/mvojnplv', {
                         method: 'POST',
