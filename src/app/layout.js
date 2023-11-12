@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         if(JSON.parse(localStorage.getItem("beeRawCart"))){
             setCartItem((JSON.parse(localStorage.getItem("beeRawCart"))).length)
         }
-      }, [JSON.parse(localStorage.getItem("beeRawCart"))]);
+      }, []);
   return (
     <UserStore.Provider>
       <html lang="en">
