@@ -1,7 +1,10 @@
 "use client"
 import './globals.css';
 
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/navigation';
@@ -27,9 +30,9 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 export default function RootLayout({ children }) {
+  // Next work
   // const { user, setUser } = UserStore.useContainer();
   const router = useRouter();
-  //   console.log(user);
   const handleCartFromNavbar = () => {
     if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
       localStorage.removeItem('addedProduct');
@@ -37,6 +40,12 @@ export default function RootLayout({ children }) {
     }
     router.push('/cart')
   }
+  const [cartItem, setCartItem] = useState(0); 
+    useEffect(() => {
+        if(JSON.parse(localStorage.getItem("beeRawCart"))){
+            setCartItem((JSON.parse(localStorage.getItem("beeRawCart"))).length)
+        }
+      }, [JSON.parse(localStorage.getItem("beeRawCart"))]);
   return (
     <UserStore.Provider>
       <html lang="en">
@@ -83,8 +92,15 @@ export default function RootLayout({ children }) {
                       ></MdSupportAgent>
                     </span>
 
-                    <span className='hover:cursor-pointer' onClick={handleCartFromNavbar}><BsMinecartLoaded color={'white'}
-                      size={25}></BsMinecartLoaded></span>
+                    <div className="indicator hover:cursor-pointer">
+                        <span style={{
+                          background: 'purple',
+                          borderRadius: '50%',
+                          fontSize: '12px'
+                        }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
+                      <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded color={'white'}
+                        size={25}></BsMinecartLoaded></span>
+                    </div>
 
                   </div>
 
@@ -107,8 +123,15 @@ export default function RootLayout({ children }) {
 
                   <div className="lg:flex items-center hidden">
 
-                    <span className='hover:cursor-pointer' onClick={handleCartFromNavbar}><BsMinecartLoaded color={'white'}
-                      size={25}></BsMinecartLoaded></span>
+                    <div className="indicator hover:cursor-pointer">
+                        <span style={{
+                          background: 'purple',
+                          borderRadius: '50%',
+                          fontSize: '12px'
+                        }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
+                      <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded color={'white'}
+                        size={25}></BsMinecartLoaded></span>
+                    </div>
 
                     <span className='mx-[24px]'>
                       <IoMdNotificationsOutline

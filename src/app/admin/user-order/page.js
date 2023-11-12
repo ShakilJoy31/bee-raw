@@ -6,10 +6,8 @@ import React, {
 
 import { useRouter } from 'next/navigation';
 import { ImCancelCircle } from 'react-icons/im';
-import {
-  MdDoneOutline,
-  MdOutlineDeleteForever,
-} from 'react-icons/md';
+import { MdDoneOutline } from 'react-icons/md';
+import { TbCurrencyTaka } from 'react-icons/tb';
 
 import { AdminAPI } from '@/APIcalling/adminAPI';
 import Button from '@/Components/button';
@@ -26,23 +24,36 @@ const Page = () => {
         });
     },[])
     const handleDeleteOrder = (id) =>{
-        AdminAPI.handleDeletingOrder(id).then(res=> {
-            const filterOrder = orders.filter(order => order._id !== id);
-            setOrders(filterOrder); 
-        });
+        
     }
-    const [seeOrderByAdmin, setSeeOrderByAdmin] = useState(null); 
+    const [totalPrice, setTotalPrice] = useState('');
+    const [seeOrderByAdmin, setSeeOrderByAdmin] = useState(null);
+    const [idForTheOrderToDelete, setValue] = useState('');
     const handleCheckOrderByAdmin = (getOrder) => {
         document.getElementById('productDetails').showModal();
+        const totalPrice = getOrder?.placedOrderForProduct?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0);
+        setTotalPrice(totalPrice);
         setSeeOrderByAdmin(getOrder);
+        setValue(getOrder._id);
     }
-    console.log(seeOrderByAdmin);
+
+    const handleRejectOrder = () =>{
+        console.log('hello');
+        AdminAPI.handleDeletingOrder(idForTheOrderToDelete).then(res=> {
+            const filterOrder = orders.filter(order => order._id !== idForTheOrderToDelete);
+            setOrders(filterOrder);
+            document.getElementById('productDetails').close();
+        });
+    }
+    const handleAcceptOrder = () =>{
+        console.log('hello');
+    }
     return (
         <div className='mt-[24px]'>
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
-                <button style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
+                <button style={{ background: 'purple', borderRadius: '5px' }} className="py-[8px] px-[20px]">Check Orders</button>
 
-                <button onClick={()=>router.push('/admin')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
+                <button onClick={()=>router.push('/admin')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[8px] px-[20px]">Upload Product</button>
             </div>
 
             {
@@ -62,7 +73,7 @@ const Page = () => {
 
                             <th className='text-white'><span className='flex justify-center'>Payment Tr Id</span></th>
 
-                            <th className='text-white'><span className='flex justify-center'>Actions</span></th>
+                            <th className='text-white'><span className='flex justify-center'>Total</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +91,7 @@ const Page = () => {
 
                             <td> <span className='flex justify-center'>{order.paymentTrId}</span></td>
 
-                            <td> <span onClick={()=>handleDeleteOrder(order._id)} className='flex justify-center'><MdOutlineDeleteForever color={'white'} size={30}></MdOutlineDeleteForever></span></td>
+                            <td><span className='flex justify-center items-center'><span>{order?.placedOrderForProduct?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0)}</span> <span><TbCurrencyTaka color={'white'} size={20}></TbCurrencyTaka></span></span></td>
 
                         </tr>)
                         }
@@ -120,7 +131,7 @@ const Page = () => {
                                         <th><span className='flex justify-center'>{index + 1}</span></th>
                                         <td> <span className='flex justify-center'><img src={product?.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
                                         <td><span className='flex justify-center'>{product?.title}</span></td>
-                                        <td><span className='flex justify-center'>{product?.price}</span></td>
+                                        <td><span className='flex justify-center'>{parseFloat(product?.price) * parseFloat(product?.quantity)}</span></td>
                                         <td><span className='flex justify-center'>{product?.quantity}</span></td>
                                         <td><span className='flex justify-center'>Green</span></td>
                                     </tr>)
@@ -131,22 +142,23 @@ const Page = () => {
 
                     <div className='mt-[25px]'>
                     <div className='lg:flex items-center hidden lg:justify-between md:justify-between gap-x-[48px]'>
-                    <div>
-                        <Button background='#DC3545' width='150px'><div className='flex justify-between px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={25} color={'white'}></ImCancelCircle></span></div></Button>
+                    <div onClick={handleRejectOrder}>
+                        <Button background='#DC3545' width='150px'><div className='flex justify-evenly px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={20} color={'white'}></ImCancelCircle></span></div></Button>
                     </div>
 
-                    <div>
-                        <Button background={'#9F5AE5'} width='150px'><div className='flex justify-between px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={25} color={'white'}></MdDoneOutline></span></div></Button>
+                    <div onClick={handleAcceptOrder}>
+                        <Button background={'#9F5AE5'} width='150px'><div className='flex justify-evenly px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={20} color={'white'}></MdDoneOutline></span></div></Button>
                     </div>
                 </div>
 
                 <div className='grid lg:hidden items-center my-[10px]'>
-                    <div>
-                        <Button background='#DC3545' width='80vw'><div className='flex justify-between px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={25} color={'white'}></ImCancelCircle></span></div></Button>
+                    {/* Next work........ */}
+                    <div onClick={handleRejectOrder}>
+                        <Button background='#DC3545' width='80vw'><div className='flex justify-around px-3 items-center'><span className='text-white'>Decline</span> <span><ImCancelCircle size={25} color={'white'}></ImCancelCircle></span></div></Button>
                     </div>
 
-                    <div className='mt-[10px]'>
-                        <Button background={'#9F5AE5'} width='80vw'><div className='flex justify-between px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={25} color={'white'}></MdDoneOutline></span></div> </Button>
+                    <div onClick={handleAcceptOrder} className='mt-[10px]'>
+                        <Button background={'#9F5AE5'} width='80vw'><div className='flex justify-around px-3 items-center'><span className='text-white'>Accept</span> <span><MdDoneOutline size={25} color={'white'}></MdDoneOutline></span></div> </Button>
                     </div>
                 </div>
                     
