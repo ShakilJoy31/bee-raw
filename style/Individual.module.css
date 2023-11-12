@@ -178,7 +178,7 @@
 }
 .inStockSuggestion{
     position: absolute; 
-        right: 1px; 
+        right: 0; 
         top: 0;
         background: green; 
         color: white; 

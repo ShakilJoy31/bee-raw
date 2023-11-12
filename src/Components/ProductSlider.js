@@ -52,6 +52,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
         const updatedProduct = { ...individualProduct };
         updatedProduct.quantity = updatedProduct.quantity + 1;
         setIndividualProduct(updatedProduct);
+        localStorage.setItem("beeRawCartSingle", JSON.stringify([updatedProduct]));
     };
 
     const quantityDecrease = () => {
@@ -59,15 +60,27 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             const updatedProduct = { ...individualProduct };
             updatedProduct.quantity = updatedProduct.quantity - 1;
             setIndividualProduct(updatedProduct);
+            localStorage.setItem("beeRawCartSingle", JSON.stringify([updatedProduct]));
+
         }
     };
-    const [selectedColor, setSelectedColor] = useState(''); 
-    console.log(individualProduct?.description);
-    const handleBuyNowButton =() =>{
-        if(JSON.parse(localStorage.getItem('addedProduct'))){
-            localStorage.removeItem('addedProduct');
+
+    const [selectedColor, setSelectedColor] = useState('');
+    const handleSelectedColor = (color) =>{
+        const selectedColor = { ...individualProduct };
+        selectedColor.color = color;
+        localStorage.setItem("beeRawCartSingle", JSON.stringify([selectedColor]));
+        setSelectedColor(color)
+    }
+    // console.log(individualProduct?.description);
+    const handleBuyNowButton = () => {
+        if(selectedColor === ''){
+            document.getElementById('alReadyExistsOnTheCartModal').showModal();
+            setWarning(true)
+            setMessage('Please select a color you want.');
+        }else{
+            router.push('/checkout')
         }
-        router.push('/checkout')
     }
     return (
         <div>
@@ -77,13 +90,13 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
                         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
                             <div className={`${IndividualCSS.previewImage}`}>
-                            <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
-                        <div>
-                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
-                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
-                        </div>
-                    </div>
-                            <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
+                                <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
+                                    <div>
+                                        <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                        <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
+                                    </div>
+                                </div>
+                                <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                                 <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
                             </div>
                         </div>
@@ -100,13 +113,18 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                     {/* Information part........ */}
                     <div className={`${IndividualCSS.headingLeftBorder} lg:pl-3 md:pl-2`}>
                         <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>{individualProduct?.title}</h1>
-                        <p style={{ marginBottom: '12px' }}><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct.offerPrice + ' BDT'}</span> {'Taka ' + individualProduct?.price + ' BDT'}</p>
+                        <p style={{ marginBottom: '12px' }}>
+                            {/* <span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct?.offerPrice + ' BDT'}</span> */}
+                            <span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + parseFloat(individualProduct?.offerPrice) * parseFloat(individualProduct.quantity) + ' BDT'}</span>
+
+                            {'Taka ' + parseFloat(individualProduct?.price) * parseFloat(individualProduct?.quantity) + ' BDT'}
+                        </p>
 
                         <div className='flex items-center gap-x-6 mt-[12px]'>
                             <p>Color: </p>
                             <div className={`grid grid-cols-3 gap-2 ml-4 `}>
                                 {individualProduct.color.split(',').map((color, index) => (
-                                    <p onClick={()=>setSelectedColor(color)} className={`px-3 py-1 hover:cursor-pointer ${selectedColor === color ? 'bg-purple-200 text-black':'bg-purple-900 text-white'}`} key={index}>
+                                    <p onClick={() => handleSelectedColor(color)} className={`px-3 py-1 hover:cursor-pointer ${selectedColor === color ? 'bg-purple-200 text-black' : 'bg-purple-900 text-white'}`} key={index}>
                                         {color}
                                     </p>
                                 ))}
@@ -229,11 +247,11 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                             zIndex: '0'
                         }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
                             <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
-                        <div>
-                            <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
-                            <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
-                        </div>
-                    </div>
+                                <div>
+                                    <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                    <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
+                                </div>
+                            </div>
                             <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                             <div onClick={() => {
                                 {

@@ -113,12 +113,12 @@ const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.pr
     
                 {
                 
-                cartItem?.map((item, index) => <div onClick={()=> router.push(`/products/${item._id}`)} key={index}>
+                cartItem?.map((item, index) => <div key={index}>
                 <div className={`lg:flex md:flex grid items-center justify-between`}>
                     <div className='flex items-center'>
-                        <img style={{ borderRadius: '8px' }} className='lg:w-[250px] lg:h-[200px] md:w-[200px] md:h-[170px] w-[170px] h-[145px]' src={item.productPicture[0]} alt="" />
+                        <img onClick={()=> router.push(`/products/${item._id}`)} style={{ borderRadius: '8px' }} className='lg:w-[250px] lg:h-[200px] md:w-[200px] md:h-[170px] w-[170px] h-[145px]' src={item.productPicture[0]} alt="" />
                         <div className='ml-[24px]'>
-                            <h1 className='font-bold mb-[8px] mr-[8px] lg:text-2xl md:text-xl'>{item.title}</h1>
+                            <h1 onClick={()=> router.push(`/products/${item._id}`)} className='font-bold mb-[8px] mr-[8px] lg:text-2xl md:text-xl'>{item.title}</h1>
                             <p>{parseFloat(item.price) * parseFloat(item.quantity)}</p>
 
                             <div className='block lg:hidden md:hidden mt-[8px]'>

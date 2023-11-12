@@ -25,7 +25,6 @@ const handleGettingProducts = async () => {
   
     try {
       const response = await axiosInstance.get(`/get-product/${productId}`);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);

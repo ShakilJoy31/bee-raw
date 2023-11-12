@@ -21,12 +21,6 @@ const Page = () => {
   useEffect(() => {
     CustomerAPI.handleGettingProduct(clickedFor).then(res => setIndividualProduct(res));
   }, [])
-  //   let totalPrice;
-  //   if(user.length < 2){
-  //     totalPrice = user[0].price;
-  //   }else{
-  //     totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0);
-  //   }
   return (
     <div>
       <div className='text-white'>

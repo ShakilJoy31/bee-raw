@@ -29,7 +29,7 @@ const Page = () => {
     }, [])
     let totalPrice;
     if (user?.length < 2) {
-        totalPrice = user[0].price;
+        totalPrice = parseFloat(user[0]?.price) * parseFloat(user[0]?.quantity);
     } else {
         totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0);
     }
@@ -82,7 +82,7 @@ const Page = () => {
                     const newEmail = {
                         name: name,
                         email: email,
-                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}. Please note the customer's email and phone number respectivelly ${email} and ${phoneNumber}. You can also go to the admin panel to check more information about the order. Have a good day chotto bondhu!`,
+                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}. Please note the customer's email and phone number respectivelly ${email} and ${phoneNumber}. Go to the admin panel to check more information about the receieved order or go to this URL https://bee-raw-izqn.vercel.app/admin/user-order. Have a good day chotto bondhu!`,
                       }
                     fetch('https://formspree.io/f/mvojnplv', {
                         method: 'POST',
@@ -104,7 +104,7 @@ const Page = () => {
                             console.log(result);
                          })
                          .catch((error) => {
-                            console.error('Fetch error:', error);
+                            // console.error('Fetch error:', error);
                          });
 
                     console.log(state);
@@ -286,6 +286,7 @@ const Page = () => {
                                     <th className='text-white px-20'><span className='flex justify-center'>Name</span></th>
                                     <th className='text-white'><span className='flex justify-center'>Price</span></th>
                                     <th className='text-white'><span className='flex justify-center'>Quantity</span></th>
+                                    <th className='text-white'><span className='flex justify-center'>Color</span></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -294,8 +295,9 @@ const Page = () => {
                                         <th><span className='flex justify-center'>{index + 1}</span></th>
                                         <td> <span className='flex justify-center'><img src={product.productPicture[0]} alt="Product Image" style={{ borderRadius: '0 8px 0 8px' }} className='w-10 h-10' /></span></td>
                                         <td><span className='flex justify-center'>{product.title}</span></td>
-                                        <td><span className='flex justify-center'>{product.price}</span></td>
+                                        <td><span className='flex justify-center'>{parseFloat(product.price) * parseFloat(product?.quantity)}</span></td>
                                         <td><span className='flex justify-center'>{product.quantity}</span></td>
+                                        <td><span className='flex justify-center'>{product.color.split(',')[0]}</span></td>
                                     </tr>)
                                 }
                             </tbody>
