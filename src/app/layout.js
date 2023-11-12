@@ -1,25 +1,13 @@
 "use client"
 import './globals.css';
 
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React from 'react';
 
 import { Inter } from 'next/font/google';
-import { useRouter } from 'next/navigation';
-import { BiSearch } from 'react-icons/bi';
-import { BsMinecartLoaded } from 'react-icons/bs';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { LuMenu } from 'react-icons/lu';
-import { MdSupportAgent } from 'react-icons/md';
-
-// import { SlMenu } from 'react-icons/si';
-import { verificationFieldsRound } from '@/constants/speceing';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
-import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../userStore';
+import BeeRawNavbar from '../Components/BeeRawNavbar';
 import CustomerSidebar from '../Components/CustomerSidebar';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -30,22 +18,6 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 export default function RootLayout({ children }) {
-  // Next work
-  // const { user, setUser } = UserStore.useContainer();
-  const router = useRouter();
-  const handleCartFromNavbar = () => {
-    if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
-      localStorage.removeItem('addedProduct');
-      localStorage.removeItem('beeRawCartSingle');
-    }
-    router.push('/cart')
-  }
-  const [cartItem, setCartItem] = useState(0); 
-    useEffect(() => {
-        if(JSON.parse(localStorage.getItem("beeRawCart"))){
-            setCartItem((JSON.parse(localStorage.getItem("beeRawCart"))).length)
-        }
-      }, []);
   return (
     <UserStore.Provider>
       <html lang="en">
@@ -56,94 +28,7 @@ export default function RootLayout({ children }) {
             </div>
 
             <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
-              <div>
-                <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
-                  {/* For mobile user */}
-                  <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
-
-                    <div>
-                      <div className="drawer">
-                        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                        <div className="drawer-content">
-                          <label htmlFor="my-drawer" className="drawer-button"><span className='hover:cursor-pointer'><LuMenu color={'white'} size={25}></LuMenu></span></label>
-                        </div>
-                        <div style={{ zIndex: '2' }} className="drawer-side">
-                          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                          <CustomerSidebar></CustomerSidebar>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <img onClick={() => router.push('/products')} className="block mx-auto hover:cursor-pointer w-[180px] h-[60px]" src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" />
-                    </div>
-
-                    <span className=''>
-                      <IoMdNotificationsOutline
-                        color={'white'}
-                        size={30}
-                      ></IoMdNotificationsOutline>
-                    </span>
-
-                    <span className=''>
-                      <MdSupportAgent
-                        color={'white'}
-                        size={30}
-                      ></MdSupportAgent>
-                    </span>
-
-                    <div className="indicator hover:cursor-pointer">
-                        <span style={{
-                          background: 'purple',
-                          borderRadius: '50%',
-                          fontSize: '12px'
-                        }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
-                      <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded color={'white'}
-                        size={25}></BsMinecartLoaded></span>
-                    </div>
-
-                  </div>
-
-                  <div className={`flex items-center ${MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
-                    <span className="mx-3">
-                      <BiSearch color={'purple'} size={25}></BiSearch>
-                    </span>
-                    <input
-                      style={{
-                        borderRadius: verificationFieldsRound,
-                        background: 'white',
-                      }}
-                      placeholder="Type product title here"
-                      className="w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
-                      type="text"
-                      name=""
-                      id=""
-                    />
-                  </div>
-
-                  <div className="lg:flex items-center hidden">
-
-                    <div className="indicator hover:cursor-pointer">
-                        <span style={{
-                          background: 'purple',
-                          borderRadius: '50%',
-                          fontSize: '12px'
-                        }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
-                      <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded color={'white'}
-                        size={25}></BsMinecartLoaded></span>
-                    </div>
-
-                    <span className='mx-[24px]'>
-                      <IoMdNotificationsOutline
-                        color={'white'}
-                        size={30}
-                      ></IoMdNotificationsOutline>
-                    </span>
-                    <i style={{ color: 'white', fontFamily: 'monospace' }} className='text-xl'>Be Raw, Buy Raw</i>
-
-                  </div>
-                </div>
-              </div>
+              <BeeRawNavbar></BeeRawNavbar>
               {children}
             </div>
           </div>
