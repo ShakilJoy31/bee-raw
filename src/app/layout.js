@@ -6,7 +6,10 @@ import React from 'react';
 import { Inter } from 'next/font/google';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
-import { UserStore } from '../../userStore';
+import {
+  ProductsStore,
+  UserStore,
+} from '../../userStore';
 import BeeRawNavbar from '../Components/BeeRawNavbar';
 import CustomerSidebar from '../Components/CustomerSidebar';
 
@@ -19,6 +22,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
+    <ProductsStore.Provider>
     <UserStore.Provider>
       <html lang="en">
         <body style={{ background: 'black' }} className='text-white'>
@@ -36,5 +40,6 @@ export default function RootLayout({ children }) {
         </body>
       </html>
     </UserStore.Provider>
+    </ProductsStore.Provider>
   )
 }

@@ -16,17 +16,23 @@ import { CustomerAPI } from '@/APIcalling/customerAPI';
 import { verificationFieldsRound } from '@/constants/speceing';
 
 import MyServiceCSS from '../../style/MyServiceCSS.module.css';
-import { UserStore } from '../../userStore';
+import {
+  ProductsStore,
+  UserStore,
+} from '../../userStore';
 import CustomerSidebar from '../Components/CustomerSidebar';
 
 const Page = () => {
   // Next work
   const { user, setUser } = UserStore.useContainer();
-  const [products, setProducts] = useState([]);
+  const {products, setProducts} = ProductsStore.useContainer();
+  const [data, setData] = useState([]);
   useEffect(()=>{
-    CustomerAPI.handleGettingProducts().then(res => setProducts(res));
+    CustomerAPI.handleGettingProducts().then(res => {
+      setData(res)
+      setProducts(res)
+    });
   },[])
-  console.log(user);
   console.log(products);
   const router = useRouter();
   const handleCartFromNavbar = () => {
@@ -36,7 +42,7 @@ const Page = () => {
     }
     router.push('/cart')
   }
-  const [cartItem, setCartItem] = useState(0); 
+  const [cartItem, setCartItem] = useState(0);
     useEffect(() => {
         if(user?.length === 0){
             setCartItem((JSON.parse(localStorage.getItem("beeRawCart")))?.length)
@@ -47,7 +53,13 @@ const Page = () => {
 
 
       const handleSearchProducts = (theValue) => {
-        console.log(theValue);
+        const foundProducts = data.filter((product, index) => (product.title).toLowerCase().match(theValue));
+        if(!theValue){
+          setProducts(data);
+      }
+      else{
+          setProducts(foundProducts);
+      }
       }
 
     return (

@@ -13,27 +13,29 @@ import { verificationFieldsRound } from '@/constants/speceing';
 import { useForm } from '@formspree/react';
 
 import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
+import { UserStore } from '../../../userStore';
 
 const Page = () => {
-    // const { user, setUser } = UserStore.useContainer();
-    const [user, setUser] = useState([]);
+    const { setUser } = UserStore.useContainer();
+    const [user, setLocalUser] = useState([]);
     const router = useRouter();
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("beeRawCartSingle"))) {
-            setUser((JSON.parse(localStorage.getItem("beeRawCartSingle"))))
+            setLocalUser((JSON.parse(localStorage.getItem("beeRawCartSingle"))))
         } else if (JSON.parse(localStorage.getItem("beeRawCart"))) {
-            setUser(JSON.parse(localStorage.getItem("beeRawCart")))
+            setLocalUser(JSON.parse(localStorage.getItem("beeRawCart")))
         } else {
             router.push('/products');
         }
     }, [])
+    const [selectedOption, setSelectedOption] = useState('half');
+    const deliveryFee = selectedOption === 'half' ? 60 : 120;
     let totalPrice;
     if (user?.length < 2) {
-        totalPrice = parseFloat(user[0]?.price) * parseFloat(user[0]?.quantity);
+        totalPrice = parseFloat(user[0]?.price) * parseFloat(user[0]?.quantity) + deliveryFee;
     } else {
-        totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0);
+        totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)) + deliveryFee, 0);
     }
-    const [selectedOption, setSelectedOption] = useState('half');
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
@@ -57,6 +59,7 @@ const Page = () => {
             }
         }
     }, 1800);
+    console.log(warning);
     const [state, handleSubmit] = useForm("mvojnplv");
     const handlePlaceOrderButton = () => {
         const userDataForPlaceOrder = {
@@ -66,7 +69,8 @@ const Page = () => {
             email: email,
             paymentTrId: paymentTrId,
             isDhaka: (selectedOption === 'half' ? 'Inside Dhaka' : 'Outside Dhaka'),
-            placedOrderForProduct: user
+            placedOrderForProduct: user,
+            totalTakaOrdered: totalPrice
         }
         if (!name || !address || !phoneNumber) {
             document.getElementById('placeOrderModal').showModal();
@@ -75,45 +79,40 @@ const Page = () => {
         } else {
             CustomerAPI.userInformationForPlacOrderProduct(userDataForPlaceOrder).then(res => {
                 if (res.acknowledged === true) {
-                    document.getElementById('placeOrderModal').showModal();
+                    document.getElementById('placeOrderModal')?.showModal();
                     setWarning(true)
                     setCartAddedMessage('Congratulations! Order placed successfully.')
+
                     // Code for sending the email...........
                     const newEmail = {
                         name: name,
                         email: email,
-                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}. Please note the customer's email and phone number respectivelly ${email} and ${phoneNumber}. Go to the admin panel to check more information about the receieved order or go to this URL https://bee-raw-izqn.vercel.app/admin/user-order. Have a good day chotto bondhu!`,
-                      }
+                        message: `Hey Chotto bondhu Sa'ad. ${name} ordered a product from ${address}. Please note the customer's email and phone number respectivelly ${email} and ${phoneNumber}. ${name} total ordered ${totalPrice} taka. Go to the admin panel to check more information about the receieved order or go to this URL https://bee-raw-izqn.vercel.app/admin/user-order. Have a good day chotto bondhu!`,
+                    }
                     fetch('https://formspree.io/f/mvojnplv', {
                         method: 'POST',
                         body: JSON.stringify(newEmail),
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                    })
-                        .then((res) => res.json())
-                        .then((result) => {
-                            // console.log(result);
-                        }).then((res) => {
-                            if (!res.ok) {
-                               throw new Error(`HTTP error! Status: ${res.status}`);
-                            }
-                            return res.json();
-                         })
-                         .then((result) => {
-                            console.log(result);
-                         })
-                         .catch((error) => {
-                            // console.error('Fetch error:', error);
-                         });
+                    }).then((res) => res.json()).then((result) => {
+                        // console.log(result);
+                    }).then((res) => { }).then((result) => { }).catch((error) => { });
 
-                    console.log(state);
-                    if (state.succeeded) {
-                        return <p>Thanks for joining!</p>;
-                    }
-
+                    setTimeout(function () {
+                        // Removing the data from local storage and sending the user to the home page where they were after the data is deleted fro localstorage.........
+                        if (JSON.parse(localStorage.getItem("beeRawCartSingle"))) {
+                            localStorage.removeItem('beeRawCartSingle')
+                            setUser([]);
+                        }
+                        if (JSON.parse(localStorage.getItem("beeRawCart"))) {
+                            localStorage.removeItem('beeRawCart')
+                            setUser([]);
+                        }
+                        router.push('/products');
+                    }, 9999);
                 } else {
-                    document.getElementById('placeOrderModal').showModal();
+                    document.getElementById('placeOrderModal')?.showModal();
                     setWarning(true)
                     setCartAddedMessage('OoppS! Failed.');
                 }
@@ -247,7 +246,7 @@ const Page = () => {
                                     className="checkbox checkbox-xs checkbox-accent"
                                     checked={selectedOption === 'half'}
                                 />
-                                <p>Inside Dhaka</p>
+                                <p onClick={() => handleOptionChange('half')} className='hover:underline hover:cursor-pointer'>Inside Dhaka</p>
                             </div>
                         </div>
 
@@ -260,7 +259,7 @@ const Page = () => {
                                     className="checkbox checkbox-xs checkbox-accent"
                                     checked={selectedOption === 'quarter'}
                                 />
-                                <p>Outside Dhaka</p>
+                                <p onClick={() => handleOptionChange('quarter')} className='hover:underline hover:cursor-pointer'>Outside Dhaka</p>
                             </div>
                         </div>
 
@@ -314,9 +313,20 @@ const Page = () => {
                                 <p>{totalPrice}</p>
                             </div>
 
-                            <div className='flex items-center justify-between my-[8px]'>
-                                <h1>Delevary Charge: </h1>
-                                <p className='ml-2'>60-120 Taka</p>
+                            <div className='flex items-center justify-center my-[8px]'>
+                                <h1>Delevary Charge</h1>
+                            </div>
+
+
+                            <div className={`flex items-center justify-between my-[8px] ${selectedOption === 'half' ? 'text-orange-600 underline' : 'text-white'}`}>
+                                <h1>Inside Dhaka</h1>
+                                <p className='ml-2'> 60 Taka</p>
+                            </div>
+
+
+                            <div className={`flex items-center justify-between my-[8px] ${selectedOption === 'quarter' ? 'text-orange-600 underline' : 'text-white'}`}>
+                                <h1>Outside Dhaka</h1>
+                                <p className='ml-2'> 120 Taka</p>
                             </div>
                         </div>
                     </div>
@@ -325,7 +335,7 @@ const Page = () => {
 
 
 
-                <div className='lg:flex items-center justify-center hidden lg:justify-end md:justify-end gap-x-[48px] pb-[66px] mt-[48px]'>
+                <div className='lg:flex items-center justify-center hidden lg:justify-end md:justify-end gap-x-[48px] py-[25px] '>
                     <div onClick={() => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
@@ -338,7 +348,7 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className='grid lg:hidden items-center my-[10px]'>
+                <div className='grid lg:hidden items-center py-[25px]'>
                     <div onClick={() => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
@@ -346,7 +356,7 @@ const Page = () => {
                         <Button background='#DC3545' width='94vw'><span className='text-white'>Cancel</span></Button>
                     </div>
 
-                    <div onClick={handlePlaceOrderButton} className='mt-[10px]'>
+                    <div onClick={handlePlaceOrderButton} className='mt-[25px]'>
                         <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Place Order</span></Button>
                     </div>
                 </div>

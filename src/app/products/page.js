@@ -6,20 +6,22 @@ import React, {
 
 import { useRouter } from 'next/navigation';
 
-import { CustomerAPI } from '@/APIcalling/customerAPI';
 import Button from '@/Components/button';
 import Spinner from '@/Components/Spinner';
 
 import DashboardCSS from '../../../style/Dashboard.module.css';
-import { UserStore } from '../../../userStore';
+import {
+  ProductsStore,
+  UserStore,
+} from '../../../userStore';
 
 const Page = () => {
-    const { user, setUser } = UserStore.useContainer()
+    const { user, setUser } = UserStore.useContainer();
+    const {products, setProducts} = ProductsStore.useContainer();
+    console.log(products);
     const router = useRouter();
-    const [products, setProducts] = useState([]);
     const [warning, setWarning] = useState(false);
     useEffect(() => {
-        CustomerAPI.handleGettingProducts().then(res => setProducts(res));
         if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
             localStorage.removeItem('beeRawCartSingle');
           }
@@ -27,7 +29,7 @@ const Page = () => {
 
     setTimeout(function () {
         if (warning) {
-            document.getElementById('alReadyExistsOnTheCartModal').close();
+            document.getElementById('alReadyExistsOnTheCartModal')?.close();
             setWarning(false);
         }
     }, 1800);
@@ -77,7 +79,7 @@ const Page = () => {
                                 }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={product.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
+                                <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                             </div>
 
                             <div className=''>
@@ -86,7 +88,7 @@ const Page = () => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:underline ">{product.title}</h2>
+                                        }} className="hover:underline h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
