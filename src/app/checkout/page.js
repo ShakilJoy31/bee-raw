@@ -141,7 +141,7 @@ const Page = () => {
 
                 <div>
                     <div>
-                        <h1 className='mb-1'>Receiever Name</h1>
+                        <h1 className='mb-1'>Receiever Name <span className='text-red-700 text-xl pt-1'> *</span></h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
                             {/* <span className="mx-3">
                                 <FaUser color={'purple'} size={25}></FaUser>
@@ -151,7 +151,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Search for anything"
+                                placeholder="Type your full name"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -163,14 +163,14 @@ const Page = () => {
 
 
                     <div className='my-3'>
-                        <h1 className='mb-1'>Receiever Address</h1>
+                        <h1 className='mb-1'>Receiever Address <span className='text-red-700 text-xl pt-1'> *</span></h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
                             <input onChange={(e) => setAddress(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Search for anything"
+                                placeholder="Type your address"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -181,7 +181,7 @@ const Page = () => {
 
 
                     <div>
-                        <h1 className='mb-1'>Phone number</h1>
+                        <h1 className='mb-1'>Phone number <span className='text-red-700 text-xl pt-1'> *</span></h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
 
                             <input onChange={(e) => setPhoneNumber(e.target.value)}
@@ -189,7 +189,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Search for anything"
+                                placeholder="Type your phone number"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -208,7 +208,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Search for anything"
+                                placeholder="Type your email"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -219,7 +219,7 @@ const Page = () => {
 
 
 
-                    <div>
+                    {/* <div>
                         <h1 className='mb-1'>Payment Transaction id</h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
 
@@ -235,7 +235,7 @@ const Page = () => {
                                 id=""
                             />
                         </div>
-                    </div>
+                    </div> */}
 
 
                     <div className='flex gap-x-8 my-3'>

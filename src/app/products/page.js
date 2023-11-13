@@ -20,7 +20,6 @@ const Page = () => {
     const [warning, setWarning] = useState(false);
     useEffect(() => {
         CustomerAPI.handleGettingProducts().then(res => setProducts(res));
-        localStorage.removeItem('beeRawCartSingle');
         if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
             localStorage.removeItem('beeRawCartSingle');
           }

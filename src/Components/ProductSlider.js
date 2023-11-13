@@ -72,7 +72,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
         localStorage.setItem("beeRawCartSingle", JSON.stringify([selectedColor]));
         setSelectedColor(color)
     }
-    // console.log(individualProduct?.description);
+    console.log(individualProduct);
     const handleBuyNowButton = () => {
         if(selectedColor === ''){
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
@@ -123,7 +123,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                         <div className='flex items-center gap-x-6 mt-[12px]'>
                             <p>Color: </p>
                             <div className={`grid grid-cols-3 gap-2 ml-4 `}>
-                                {individualProduct.color.z.map((color, index) => (
+                                {individualProduct?.color?.split(',')?.map((color, index) => (
                                     <p onClick={() => handleSelectedColor(color)} className={`px-3 py-1 hover:cursor-pointer ${selectedColor === color ? 'bg-purple-200 text-black' : 'bg-purple-900 text-white'}`} key={index}>
                                         {color}
                                     </p>

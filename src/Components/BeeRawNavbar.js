@@ -11,6 +11,7 @@ import { IoMdNotificationsOutline } from 'react-icons/io';
 import { LuMenu } from 'react-icons/lu';
 import { MdSupportAgent } from 'react-icons/md';
 
+import { CustomerAPI } from '@/APIcalling/customerAPI';
 // import { SlMenu } from 'react-icons/si';
 import { verificationFieldsRound } from '@/constants/speceing';
 
@@ -21,7 +22,12 @@ import CustomerSidebar from '../Components/CustomerSidebar';
 const Page = () => {
   // Next work
   const { user, setUser } = UserStore.useContainer();
+  const [products, setProducts] = useState([]);
+  useEffect(()=>{
+    CustomerAPI.handleGettingProducts().then(res => setProducts(res));
+  },[])
   console.log(user);
+  console.log(products);
   const router = useRouter();
   const handleCartFromNavbar = () => {
     if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
@@ -43,7 +49,7 @@ const Page = () => {
       const handleSearchProducts = (theValue) => {
         console.log(theValue);
       }
-      
+
     return (
         <div>
                 <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
