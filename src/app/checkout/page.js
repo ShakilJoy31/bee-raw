@@ -13,10 +13,10 @@ import { verificationFieldsRound } from '@/constants/speceing';
 import { useForm } from '@formspree/react';
 
 import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
-import { UserStore } from '../../../userStore';
 
 const Page = () => {
-    const { user, setUser } = UserStore.useContainer();
+    // const { user, setUser } = UserStore.useContainer();
+    const [user, setUser] = useState([]);
     const router = useRouter();
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("beeRawCartSingle"))) {

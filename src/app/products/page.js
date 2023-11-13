@@ -51,7 +51,7 @@ const Page = () => {
         }
     }
     const handleBuyNowButton = (product) => {
-        setUser([product]);
+        // setUser([product]);
         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
         router.push('/checkout');
     }
@@ -86,7 +86,7 @@ const Page = () => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:underline h-[70px]">{product.title}</h2>
+                                        }} className="hover:underline ">{product.title}</h2>
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {

@@ -22,7 +22,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
     setTimeout(function () {
         if (warning) {
-            document.getElementById('alReadyExistsOnTheCartModal').close();
+            document.getElementById('alReadyExistsOnTheCartModal')?.close();
             setWarning(false);
         }
     }, 1800);
