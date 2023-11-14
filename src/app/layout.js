@@ -33,7 +33,9 @@ export default function RootLayout({ children }) {
 
             <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
               <BeeRawNavbar></BeeRawNavbar>
+              <div>
               {children}
+              </div>
             </div>
           </div>
 

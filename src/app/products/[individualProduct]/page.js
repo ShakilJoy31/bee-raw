@@ -24,10 +24,8 @@ const Page = () => {
   return (
     <div>
       <div className='text-white'>
-        {/* <CenterMode></CenterMode> */}
-        {/* <MySlider></MySlider> */}
         {
-          individualProduct?.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
+          individualProduct?.length < 1 ? <div className='mt-[65px] flex justify-center'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
         }
       </div>
     </div>);
