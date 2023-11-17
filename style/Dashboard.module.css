@@ -154,14 +154,14 @@
 /* Tablets (768px to 1023px) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .footerSection{
-    border-right: 1px solid rgba(255, 255, 255, 0.685);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.685); */
   }
 }
 
 /* Large screens (1024px and above) */
 @media screen and (min-width: 1024px) {
   .footerSection{
-    border-right: 1px solid rgba(255, 255, 255, 0.685);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.685); */
   }
 }
 

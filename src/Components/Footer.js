@@ -25,7 +25,7 @@ const Footer = () => {
                     <div>
                     <span style={{
                         fontWeight: "700",
-                        fontSize: "20px",
+                        fontSize: "22px",
                         color: 'white', 
                     }}>1 Year Warranty</span>
                     <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Take your replacement for any kind of quality issues.</p>
@@ -47,7 +47,7 @@ const Footer = () => {
                     <div>
                     <span style={{
                         fontWeight: "700",
-                        fontSize: "20px",
+                        fontSize: "22px",
                         color: 'white', 
                     }}>24/7 Support.</span>
                     <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Contact through email or messenger 24/7.</p>
@@ -63,7 +63,7 @@ const Footer = () => {
                     <div>
                     <span style={{
                         fontWeight: "700",
-                        fontSize: "20px",
+                        fontSize: "22px",
                         color: 'white', 
                     }}>Money Back Gurantee</span>
                     <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>If does not suit, get your money back!</p>
@@ -78,12 +78,12 @@ const Footer = () => {
             </div>
 
 
-            <div className={`grid justify-between lg:flex md:flex p-2 mt-4`}>
+            <div className={`grid justify-around lg:flex md:flex p-2 mt-4`}>
                 <div className='grid '>
                     <div>
                     <span style={{
                         fontWeight: "700",
-                        fontSize: "20px",
+                        fontSize: "22px",
                         color: 'white', 
                     }}>POLICY</span>
                     <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Terms & Conditions</p>
@@ -93,11 +93,11 @@ const Footer = () => {
                 </div>
 
 
-                <div className='grid my-4'>
+                <div className='grid my-4 lg:my-0 md:my-0'>
                     <div>
                     <span style={{
                         fontWeight: "700",
-                        fontSize: "20px",
+                        fontSize: "22px",
                         color: 'white', 
                     }}>INFORMATIONS</span>
                     <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>About us</p>
