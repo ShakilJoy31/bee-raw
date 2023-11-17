@@ -38,7 +38,6 @@ const Page = () => {
     });
       Aos.init({ duration: 500 });
   }, [])
-  console.log(products);
   const router = useRouter();
   const handleCartFromNavbar = () => {
     if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {

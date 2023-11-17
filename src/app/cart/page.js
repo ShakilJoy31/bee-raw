@@ -6,6 +6,7 @@ import React, {
 
 import { useRouter } from 'next/navigation';
 import { BsArrowLeft } from 'react-icons/bs';
+import { IoTrashBin } from 'react-icons/io5';
 
 import Button from '@/Components/button';
 import Divider from '@/Components/Divider';
@@ -60,47 +61,25 @@ const Page = () => {
     const totalPrice = cartItem?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0);
 
     const [orderDuplicateError, setOrderDuplicateError] = useState('');
-    //   const handlePlaceOrderButton = () =>{
-    //     const userId = (JSON.parse(localStorage.getItem("loggedInUser"))).data.data.user._id;
-    //     const token = (JSON.parse(localStorage.getItem("loggedInUser")).headers.token)
-    //     const itemsAccordingToCart = cartItem.map((item) => {
-    //         return {
-    //           name: item.name,
-    //           description: item.description,
-    //           businessId: item.businessId,
-    //           itemId: item._id,
-    //           quantity: item.serving[0].quantity,
-    //           servingName: "Tbl1"
-    //         };
-    //       })
-    //     const placeOrderData = {
-    //         items: itemsAccordingToCart,
-    //         service: {
-    //             serviceType:"TABLE",
-    //             serviceId: "64fb0ca38ce17739e4492346"
-    //         },
-    //           businessId: cartItem[0].businessId,
-    //             date: date,
-    //         time: time
-    //       }
-    //       CustomerAPI.placingOrder(userId, token, placeOrderData).then((res) => {
-    //         if (res.data) {
-    //             localStorage.setItem("placedOrderRes", JSON.stringify(res));
-    //             setWarning(true)
-    //             document.getElementById('alreadyBookedModal').showModal();
-    //             setOrderDuplicateError('Congratulations! Table booked.');
-    //         }else{
-    //             setWarning(true)
-    //             document.getElementById('alreadyBookedModal').showModal();
-    //             setOrderDuplicateError(res.response.data.error.message); 
-    //         }
-    //     })
-    //   }
-    setUser(cartItem);
+    const [productToDelete, setProductToDelete] = useState('');
+
+    const handleDeleteFromCart = () =>{
+        const restProduct = cartItem.filter((item, index) => item?._id !== productToDelete);
+        console.log(restProduct);
+        if(restProduct.length === 0){
+            setCartItem(null);
+        }else{
+            setCartItem(restProduct);
+        }
+        localStorage.setItem("beeRawCart", JSON.stringify(restProduct));
+        setUser(restProduct);
+        document.getElementById('deleteProductFromCart').close();
+    }
+    // setUser(cartItem);
     return (
         <div>
             {
-                cartItem ? <div className='min-h-screen text-white'>
+                cartItem !== null ? <div className='min-h-screen text-white'>
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center'>
                             <span onClick={() => router.back()} className='hover:cursor-pointer'>
@@ -119,8 +98,18 @@ const Page = () => {
                                     <img onClick={() => router.push(`/products/${item._id}`)} style={{ borderRadius: '8px' }} className='lg:w-[250px] lg:h-[200px] md:w-[200px] md:h-[170px] w-[170px] h-[145px]' src={item.productPicture[0]} alt="" />
                                     <div className='ml-[24px]'>
                                         <h1 onClick={() => router.push(`/products/${item._id}`)} className='font-bold mb-[8px] mr-[8px] lg:text-2xl md:text-xl'>{item.title}</h1>
-                                        <p>{parseFloat(item.price) * parseFloat(item.quantity)}</p>
 
+                                        <div className='flex items-center w-full gap-x-3'>
+                                                <p style={{ textDecoration: 'line-through' }} className='text-slate-400' onClick={() => {
+                                                    router.push(`/products/${item._id}`)
+                                                }}>{parseFloat(item.offerPrice) * parseFloat(item.quantity)} ৳</p>
+
+                                                <p onClick={() => {
+                                                    router.push(`/products/${item._id}`)
+                                                }}>{parseFloat(item.price) * parseFloat(item.quantity)} ৳</p>
+                                            </div>
+                                        
+                                        {/* For mobile... */}
                                         <div className='block lg:hidden md:hidden mt-[8px]'>
                                             <div>
                                                 <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
@@ -136,8 +125,9 @@ const Page = () => {
                                     </div>
                                 </div>
 
-                                <div className='hidden lg:block md:block'>
-                                    <div className='flex justify-end'>
+                                {/* For Computer... */}
+                                <div className='hidden lg:flex md:flex justify-end h-full'>
+                                    <div className=''>
                                         <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
                                             <p onClick={() => quantityDecrease(item)}><span className=''>-</span></p>
                                             <p>|</p>
@@ -145,6 +135,10 @@ const Page = () => {
                                             <p>|</p>
                                             <p onClick={() => quantityIncrease(item)}><span className=''>+</span></p>
                                         </div>
+                                        <span onClick={()=> {
+                                            document.getElementById('deleteProductFromCart')?.showModal();
+                                            setProductToDelete(item?._id)
+                                        }} className='flex justify-center mt-[10px] hover:cursor-pointer hover:text-white'><IoTrashBin size={25} color={'red'} /></span>
                                     </div>
 
                                 </div>
@@ -195,6 +189,7 @@ const Page = () => {
                         <div onClick={() => {
                             localStorage.removeItem('beeRawCart')
                             setCartItem(null);
+                            setUser(null)
                         }} className='mb-[25px]'>
                             <Button background='#DC3545' width='94vw'><span className='text-white'>Empty Cart</span></Button>
                         </div>
@@ -210,6 +205,7 @@ const Page = () => {
                         <div onClick={() => {
                             localStorage.removeItem('beeRawCart')
                             setCartItem(null);
+                            setUser(null)
                         }}>
                             <Button background='#DC3545' width='250px'><span className='text-white'>Empty Cart</span></Button>
                         </div>
@@ -219,6 +215,33 @@ const Page = () => {
                         </div>
 
                     </div>
+
+                    <dialog id="deleteProductFromCart" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: '#DC3545',
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <h3 className="flex justify-center text-white">এই বাইঞ্চোদ, প্রোডাক্ট কিন্তু ডিলেট হয়ে যাবে।</h3>
+
+                    <div className='flex justify-between items-center my-[10px] gap-x-2'>
+                    
+                    <div onClick={()=>{
+                        document.getElementById('deleteProductFromCart').close();
+                    }}>
+                        <Button background='green' width='150px'><div className='flex justify-around px-3 items-center'><span className='text-white'>এই না না</span></div></Button>
+                    </div>
+
+                    <div onClick={handleDeleteFromCart} className=''>
+                        <Button background={'#9F5AE5'} width='150px'><div className='flex justify-around px-3 items-center'><span className='text-white'>আচ্ছা হোক</span></div> </Button>
+                    </div>
+                </div>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
 
                 </div> : <div className='min-h-screen text-black mx-[48px]'>
                     <EmptyCartComponent></EmptyCartComponent>
@@ -230,18 +253,3 @@ const Page = () => {
 };
 
 export default Page;
-
-
-// {/* <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
-//                                     <div style={{
-//                                         color: 'white',
-//                                         background: '#DC3545',
-//                                         border: '1px solid white'
-//                                     }} className="modal-box">
-//                                         <h3 className="flex justify-center text-white">Item already added!</h3>
-
-//                                     </div>
-//                                     <form method="dialog" className="modal-backdrop">
-//                                         <button>close</button>
-//                                     </form>
-//                                 </dialog> */}

@@ -31,10 +31,9 @@ import {
       });
     try {
       const response = await axiosInstance.get(placedOrderAPIForAdmin);
-      console.log(response);
       return response.data;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
   };
 

@@ -307,12 +307,8 @@ const Page = () => {
 
                     <div className='lg:w-72 md:w-50 w-full mt-4'>
                         <div>
-                            <h1 style={{ fontSize: '16px' }} className='font-bold mb-[8px]'>Pre-Order Summary</h1>
-                            <div className='flex items-center justify-between'>
-                                <h1>Item total</h1>
-                                <p>{totalPrice}</p>
-                            </div>
-
+                            <h1 style={{ fontSize: '16px' }} className='font-bold mb-[8px] flex justify-center'>Pre-Order Summary</h1>
+                            
                             <div className='flex items-center justify-center my-[8px]'>
                                 <h1>Delevary Charge</h1>
                             </div>
@@ -327,6 +323,11 @@ const Page = () => {
                             <div className={`flex items-center justify-between my-[8px] ${selectedOption === 'quarter' ? 'text-orange-600 underline' : 'text-white'}`}>
                                 <h1>Outside Dhaka</h1>
                                 <p className='ml-2'> 120 Taka</p>
+                            </div>
+
+                            <div className='flex items-center justify-between'>
+                                <h1>Item total</h1>
+                                <p>{totalPrice}</p>
                             </div>
                         </div>
                     </div>
@@ -376,6 +377,7 @@ const Page = () => {
                             <div>
                                 <span className='my-2 flex justify-center items-center'>(Around <span className='font-bold mx-1'>7:00 AM</span> to <span className='font-bold ml-1'>11:59 PM</span>)</span>
                             </div>
+                            
                         </div> : ''
                     }
                 </div>

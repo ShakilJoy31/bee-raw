@@ -38,6 +38,13 @@
   transition-duration: 100ms;
   cursor: pointer;
 }
+.sidebarHeadingSelected{
+  background: purple;
+  border-radius: 8px;
+  transition-duration: 100ms;
+  cursor: pointer;
+}
+
 .offerSlider{
   border-radius: 16px;
   border: 1px solid rgba(18, 18, 18, 0.16);

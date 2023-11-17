@@ -11,7 +11,6 @@ import { TbCurrencyTaka } from 'react-icons/tb';
 
 import { AdminAPI } from '@/APIcalling/adminAPI';
 import Button from '@/Components/button';
-import Spinner from '@/Components/Spinner';
 
 import AdminCSS from '../../../../style/AdminCSS.module.css';
 
@@ -57,7 +56,12 @@ const Page = () => {
             </div>
 
             {
-                orders?.length < 1 ? <div className='flex justify-center items-center min-h-screen lg:h-0 md:h-0'><Spinner></Spinner></div> : <div className="overflow-x-auto w-full">
+                orders?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+                <div>
+                <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
+              <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                </div>
+              </div> : <div className="overflow-x-auto w-full">
                 <table className="table">
                     <thead>
                         <tr>

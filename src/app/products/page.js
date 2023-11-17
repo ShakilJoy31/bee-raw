@@ -7,7 +7,6 @@ import React, {
 import { useRouter } from 'next/navigation';
 
 import Button from '@/Components/button';
-import Spinner from '@/Components/Spinner';
 
 import DashboardCSS from '../../../style/Dashboard.module.css';
 import {
@@ -18,7 +17,6 @@ import {
 const Page = () => {
     const { user, setUser } = UserStore.useContainer();
     const {products, setProducts} = ProductsStore.useContainer();
-    console.log(products);
     const router = useRouter();
     const [warning, setWarning] = useState(false);
     useEffect(() => {
@@ -60,7 +58,12 @@ const Page = () => {
     return (
         <div className='h-full'>
             {
-                products?.length < 1 ? <div className='flex justify-center items-center h-full'><Spinner></Spinner></div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
+                products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+                <div>
+                <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
+              <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                </div>
+              </div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 
                     {
                         products?.map((product, index) => <div style={{

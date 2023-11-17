@@ -18,7 +18,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
     const [warning, setWarning] = useState(false);
     useEffect(() => {
         setPreviewImage(individualProduct?.productPicture[0]);
-    }, [individualProduct?.productPicture[0]])
+    }, [])
 
     setTimeout(function () {
         if (warning) {
@@ -72,7 +72,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
         localStorage.setItem("beeRawCartSingle", JSON.stringify([selectedColor]));
         setSelectedColor(color)
     }
-    console.log(individualProduct);
     const handleBuyNowButton = () => {
         if(selectedColor === ''){
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
@@ -104,7 +103,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
                         <div className={`${IndividualCSS.previewImageLittle}`}>
                             {
-                                individualProduct?.productPicture.map((picture, index) => <img className={`${IndividualCSS.littleImageOfProduct} ${previewImage === picture ? IndividualCSS.littleImageOfProductSelected : ''}`} onClick={() => handleReviewImage(picture)} key={index} src={picture} />)
+                                individualProduct?.productPicture?.map((picture, index) => <img className={`${IndividualCSS.littleImageOfProduct} ${previewImage === picture ? IndividualCSS.littleImageOfProductSelected : ''}`} onClick={() => handleReviewImage(picture)} key={index} src={picture} />)
                             }
                         </div>
                     </div>
@@ -157,83 +156,18 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
 
                         </div>
 
-                        <div className='lg:hidden block md:hidden my-[12px]'>
-                            <p className='mb-4'>
-                                <span className='font-bold text-xl'>Feature : </span> <br></br>
-                                RAM: 196KB
-                                <br></br>
-                                ROM: 1MB+64MB
-                                <br></br>
-                                Wireless charging capability
-                                <br></br>
-                                Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
 
-                            <p>
-                                <span className='font-bold text-xl'>Specification : </span> <br></br>
-                                Product Name : T900 Ultra smart watch
-                                <br></br>
-                                System Requirements : Android5.0+ / ios10.0+
-                                <br></br>
-                                Charge Mode : Wireless charging
-                                <br></br>
-                                Battery Capacity : 230 MAH
-                                <br></br>
-                                Standby time : 65days
-                                <br></br>
-                                Usage time : About 10 days
-                                <br></br>
-                                Button Method : Full screen touch
-                                <br></br>
-                                APP: Hiwatch Pro
-                                <br></br>
-                                Bracelet Memory : 128M
-                                <br></br>
-                                IP67 life waterproof
-                                <br></br>
-                                Screen Display : 2.02-inch IPS screen, resolution 240*286
-                            </p>
+                        {/* Description for mobile. */}
+                        <div className='lg:hidden block md:hidden my-[12px]'>
+                        <p style={{ whiteSpace: 'pre-line' }}>{individualProduct.description}</p>
                         </div>
                     </div>
                 </div>
 
 
-
+                {/* Description for computer..... */}
                 <div className='lg:flex justify-between hidden md:hidden my-[25px]'>
-                    {/* <p>{individualProduct.description}</p> */}
-                    <p>
-                        <span className='font-bold text-xl'>Feature : </span> <br></br>
-                        RAM: 196KB
-                        <br></br>
-                        ROM: 1MB+64MB
-                        <br></br>
-                        Wireless charging capability
-                        <br></br>
-                        Shows notification of Calls / Email / SMS / WhatsApp / WeChat & etc</p>
-
-                    <p>
-                        <span className='font-bold text-xl'>Specification : </span> <br></br>
-                        Product Name : T900 Ultra smart watch
-                        <br></br>
-                        System Requirements : Android5.0+ / ios10.0+
-                        <br></br>
-                        Charge Mode : Wireless charging
-                        <br></br>
-                        Battery Capacity : 230 MAH
-                        <br></br>
-                        Standby time : 65days
-                        <br></br>
-                        Usage time : About 10 days
-                        <br></br>
-                        Button Method : Full screen touch
-                        <br></br>
-                        APP: Hiwatch Pro
-                        <br></br>
-                        Bracelet Memory : 128M
-                        <br></br>
-                        IP67 life waterproof
-                        <br></br>
-                        Screen Display : 2.02-inch IPS screen, resolution 240*286
-                    </p>
+                    <p style={{ whiteSpace: 'pre-line' }}>{individualProduct.description}</p>
                 </div>
 
 
@@ -260,7 +194,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                 }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={individualProduct.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                                <figure><img src={individualProduct?.productPicture} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
                             </div>
 
                             <div className=''>

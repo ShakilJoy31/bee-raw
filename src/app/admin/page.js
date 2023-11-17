@@ -25,8 +25,7 @@ const Page = () => {
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('Best seller');
     const [availability, setAvailability] = useState('In Stock');
-    const [feature, setFeature] = useState('');
-    const [specification, setSpecification] = useState('');
+    const [description, setDescription] = useState('');
     const [picture, setPicture] = useState('');
     const [hostedImage, setHostedImage] = useState()
     const [hostedImages, setHostedImages] = useState([])
@@ -61,8 +60,7 @@ const Page = () => {
             color: color,
             category: category,
             availability: availability,
-            feature: feature,
-            specification: specification,
+            description: description,
             productPicture: hostedImages,
             quantity: 1
         }
@@ -209,15 +207,8 @@ const Page = () => {
 
             <div className='mt-[6px]'>
                 <div>
-                    <span className=''>Feature</span>
-                    <textarea onChange={(e) => setFeature(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
-                </div>
-            </div>
-
-            <div className='mt-[6px]'>
-                <div>
-                    <span className=''>Specification</span>
-                    <textarea onChange={(e) => setSpecification(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
+                    <span className=''>Description</span>
+                    <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
                 </div>
             </div>
 

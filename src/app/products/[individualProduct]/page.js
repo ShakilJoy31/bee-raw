@@ -11,7 +11,6 @@ import {
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
 import ProductSlider from '@/Components/ProductSlider';
-import Spinner from '@/Components/Spinner';
 
 const Page = () => {
   const router = useRouter();
@@ -25,7 +24,14 @@ const Page = () => {
     <div>
       <div className='text-white'>
         {
-          individualProduct?.length < 1 ? <div className='mt-[65px] flex justify-center'><Spinner></Spinner></div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
+          individualProduct?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+          <div>
+          <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
+        <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+          </div>
+        </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
+          // Cambria
+          // Lucida Sans Unicode
         }
       </div>
     </div>);
