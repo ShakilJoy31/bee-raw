@@ -66,7 +66,7 @@ const Footer = () => {
                         fontSize: "20px",
                         color: 'white', 
                     }}>Money Back Gurantee</span>
-                    <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>If doesn't suit, get your money back!</p>
+                    <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>If does not suit, get your money back!</p>
                     </div>
                     </div>
                 </div>
