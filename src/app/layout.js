@@ -5,6 +5,8 @@ import React from 'react';
 
 import { Inter } from 'next/font/google';
 
+import Footer from '@/Components/Footer';
+
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
   ProductsStore,
@@ -36,9 +38,15 @@ export default function RootLayout({ children }) {
               <div>
               {children}
               </div>
+              <div className='hidden lg:block md:block mb-4'>
+            <Footer></Footer>
+              </div>
             </div>
           </div>
 
+          <div className='block lg:hidden md:hidden'>
+            <Footer></Footer>
+          </div>
         </body>
       </html>
     </UserStore.Provider>

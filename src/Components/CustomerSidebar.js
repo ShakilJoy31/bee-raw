@@ -47,7 +47,7 @@ const CustomerSidebar = ({ drawer }) => {
     return (
         <div style={{ background: 'black' }} className={`h-full w-[300px] md:w-[310px] lg:w-[320px]`}>
             <div style={{ overflow: 'hidden' }} className={`h-full text-white ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
-                <div className='flex items-center justify-evenly'>
+                <div className='flex items-center justify-around'>
                     <img style={{ width: '150px', height: '100px' }} onClick={() => router.push('/products')} className="lg:block lg:mx-auto md:block md:mx-auto py-[
                     6px] hover:cursor-pointer" src='https://i.ibb.co/grM5C0K/IMG-20230923-145307-1-removebg-preview.png
                     ' alt="" />

@@ -10,9 +10,8 @@ import Aos from 'aos';
 import { useRouter } from 'next/navigation';
 import { BiSearch } from 'react-icons/bi';
 import { BsMinecartLoaded } from 'react-icons/bs';
-import { IoMdNotificationsOutline } from 'react-icons/io';
+import { FcOnlineSupport } from 'react-icons/fc';
 import { LuMenu } from 'react-icons/lu';
-import { MdSupportAgent } from 'react-icons/md';
 import { TbCurrencyTaka } from 'react-icons/tb';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
@@ -92,17 +91,10 @@ const Page = () => {
           </div>
 
           <span className=''>
-            <IoMdNotificationsOutline
-              color={'white'}
+            <FcOnlineSupport 
+              
               size={30}
-            ></IoMdNotificationsOutline>
-          </span>
-
-          <span className=''>
-            <MdSupportAgent
-              color={'white'}
-              size={30}
-            ></MdSupportAgent>
+            ></FcOnlineSupport >
           </span>
 
           <div className="indicator hover:cursor-pointer">
@@ -178,10 +170,10 @@ const Page = () => {
           </div>
 
           <span className='mx-[24px]'>
-            <IoMdNotificationsOutline
-              color={'white'}
+            <FcOnlineSupport 
+             
               size={30}
-            ></IoMdNotificationsOutline>
+            ></FcOnlineSupport >
           </span>
           <i style={{ color: 'white', fontFamily: 'monospace' }} className='text-xl'>Be Raw, Buy Raw</i>
 
