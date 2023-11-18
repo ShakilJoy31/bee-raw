@@ -21,8 +21,10 @@ const Page = () => {
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("beeRawCart"))) {
             setCartItem((JSON.parse(localStorage.getItem("beeRawCart"))))
+        }else{
+            setCartItem(null);
         }
-    }, []);
+    }, [cartItem]);
 
     const router = useRouter();
     const [quantity, setQuantity] = useState(1);
@@ -65,13 +67,13 @@ const Page = () => {
 
     const handleDeleteFromCart = () =>{
         const restProduct = cartItem.filter((item, index) => item?._id !== productToDelete);
-        console.log(restProduct);
         if(restProduct.length === 0){
             setCartItem(null);
+            localStorage.removeItem('beeRawCart');
         }else{
             setCartItem(restProduct);
+            localStorage.setItem("beeRawCart", JSON.stringify(restProduct));
         }
-        localStorage.setItem("beeRawCart", JSON.stringify(restProduct));
         setUser(restProduct);
         document.getElementById('deleteProductFromCart').close();
     }
@@ -111,7 +113,7 @@ const Page = () => {
                                         
                                         {/* For mobile... */}
                                         <div className='block lg:hidden md:hidden mt-[8px]'>
-                                            <div>
+                                            <div className='flex items-center gap-x-2'>
                                                 <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
                                                     <p onClick={() => quantityDecrease(item)}><span className=''>-</span></p>
                                                     <p>|</p>
@@ -119,6 +121,10 @@ const Page = () => {
                                                     <p>|</p>
                                                     <p onClick={() => quantityIncrease(item)}><span className=''>+</span></p>
                                                 </div>
+                                                <span onClick={()=> {
+                                            document.getElementById('deleteProductFromCart')?.showModal();
+                                            setProductToDelete(item?._id)
+                                        }} className='flex justify-center hover:cursor-pointer hover:text-white'><IoTrashBin size={25} color={'red'} /></span>
                                             </div>
 
                                         </div>
@@ -222,18 +228,21 @@ const Page = () => {
                     background: '#DC3545',
                     border: '1px solid white'
                 }} className="modal-box">
-                    <h3 className="flex justify-center text-white">এই বাইঞ্চোদ, প্রোডাক্ট কিন্তু ডিলেট হয়ে যাবে।</h3>
+                    <h3 className="flex justify-center text-white">This product that you have added will be deleted from your the cart.</h3>
+                    {/* <h3 className="flex justify-center text-white">এই বাইঞ্চোদ, প্রোডাক্ট কিন্তু ডিলেট হয়ে যাবে।</h3> */}
 
                     <div className='flex justify-between items-center my-[10px] gap-x-2'>
                     
                     <div onClick={()=>{
                         document.getElementById('deleteProductFromCart').close();
                     }}>
-                        <Button background='green' width='150px'><div className='flex justify-around px-3 items-center'><span className='text-white'>এই না না</span></div></Button>
+                        <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Cancel</span></div></Button>
+                        {/* <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>এই না না</span></div></Button> */}
                     </div>
 
                     <div onClick={handleDeleteFromCart} className=''>
-                        <Button background={'#9F5AE5'} width='150px'><div className='flex justify-around px-3 items-center'><span className='text-white'>আচ্ছা হোক</span></div> </Button>
+                        <Button background={'red'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Confirm</span></div> </Button>
+                        {/* <Button background={'#9F5AE5'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>আচ্ছা হোক</span></div> </Button> */}
                     </div>
                 </div>
                 </div>

@@ -26,7 +26,6 @@ import {
 import CustomerSidebar from '../Components/CustomerSidebar';
 
 const Page = () => {
-  // Next work
   const { user, setUser } = UserStore.useContainer();
   const { products, setProducts } = ProductsStore.useContainer();
   const [data, setData] = useState([]);
@@ -90,9 +89,8 @@ const Page = () => {
             <img onClick={() => router.push('/products')} className="block mx-auto hover:cursor-pointer w-[180px] h-[60px]" src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" />
           </div>
 
-          <span className=''>
+          <span onClick={()=> router.push('/support')} className='hover:cursor-pointer'>
             <FcOnlineSupport 
-              
               size={30}
             ></FcOnlineSupport >
           </span>
@@ -169,9 +167,8 @@ const Page = () => {
               size={25}></BsMinecartLoaded></span>
           </div>
 
-          <span className='mx-[24px]'>
+          <span onClick={()=> router.push('/support')} className='mx-[24px] hover:cursor-pointer'>
             <FcOnlineSupport 
-             
               size={30}
             ></FcOnlineSupport >
           </span>

@@ -1,10 +1,12 @@
+import { useRouter } from 'next/navigation';
+
 import DashboardCSS from '../../style/Dashboard.module.css';
 import Divider from './Divider';
 
 const Footer = () => {
+    const router = useRouter();
     return (
         <div className=''>
-            
              <div className={`w-full`}>
         <div
           style={{
@@ -86,9 +88,13 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>POLICY</span>
-                    <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Terms & Conditions</p>
-                    <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Privacy Policy</p>
-                    <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Return & Refand Policy</p>
+
+                    <p onClick={()=> router.push('/terms-and-conditions')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Terms & Conditions</p>
+
+                    <p onClick={()=> router.push('/privacy-policy')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Privacy Policy</p>
+
+                    <p onClick={()=> router.push('/return-and-refand-policy')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Return & Refand Policy</p>
+                    
                     </div>
                 </div>
 
@@ -100,8 +106,8 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>INFORMATIONS</span>
-                    <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>About us</p>
-                    <p className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Contact us</p>
+                    <p onClick={()=> router.push('/about-us')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>About us</p>
+                    <p onClick={()=> router.push('/support')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Contact us</p>
                     </div>
                 </div>
 
