@@ -30,8 +30,6 @@ const Page = () => {
         <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
           </div>
         </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
-          // Cambria
-          // Lucida Sans Unicode
         }
       </div>
     </div>);

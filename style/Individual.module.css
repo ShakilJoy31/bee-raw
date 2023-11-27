@@ -40,6 +40,16 @@
         padding: 3px;
         border-radius: 4px;
     }
+    .inStockSuggestion{
+        position: absolute; 
+            right: 0; 
+            top: 0;
+            background: green; 
+            color: white; 
+            padding: 3px;
+            opacity: 0.8;
+            border-radius: 0 8px 0 8px;
+    }
   }
   
   /* Tablets (768px to 1023px) */
@@ -49,7 +59,6 @@
     }
     .previewImage {
         width: 300px;
-        height: 300px;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -84,6 +93,16 @@
         padding: 3px;
         border-radius: 4px;
     }
+    .inStockSuggestion{
+        position: absolute; 
+            right: 0; 
+            top: 0;
+            background: green; 
+            color: white; 
+            padding: 3px;
+            opacity: 0.8;
+            border-radius: 0 8px 0 8px;
+    }
   }
   
   /* Large screens (1024px and above) */
@@ -93,7 +112,6 @@
     }
     .previewImage {
         width: 320px;
-        height: 320px;
     }
     .imageLeftArrow{
         z-index: 1;
@@ -128,6 +146,16 @@
         color: white; 
         padding: 3px;
         border-radius: 4px;
+    }
+    .inStockSuggestion{
+        position: absolute; 
+            right: 0; 
+            top: 0;
+            background: green; 
+            color: white; 
+            padding: 3px;
+            opacity: 0.8;
+            border-radius: 0 8px 0 8px;
     }
   }
 

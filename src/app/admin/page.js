@@ -24,6 +24,7 @@ const Page = () => {
     const [offer, setOffer] = useState('');
     const [color, setColor] = useState('');
     const [category, setCategory] = useState('Best seller');
+    const [categories, setCategories] = useState([{ id: 1, category: '' }]);
     const [availability, setAvailability] = useState('In Stock');
     const [description, setDescription] = useState('');
     const [picture, setPicture] = useState('');
@@ -58,7 +59,7 @@ const Page = () => {
             offerPrice: offerPrice,
             offer: offer,
             color: color,
-            category: category,
+            category: categories,
             availability: availability,
             description: description,
             productPicture: hostedImages,
@@ -86,7 +87,6 @@ const Page = () => {
         const restImage = hostedImages.filter(img => img !== getImage);
         setHostedImages(restImage);
     }
-    const [categories, setCategories] = useState([{ id: 1, category: '' }]);
     const handleCategoryChange = (e, categoryId) => {
         const updatedCategories = categories.map((cat) =>
             cat.id === categoryId ? { ...cat, category: e.target.value } : cat
@@ -224,7 +224,7 @@ const Page = () => {
                                 background: 'purple',
                                 color: blackColor,
                             }}
-                            className={`$${HomeComponentCss.customInputImageUpload} w-[120px] h-[120px] hover:cursor-pointer mb-[24px]`}
+                            className={`$${HomeComponentCss.customInputImageUpload} w-[120px] h-[120px] hover:cursor-pointer`}
                         >
                             <input onChange={(e) => setPicture(e.target.files[0])}
                                 style={{ position: "absolute", opacity: "0" }}
@@ -238,7 +238,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5'>
+                    <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 my-[24px]'>
                         {
                             hostedImages.map((image, index) => <div key={index} style={{ position: relativePosition }}>
                                 <span onClick={() => handleRemoveImage(image)} style={{ position: 'absolute', top: '5px', right: '5px' }}><RxCross1 size={25} color={'red'}></RxCross1></span>

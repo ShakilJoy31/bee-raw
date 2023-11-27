@@ -66,7 +66,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div style={{ paddingTop: '4px', paddingBottom: '4px', paddingLeft: '16px' }} onClick={() => router.push('/products/best-seller')}
                             className={`flex items-center gap-x-4 mx-[24px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/best-seller' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><MdSell size={25} color={'green'}></MdSell></span>
-                            <p>Best seller</p>
+                            <p>Top Sold Products</p>
                         </div>
                     </label>
 

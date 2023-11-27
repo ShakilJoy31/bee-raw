@@ -96,6 +96,27 @@
 
 
 
+.carslImgContainer {
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+  transition-duration: 150ms;
+  border-radius: 0;
+}
+
+.carslImgContainer img {
+  transition: transform 0.3s ease;
+  transition-duration: 150ms;
+}
+
+.carslImgContainer:hover img {
+  cursor: pointer;
+  transform: scale(1.2);
+  transition-duration: 450ms;
+}
+
+
+
 .imageContainerDifferent {
   position: relative;
   overflow: hidden;
@@ -165,3 +186,13 @@
   }
 }
 
+.footerContent{
+  transition-duration: 1400ms;
+  color: rgba(255, 255, 255, 0.514)
+}
+
+.footerContent:hover{
+  cursor: pointer;
+  color: white;
+  transition-duration: 400ms;
+}

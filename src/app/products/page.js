@@ -7,6 +7,7 @@ import React, {
 import { useRouter } from 'next/navigation';
 
 import Button from '@/Components/button';
+import PauseOnHover from '@/Components/PauseOnHover';
 
 import DashboardCSS from '../../../style/Dashboard.module.css';
 import {
@@ -57,6 +58,7 @@ const Page = () => {
     }
     return (
         <div className='h-full'>
+            <PauseOnHover products={products}></PauseOnHover>
             {
                 products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
                 <div>

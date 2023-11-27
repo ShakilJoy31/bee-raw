@@ -8,11 +8,15 @@ import { useRouter } from 'next/navigation';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import IndividualCSS from '../../style/Individual.module.css';
-import { UserStore } from '../../userStore';
+import {
+  ProductsStore,
+  UserStore,
+} from '../../userStore';
 import Button from './button';
 
 const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
-    const { user, setUser } = UserStore.useContainer()
+    const { user, setUser } = UserStore.useContainer();
+    const { products, setProducts } = ProductsStore.useContainer();
     const router = useRouter();
     const [previewImage, setPreviewImage] = useState('');
     const [warning, setWarning] = useState(false);
@@ -29,6 +33,8 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
     const handleReviewImage = (picture) => {
         setPreviewImage(picture)
     }
+    const moreProducts = products.filter(product => individualProduct?.category[0]?.category === product?.category[0]?.category);
+
     const [message, setMessage] = useState('');
     const handleAddToCartButton = () => {
         const newParticularMenu = individualProduct;
@@ -61,7 +67,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
             updatedProduct.quantity = updatedProduct.quantity - 1;
             setIndividualProduct(updatedProduct);
             localStorage.setItem("beeRawCartSingle", JSON.stringify([updatedProduct]));
-
         }
     };
 
@@ -96,7 +101,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                     </div>
                                 </div>
                                 <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
-                                <img className={`${IndividualCSS.mainImage}`} src={previewImage} />
+                                <img className={`${IndividualCSS.mainImage} w-full`} src={previewImage} />
                             </div>
                         </div>
 
@@ -175,47 +180,49 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                 <div className='mb-6'>
                     <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>
                     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
-                        <div style={{
-                            borderRadius: '8px',
-                            position: 'relative',
-                            zIndex: '0'
-                        }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
-                            <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
-                                <div>
-                                    <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
-                                    <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
-                                </div>
-                            </div>
-                            <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
-                            <div onClick={() => {
-                                {
-                                    router.push(`/products/${individualProduct._id}`)
-                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
-                                }
-                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                            }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={individualProduct?.productPicture} alt="Product Image" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
-                            </div>
-
-                            <div className=''>
-                                <div className='mt-4'>
-                                    <div className="lg:px-4 px-1">
-                                        <h2 onClick={() => {
-                                            router.push(`/products/${individualProduct._id}`)
-                                            localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
-                                        }} className="h-16 hover:underline">{individualProduct.title}</h2>
-
-                                        <div className=''>
-                                            <p className='my-[12px] flex justify-between items-center'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{individualProduct.offerPrice + ' BDT'}</span> {individualProduct?.price + ' BDT'}</p>
-                                        </div>
+                        {
+                            moreProducts.map((product, index)=> <div key={index} style={{
+                                borderRadius: '8px',
+                                position: 'relative',
+                                zIndex: '0'
+                            }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                                <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
+                                    <div>
+                                        <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                        <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
                                     </div>
-
-
-
                                 </div>
-                            </div>
-
-                        </div>
+                                <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
+                                <div onClick={() => {
+                                    {
+                                        router.push(`/products/${individualProduct._id}`)
+                                        localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
+                                    }
+                                    localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                }} className={`${DashboardCSS.imageContainer}`}>
+                                    <figure><img src={product?.productPicture} alt="Product Image" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                                </div>
+    
+                                <div className=''>
+                                    <div className='mt-4'>
+                                        <div className="lg:px-4 px-1">
+                                            <h2 onClick={() => {
+                                                router.push(`/products/${individualProduct._id}`)
+                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
+                                            }} className="h-16 hover:underline">{individualProduct.title}</h2>
+    
+                                            <div className=''>
+                                                <p className='my-[12px] flex justify-between items-center'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{individualProduct.offerPrice + ' BDT'}</span> {individualProduct?.price + ' BDT'}</p>
+                                            </div>
+                                        </div>
+    
+    
+    
+                                    </div>
+                                </div>
+    
+                            </div>)
+                        }
                     </div>
                 </div>
             </div>

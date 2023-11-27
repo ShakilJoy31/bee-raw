@@ -30,7 +30,7 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>1 Year Warranty</span>
-                    <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Take your replacement for any kind of quality issues.</p>
+                    <p className={`${DashboardCSS.footerContent}`}>Take your replacement for any kind of quality issues.</p>
                     </div>
                     </div> 
                 </div>
@@ -52,7 +52,7 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>24/7 Support.</span>
-                    <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Contact through email or messenger 24/7.</p>
+                    <p className={`${DashboardCSS.footerContent}`}>Contact through email or messenger 24/7.</p>
                     </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>Money Back Gurantee</span>
-                    <p className='hover:underline' style={{color: 'rgba(255, 255, 255, 0.685)'}}>If does not suit, get your money back!</p>
+                    <p className={`${DashboardCSS.footerContent}`}>If does not suit, get your money back!</p>
                     </div>
                     </div>
                 </div>
@@ -89,11 +89,9 @@ const Footer = () => {
                         color: 'white', 
                     }}>POLICY</span>
 
-                    <p onClick={()=> router.push('/terms-and-conditions')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Terms & Conditions</p>
+                    <p onClick={()=> router.push('/terms-and-conditions')} className={`${DashboardCSS.footerContent}`}>Terms & Conditions</p>
 
-                    <p onClick={()=> router.push('/privacy-policy')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Privacy Policy</p>
-
-                    <p onClick={()=> router.push('/return-and-refand-policy')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Return & Refand Policy</p>
+                    <p onClick={()=> router.push('/privacy-policy')} className={`${DashboardCSS.footerContent}`}>Privacy Policy</p>
                     
                     </div>
                 </div>
@@ -106,8 +104,8 @@ const Footer = () => {
                         fontSize: "22px",
                         color: 'white', 
                     }}>INFORMATIONS</span>
-                    <p onClick={()=> router.push('/about-us')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>About us</p>
-                    <p onClick={()=> router.push('/support')} className='hover:underline hover:cursor-pointer' style={{color: 'rgba(255, 255, 255, 0.685)'}}>Contact us</p>
+                    <p onClick={()=> router.push('/about-us')} className={`${DashboardCSS.footerContent}`}>About us</p>
+                    <p onClick={()=> router.push('/support')} className={`${DashboardCSS.footerContent}`}>Contact us</p>
                     </div>
                 </div>
 

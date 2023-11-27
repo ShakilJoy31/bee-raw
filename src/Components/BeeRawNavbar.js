@@ -117,7 +117,7 @@ const Page = () => {
                 borderRadius: verificationFieldsRound,
                 background: 'white',
               }}
-              placeholder="Type product title here"
+              placeholder="I am looking for..."
               className="w-full h-[35px] focus:outline-none border-0 pl-1 text-black"
               type="text"
               name=""
