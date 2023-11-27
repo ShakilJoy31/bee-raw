@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import React, { useRef } from 'react';
 
+import { useRouter } from 'next/navigation';
 import {
   BsArrowLeftCircleFill,
   BsArrowRightCircleFill,
@@ -10,9 +11,9 @@ import {
 import Slider from 'react-slick';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
-import IndividualCSS from '../../style/Individual.module.css';
 
 const SimpleSlider = ({ products }) => {
+    const router = useRouter();
     const sliderRef = useRef();
     const onlyBestSeller = products.filter((product) => product?.category === 'Best seller');
     const settings = {
@@ -67,7 +68,7 @@ const SimpleSlider = ({ products }) => {
             </div>
             <Slider ref={sliderRef} {...settings}>
                 {onlyBestSeller?.map((product, index) => (
-                    <div key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>
+                    <div onClick={()=> router.push(`/products/${product._id}`)} key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>
                         <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className=''>
                         </div>
                         <div style={{position: 'absolute', bottom: '10px', zIndex:'3'}} className='px-2 w-full'>
@@ -78,7 +79,6 @@ const SimpleSlider = ({ products }) => {
                             </div>
                         </div>
                         <div className={`${DashboardCSS.carslImgContainer}`}>
-                            <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{product.availability}</span>
                             <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '8px' }} /></figure>
                         </div>
                         <div
@@ -103,21 +103,9 @@ export default SimpleSlider;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // filter: 'brightness(0.5)', webkitFilter: 'brightness(0.5)'
+
+
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 

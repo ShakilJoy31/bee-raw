@@ -20,4 +20,6 @@ export const productsGettingAPI = '/get-products';
 export const productGettingAPI = '/get-product';
 export const placedOrderAPI = '/userInfoForPlacedProduct';
 export const placedOrderAPIForAdmin = '/get-orders';
+export const editProductAPIForAdmin = '/edit-product/';
 export const productDeleteByAdmin = '/deleteProduct/';
+export const productDeleteAPI = '/deleteProductByAdmin/';

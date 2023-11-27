@@ -29,7 +29,7 @@ const Page = () => {
           <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
         <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
           </div>
-        </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></ProductSlider>
+        </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct} clickedFor={clickedFor}></ProductSlider>
         }
       </div>
     </div>);

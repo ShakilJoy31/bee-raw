@@ -5,6 +5,9 @@ import React, {
 } from 'react';
 
 import { useRouter } from 'next/navigation';
+import { TbAlertOctagonFilled } from 'react-icons/tb';
+
+import { AdminAPI } from '@/APIcalling/adminAPI';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import IndividualCSS from '../../style/Individual.module.css';
@@ -14,14 +17,18 @@ import {
 } from '../../userStore';
 import Button from './button';
 
-const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
+const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) => {
     const { user, setUser } = UserStore.useContainer();
     const { products, setProducts } = ProductsStore.useContainer();
     const router = useRouter();
     const [previewImage, setPreviewImage] = useState('');
     const [warning, setWarning] = useState(false);
+    const [isEditable, setIsEditable] = useState(false);
     useEffect(() => {
         setPreviewImage(individualProduct?.productPicture[0]);
+        if (JSON.parse(localStorage.getItem('editable')) === 'editable') {
+            setIsEditable(true);
+        }
     }, [])
 
     setTimeout(function () {
@@ -71,20 +78,34 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
     };
 
     const [selectedColor, setSelectedColor] = useState('');
-    const handleSelectedColor = (color) =>{
+    const handleSelectedColor = (color) => {
         const selectedColor = { ...individualProduct };
         selectedColor.color = color;
         localStorage.setItem("beeRawCartSingle", JSON.stringify([selectedColor]));
         setSelectedColor(color)
     }
     const handleBuyNowButton = () => {
-        if(selectedColor === ''){
+        if (selectedColor === '') {
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
             setMessage('Please select a color you want.');
-        }else{
+        } else {
             router.push('/checkout')
         }
+    }
+    const handleEditByAdmin = () => {
+        localStorage.setItem("productToEdit", JSON.stringify(individualProduct));
+        router.push('/admin');
+    }
+
+    
+    const handleDeleteProductByAdmin = () => {
+        AdminAPI.handleDeletingProductByAdmin(individualProduct?._id).then(res => {
+            if (res) {
+                router.push('/products')                
+                document.getElementById('beforeDelete').close();
+            }
+        })
     }
     return (
         <div>
@@ -159,12 +180,35 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                 <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
                             </div>
 
+                            {
+                                isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={handleEditByAdmin}>
+                                    <Button background={'purple'} width='150px'><span className='text-white'>Edit</span></Button>
+                                </div>
+                            }
+
+                            {
+                                isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={()=> document.getElementById('beforeDelete').showModal()}>
+                                    <Button background={'#DC3545'} width='150px'><span className='text-white'>Delete</span></Button>
+                                </div>
+                            }
+
                         </div>
 
+                        {
+                            isEditable && <div className={`${IndividualCSS.theButton} lg:hidden block md:hidden`} onClick={handleEditByAdmin}>
+                                <Button background={'purple'} width='100%'><span className='text-white'>Edit</span></Button>
+                            </div>
+                        }
+
+                        {
+                            isEditable && <div className={`${IndividualCSS.theButton} lg:hidden block md:hidden mt-[24px]`} onClick={()=> document.getElementById('beforeDelete').showModal()}>
+                                <Button background={'#DC3545'} width='100%'><span className='text-white'>Delete</span></Button>
+                            </div>
+                        }
 
                         {/* Description for mobile. */}
                         <div className='lg:hidden block md:hidden my-[12px]'>
-                        <p style={{ whiteSpace: 'pre-line' }}>{individualProduct.description}</p>
+                            <p style={{ whiteSpace: 'pre-line' }}>{individualProduct.description}</p>
                         </div>
                     </div>
                 </div>
@@ -181,7 +225,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                     <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>
                     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
                         {
-                            moreProducts.map((product, index)=> <div key={index} style={{
+                            moreProducts.map((product, index) => <div key={index} style={{
                                 borderRadius: '8px',
                                 position: 'relative',
                                 zIndex: '0'
@@ -202,7 +246,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                 }} className={`${DashboardCSS.imageContainer}`}>
                                     <figure><img src={product?.productPicture} alt="Product Image" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
                                 </div>
-    
+
                                 <div className=''>
                                     <div className='mt-4'>
                                         <div className="lg:px-4 px-1">
@@ -210,17 +254,17 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                                                 router.push(`/products/${individualProduct._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
                                             }} className="h-16 hover:underline">{individualProduct.title}</h2>
-    
+
                                             <div className=''>
                                                 <p className='my-[12px] flex justify-between items-center'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{individualProduct.offerPrice + ' BDT'}</span> {individualProduct?.price + ' BDT'}</p>
                                             </div>
                                         </div>
-    
-    
-    
+
+
+
                                     </div>
                                 </div>
-    
+
                             </div>)
                         }
                     </div>
@@ -236,6 +280,36 @@ const ProductSlider = ({ individualProduct, setIndividualProduct }) => {
                     border: '1px solid white'
                 }} className="modal-box">
                     <h3 className="flex justify-center text-white">{message}</h3>
+
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+
+            {/* The warning modal to delete the product*/}
+            <dialog id="beforeDelete" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: '#DC3545',
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <div>
+                        <h3 className="flex justify-center text-white items-center gap-x-2"><span><TbAlertOctagonFilled size={30} color={'black'}></TbAlertOctagonFilled></span> <span>Hey, Attention please!</span></h3>
+                        <h1 className="flex justify-center">Do you want to delete this product?</h1>
+                        <h1 className="flex justify-center">This is not reverseable!</h1>
+                        <div className='flex justify-between items-center mt-[24px]'>
+                            <div onClick={()=> document.getElementById('beforeDelete').close()}>
+                                <Button background='green' width='150px'><span className='text-white'>Cancel</span></Button>
+                            </div>
+
+                            <div onClick={handleDeleteProductByAdmin} className={`${IndividualCSS.theButton}`}>
+                                <Button background={'purple'} width='150px'><span className='text-white'>Delete</span></Button>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
                 <form method="dialog" className="modal-backdrop">

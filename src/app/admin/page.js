@@ -1,9 +1,13 @@
 "use client"
-import React, { useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
 import { useRouter } from 'next/navigation';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { RxCross1 } from 'react-icons/rx';
+import { TbAlertOctagonFilled } from 'react-icons/tb';
 
 import { AdminAPI } from '@/APIcalling/adminAPI';
 import { blackColor } from '@/constants/color-constants';
@@ -18,6 +22,7 @@ import HomeComponentCss from '../../../style/ComponentStyle.module.css';
 
 const Page = () => {
     const router = useRouter();
+    const [productToEdit, setProductToEdit] = useState('')
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [offerPrice, setOfferPrice] = useState('');
@@ -30,6 +35,19 @@ const Page = () => {
     const [picture, setPicture] = useState('');
     const [hostedImage, setHostedImage] = useState()
     const [hostedImages, setHostedImages] = useState([])
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('productToEdit'))) {
+            setProductToEdit(JSON.parse(localStorage.getItem('productToEdit')));
+            setTitle(JSON.parse(localStorage.getItem('productToEdit')).title);
+            setPrice(JSON.parse(localStorage.getItem('productToEdit')).price);
+            setOfferPrice(JSON.parse(localStorage.getItem('productToEdit')).offerPrice);
+            setOffer(JSON.parse(localStorage.getItem('productToEdit')).offer);
+            setColor(JSON.parse(localStorage.getItem('productToEdit')).color);
+            setDescription(JSON.parse(localStorage.getItem('productToEdit')).description);
+            setHostedImages(JSON.parse(localStorage.getItem('productToEdit')).productPicture);
+        }
+    }, [])
+
     if (picture) {
         const formDataImage = new FormData();
         formDataImage.append("image", picture);
@@ -65,22 +83,33 @@ const Page = () => {
             productPicture: hostedImages,
             quantity: 1
         }
-        if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !hostedImages) {
-            document.getElementById('alReadyExistsOnTheCartModal').showModal();
-            setWarning(true)
-            setCartAddedMessage('All fields are required!')
-        } else {
-            AdminAPI.postingProducts(productData).then(res => {
-                if (res.acknowledged === true) {
+        if (productToEdit) {
+            AdminAPI.handleUpdateProduct(productToEdit?._id, productData).then(res => {
+                if (res) {
                     document.getElementById('alReadyExistsOnTheCartModal').showModal();
                     setWarning(true)
-                    setCartAddedMessage('Product added successfully!')
-                } else {
-                    document.getElementById('alReadyExistsOnTheCartModal').showModal();
-                    setWarning(true)
-                    setCartAddedMessage('OoppS! Failed.')
+                    setCartAddedMessage('Update successfully!')
+                    localStorage.removeItem('productToEdit');
                 }
             })
+        } else {
+            if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !hostedImages) {
+                document.getElementById('alReadyExistsOnTheCartModal').showModal();
+                setWarning(true)
+                setCartAddedMessage('All fields are required!')
+            } else {
+                AdminAPI.postingProducts(productData).then(res => {
+                    if (res.acknowledged === true) {
+                        document.getElementById('alReadyExistsOnTheCartModal').showModal();
+                        setWarning(true)
+                        setCartAddedMessage('Product added successfully!')
+                    } else {
+                        document.getElementById('alReadyExistsOnTheCartModal').showModal();
+                        setWarning(true)
+                        setCartAddedMessage('OoppS! Failed.')
+                    }
+                })
+            }
         }
     }
     const handleRemoveImage = (getImage) => {
@@ -97,18 +126,31 @@ const Page = () => {
         const newId = categories.length + 1;
         setCategories([...categories, { id: newId, category: '' }]);
     };
+    const handleEditProduct = (e) => {
+        if (e.target.value === 'IAMADMIN') {
+            localStorage.setItem("editable", JSON.stringify('editable'));
+            router.push('/products');
+        }
+    }
     return (
         <div className='mt-[24px]'>
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
-                <button onClick={() => router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Check Orders</button>
+                {
+                    productToEdit ? '' : <button onClick={() => document.getElementById('productEditConfirmation').showModal()} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">Edit Product</button>
+                }
 
-                <button onClick={handleSubmitProduct} style={{ background: 'purple', borderRadius: '5px' }} className="py-[10px] px-[20px]">Upload Product</button>
+                <button onClick={() => router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">Check Orders</button>
+
+                <button onClick={handleSubmitProduct} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">{productToEdit ? 'Edit' : 'Upload'} Product</button>
+
             </div>
 
             <div>
                 <div>
                     <span className=''>Title</span>
-                    <textarea onChange={(e) => setTitle(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" />
+                    {
+                        productToEdit ? <textarea onChange={(e) => setTitle(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" value={productToEdit && title} /> : <textarea onChange={(e) => setTitle(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" placeholder='Type title' />
+                    }
                 </div>
             </div>
 
@@ -116,7 +158,10 @@ const Page = () => {
             <div>
                 <div>
                     <span className=''>Main Price</span>
-                    <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+                    {
+                        productToEdit ? <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && price} /> : <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type price' />
+                    }
+                    
                 </div>
             </div>
 
@@ -124,7 +169,10 @@ const Page = () => {
             <div>
                 <div>
                     <span className=''>Offer Price(Will be cut)</span>
-                    <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+                    {
+                        productToEdit ? <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offerPrice} /> : <textarea onChange={(e) => setTitle(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" placeholder='Type old price' />
+                    }
+                    
                 </div>
             </div>
 
@@ -132,7 +180,10 @@ const Page = () => {
             <div>
                 <div>
                     <span className=''>Offer</span>
-                    <textarea onChange={(e) => setOffer(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+                    {
+                        productToEdit ? <textarea onChange={(e) => setOffer(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offer} /> : <textarea onChange={(e) => setOffer(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type offer here' />
+                    }
+                    
                 </div>
             </div>
 
@@ -140,14 +191,16 @@ const Page = () => {
             <div>
                 <div>
                     <span className=''>Color</span>
-                    <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+                    {
+                        productToEdit ?  <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && color} /> :  <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type color here' />
+                    }
+                   
                 </div>
             </div>
 
             <div>
                 <div>
                     <span className=''>Category</span>
-
                     {categories.map((cat, index) => (
                         <div className='mb-[6px]' key={cat.id}>
                             <div className='flex items-center justify-between gap-x-4'>
@@ -208,7 +261,10 @@ const Page = () => {
             <div className='mt-[6px]'>
                 <div>
                     <span className=''>Description</span>
-                    <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " />
+                    {
+                        productToEdit ? <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " value={productToEdit && description} /> : <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " placeholder='Type description here' />
+                    }
+                    
                 </div>
             </div>
 
@@ -240,7 +296,7 @@ const Page = () => {
 
                     <div className='grid w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 my-[24px]'>
                         {
-                            hostedImages.map((image, index) => <div key={index} style={{ position: relativePosition }}>
+                            hostedImages?.map((image, index) => <div key={index} style={{ position: relativePosition }}>
                                 <span onClick={() => handleRemoveImage(image)} style={{ position: 'absolute', top: '5px', right: '5px' }}><RxCross1 size={25} color={'red'}></RxCross1></span>
                                 <img
                                     className="w-[120px] h-[120px] rounded-sm"
@@ -256,10 +312,29 @@ const Page = () => {
             <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
                 <div style={{
                     color: 'white',
-                    background: (cartAddedMessage === 'Product added successfully!' ? 'green' : '#DC3545'),
+                    background: ((cartAddedMessage === 'Product added successfully!' || cartAddedMessage === 'Update successfully!') ? 'green' : '#DC3545'),
                     border: '1px solid white'
                 }} className="modal-box">
                     <h3 className="flex justify-center text-white">{cartAddedMessage}</h3>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+
+            <dialog id="productEditConfirmation" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
+                <div style={{
+                    color: 'white',
+                    background: '#DC3545',
+                    border: '1px solid white'
+                }} className="modal-box">
+                    <h3 className="flex justify-center text-white items-center gap-x-2"><span><TbAlertOctagonFilled size={30} color={'black'}></TbAlertOctagonFilled></span> <span>Hey, Attention please!</span></h3>
+
+                    <h3 className="flex justify-center text-white my-2">If you are the right person to edit, you should obviously know the secret password. Type it below to procceed.</h3>
+
+                    <textarea onChange={(e) => handleEditProduct(e)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " />
+
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
@@ -270,8 +345,3 @@ const Page = () => {
 };
 
 export default Page;
-
-
-
-
-// The onchange.  

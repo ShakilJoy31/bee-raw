@@ -78,7 +78,7 @@ const Page = () => {
               <div className="drawer-content">
                 <label htmlFor="my-drawer" className="drawer-button"><span className='hover:cursor-pointer'><LuMenu color={'white'} size={25}></LuMenu></span></label>
               </div>
-              <div style={{ zIndex: '2' }} className="drawer-side">
+              <div style={{ zIndex: '4' }} className="drawer-side">
                 {drawer}
                 <CustomerSidebar drawer={drawer}></CustomerSidebar>
               </div>

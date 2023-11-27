@@ -2,29 +2,29 @@ import axios from 'axios';
 
 import {
   BASE_URL,
+  editProductAPIForAdmin,
   placedOrderAPIForAdmin,
+  productDeleteAPI,
   productDeleteByAdmin,
   productPostingAPI,
 } from '@/constants/routeConstants';
 
 // Post request...
   const postingProducts = async (payload) => {
-    console.log(payload);
     const axiosInstance = axios.create({
       baseURL: BASE_URL,
     });
   
     try {
       const response = await axiosInstance.post(productPostingAPI, payload);
-      console.log(response);
       return response.data;
     } catch (error) {
-      console.log(error);
       return error;
     }
   };
 
 
+  // Get request
   const handleGettingOrders = async () => {
     const axiosInstance = axios.create({
         baseURL: BASE_URL
@@ -33,12 +33,25 @@ import {
       const response = await axiosInstance.get(placedOrderAPIForAdmin);
       return response.data;
     } catch (error) {
-        // console.log(error)
     }
   };
 
+  // Put request
+  const handleUpdateProduct = async (productId, updatedData) => {
+    const axiosInstance = axios.create({
+      baseURL: BASE_URL,
+    });
+  
+    try {
+      const response = await axiosInstance.put(editProductAPIForAdmin+`${productId}`, updatedData);
+      return response.data;
+    } catch (error) {
+      
+    }
+  };
   
 
+  // Delete request
   const handleDeletingOrder = async (orderId) => {
     const axiosInstance = axios.create({
         baseURL: BASE_URL
@@ -46,10 +59,21 @@ import {
 
     try {
         const response = await axiosInstance.delete(`${productDeleteByAdmin}${orderId}`);
-        console.log(response);
         return response.data;
     } catch (error) {
-        console.log(error);
+    }
+};
+
+
+  const handleDeletingProductByAdmin = async (productId) => {
+    const axiosInstance = axios.create({
+        baseURL: BASE_URL
+    });
+
+    try {
+        const response = await axiosInstance.delete(`${productDeleteAPI}${productId}`);
+        return response.data;
+    } catch (error) {
     }
 };
 
@@ -59,6 +83,8 @@ import {
     // handleGettingRestaurants,
     postingProducts,
     handleGettingOrders,
-    handleDeletingOrder
+    handleDeletingOrder,
+    handleUpdateProduct,
+    handleDeletingProductByAdmin
   }
 
