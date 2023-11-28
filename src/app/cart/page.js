@@ -24,7 +24,7 @@ const Page = () => {
         }else{
             setCartItem(null);
         }
-    }, [cartItem]);
+    }, []);
 
     const router = useRouter();
     const [quantity, setQuantity] = useState(1);
@@ -77,7 +77,10 @@ const Page = () => {
         setUser(restProduct);
         document.getElementById('deleteProductFromCart').close();
     }
-    // setUser(cartItem);
+    const handleCheckOut = () =>{
+        console.log('Button is clicked');
+        router.push('/checkout');
+    }
     return (
         <div>
             {
@@ -200,7 +203,7 @@ const Page = () => {
                             <Button background='#DC3545' width='94vw'><span className='text-white'>Empty Cart</span></Button>
                         </div>
 
-                        <div onClick={() => router.push('/checkout')}>
+                        <div onClick={handleCheckOut}>
                             <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Checkout</span></Button>
                         </div>
 
@@ -216,7 +219,7 @@ const Page = () => {
                             <Button background='#DC3545' width='250px'><span className='text-white'>Empty Cart</span></Button>
                         </div>
 
-                        <div onClick={() => router.push('/checkout')}>
+                        <div onClick={handleCheckOut}>
                             <Button background={'#9F5AE5'} width='250px'><span className='text-white'>Checkout</span></Button>
                         </div>
 

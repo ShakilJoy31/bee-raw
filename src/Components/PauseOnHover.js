@@ -72,7 +72,7 @@ const SimpleSlider = ({ products }) => {
                         <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className=''>
                         </div>
                         <div style={{position: 'absolute', bottom: '10px', zIndex:'3'}} className='px-2 w-full'>
-                            <h1 className='h-8'>{product.title.length > 40 ? (product.title.slice(0, 42)+'...') : product.title}</h1>
+                            <h1 className='h-8'>{product.title.length > 35 ? (product.title.slice(0, 35)+'...') : product.title}</h1>
                             <div className='flex justify-between items-center'>
                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400' >{product.offerPrice} ৳</p>
                                 <p className='mr-4'>{product.price} ৳</p>
