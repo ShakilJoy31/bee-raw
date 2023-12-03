@@ -48,6 +48,7 @@ const Page = () => {
         }
     }, [])
 
+
     if (picture) {
         const formDataImage = new FormData();
         formDataImage.append("image", picture);
@@ -93,7 +94,7 @@ const Page = () => {
                 }
             })
         } else {
-            if (!title || !price || !offerPrice || !offer || !color || !category || !availability || !hostedImages) {
+            if (!title || !offerPrice || !price || !offer || !color || !category || !availability || !hostedImages) {
                 document.getElementById('alReadyExistsOnTheCartModal').showModal();
                 setWarning(true)
                 setCartAddedMessage('All fields are required!')
@@ -170,7 +171,7 @@ const Page = () => {
                 <div>
                     <span className=''>Offer Price(Will be cut)</span>
                     {
-                        productToEdit ? <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offerPrice} /> : <textarea onChange={(e) => setTitle(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" placeholder='Type old price' />
+                        productToEdit ? <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offerPrice} /> : <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" placeholder='Type old price' />
                     }
                     
                 </div>

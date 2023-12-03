@@ -15,7 +15,7 @@ import DashboardCSS from '../../style/Dashboard.module.css';
 const SimpleSlider = ({ products }) => {
     const router = useRouter();
     const sliderRef = useRef();
-    const onlyBestSeller = products.filter((product) => product?.category === 'Best seller');
+    const onlyBestSeller = products.filter((product) => product?.category[0].category === 'Best seller');
     const settings = {
         dots: true,
         infinite: true,
