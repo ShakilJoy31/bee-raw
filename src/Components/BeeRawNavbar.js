@@ -108,7 +108,7 @@ const Page = () => {
         </div>
 
         <div className={` ${isInputForTheProduct ? MyServiceCSS.inputDisabled : MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
-          <div style={{ borderBottom: isInputForTheProduct ? '1px solid purple' : '' }} className='flex items-center'>
+          <div style={{ borderBottom: isInputForTheProduct ? '1px solid crimson' : '' }} className='flex items-center'>
             <span className="mx-3">
               <BiSearch color={'crimson'} size={25}></BiSearch>
             </span>
@@ -127,7 +127,7 @@ const Page = () => {
 
 
           {
-            isInputForTheProduct ? <div style={{position: 'absolute', zIndex: '1000', background: 'purple' }} className={`text-white mr-[10px] lg:mr-0 md:mr-0 lg:w-[450px] ${MyServiceCSS.searchResult}`} data-aos="zoom-out">
+            isInputForTheProduct ? <div style={{position: 'absolute', zIndex: '1000', background: 'crimson' }} className={`text-white mr-[10px] lg:mr-0 md:mr-0 lg:w-[450px] ${MyServiceCSS.searchResult}`} data-aos="zoom-out">
             {
               products?.map((product, index) => <div onClick={()=> {
                 router.push(`/products/${product._id}`) 

@@ -15,7 +15,7 @@ const Page = () => {
     const router = useRouter();
     const { user, setUser } = UserStore.useContainer();
     const { products, setProducts } = ProductsStore.useContainer();
-    const filteredproducts = products.filter(product => product.category[0].category === 'Best seller');
+    const filteredproducts = products.filter(product => product.category[0].category === 'Islamic Accessiories');
     return (
         <div>
             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@ const Page = () => {
                         <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
                     </linearGradient>
                 </defs>
-                <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Top Sold Products</text>
+                <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Headphones</text>
             </svg></h1>
             {
                 filteredproducts?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
