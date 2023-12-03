@@ -10,14 +10,11 @@ import {
   BiSolidWebcam,
 } from 'react-icons/bi';
 import {
-  BsCameraFill,
   BsDashCircleDotted,
-  BsEarbuds,
   BsFan,
   BsFillCalculatorFill,
   BsFillSpeakerFill,
   BsSunglasses,
-  BsUsbDriveFill,
   BsWatch,
 } from 'react-icons/bs';
 import { FaBlender } from 'react-icons/fa';
@@ -34,10 +31,10 @@ import { LuCable } from 'react-icons/lu';
 import {
   MdIron,
   MdLuggage,
+  MdMapsHomeWork,
   MdSell,
 } from 'react-icons/md';
 import { RiWebcamFill } from 'react-icons/ri';
-import { TbFridge } from 'react-icons/tb';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 
@@ -71,16 +68,6 @@ const CustomerSidebar = ({ drawer }) => {
                     </label>
 
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/tws')}
-                            className={``}>
-                            <div style={{ paddingTop: '4px', paddingBottom: '4px', paddingLeft: '16px' }} className={`flex items-center mx-[24px] gap-x-4 ${DashboardCSS.sidebarHeading} ${pathname === '/products/tws' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                                <span><BsEarbuds size={25}></BsEarbuds></span>
-                                <p className="">TWS (Bluetooth Ear Bud)</p>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
                         <div onClick={() => router.push('/products/smart-watch')}
                             className={``}>
                             <div className={`flex items-center mx-[24px] pl-[16px] py-[4px] gap-x-4 ${DashboardCSS.sidebarHeading} ${pathname === '/products/smart-watch' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
@@ -88,22 +75,21 @@ const CustomerSidebar = ({ drawer }) => {
                                 <p className="">Smart Watch</p>
                             </div>
                         </div>
-                        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
 
                         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                            <div onClick={() => router.push('/products/tripod')}
-                                className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/tripod' ? DashboardCSS.sidebarHeadingSelected : ''}`}
+                            <div onClick={() => router.push('/products/home&living')}
+                                className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/home&living' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                             >
-                                <img style={{ width: '28px', height: '28px' }} src="https://i.ibb.co/HCN5nDF/tripod-icon-white-vector-16068940-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
-                                <p>Tripod</p>
+                                
+                                <span><MdMapsHomeWork size={25}></MdMapsHomeWork></span>
+                                <p>Home & Living</p>
                             </div>
                         </label>
 
-                        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                         <div onClick={() => router.push('/products/speaker')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/speaker' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><BsFillSpeakerFill size={25}></BsFillSpeakerFill></span>
-                            <p>Speaker</p>
+                            <p>Camera</p>
                         </div>
                     </label>
 
@@ -111,7 +97,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/microphone')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/microphone' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><GiOldMicrophone size={25}></GiOldMicrophone></span>
-                            <p>Microphone</p>
+                            <p>Islamic Accessiories</p>
                         </div>
                     </label>
 
@@ -120,7 +106,7 @@ const CustomerSidebar = ({ drawer }) => {
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/microphone' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                         >
                             <span><BiSolidWebcam size={25}></BiSolidWebcam></span>
-                            <p>Webcam</p>
+                            <p>Gift Items</p>
                         </div>
                     </label>
 
@@ -129,7 +115,7 @@ const CustomerSidebar = ({ drawer }) => {
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/rgb-light' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                         >
                             <span><GiLightBulb size={25}></GiLightBulb></span>
-                            <p>RGB Light</p>
+                            <p>Electronics</p>
                         </div>
                     </label>
 
@@ -138,7 +124,7 @@ const CustomerSidebar = ({ drawer }) => {
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/fan' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                         >
                             <span><BsFan size={25}></BsFan></span>
-                            <p>Fan</p>
+                            <p>Accessories</p>
                         </div>
                     </label>
 
@@ -147,7 +133,7 @@ const CustomerSidebar = ({ drawer }) => {
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/trimer' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                         >
                             <img style={{ width: '28px', height: '28px' }} src="https://i.ibb.co/ChpPqSy/clipper-icon-white-vector-16108954-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
-                            <p>Trimmer</p>
+                            <p>Speaker</p>
                         </div>
                     </label>
 
@@ -155,7 +141,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/ring-light')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/ring-light' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><BsDashCircleDotted size={25}></BsDashCircleDotted></span>
-                            <p>Ring Light</p>
+                            <p>RGB Light</p>
                         </div>
                     </label>
 
@@ -163,7 +149,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/neckband')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/neckband' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><GiEarbuds size={25}></GiEarbuds></span>
-                            <p>Neck Band</p>
+                            <p>Fan</p>
                         </div>
                     </label>
 
@@ -171,7 +157,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/blender')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/blender' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><FaBlender size={25}></FaBlender></span>
-                            <p>Blender</p>
+                            <p>Trimer</p>
                         </div>
                     </label>
 
@@ -179,7 +165,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/headphone')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/headphone' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><ImHeadphones size={25}></ImHeadphones></span>
-                            <p>Headphone</p>
+                            <p>Ring Light</p>
                         </div>
                     </label>
 
@@ -200,16 +186,6 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/ip-camera')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/ip-camera' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <span><RiWebcamFill size={25}></RiWebcamFill></span>
-                            <p>IP Camera</p>
-                        </div>
-                    </label>
-
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-
-                        <div onClick={() => router.push('/products/cable')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/cable' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><LuCable size={25}></LuCable></span>
                             <p>Cable</p>
                         </div>
                     </label>
@@ -223,34 +199,19 @@ const CustomerSidebar = ({ drawer }) => {
                     </label>
 
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/bags-luggage')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/bags-luggage' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><MdLuggage size={25}></MdLuggage></span>
+
+                        <div onClick={() => router.push('/products/cable')}
+                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/cable' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
+                            <span><LuCable size={25}></LuCable></span>
                             <p>Bags & Luggage</p>
                         </div>
                     </label>
 
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/action-camera')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/action-camera' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><BsCameraFill size={25}></BsCameraFill></span>
-                            <p>Action Camera</p>
-                        </div>
-                    </label>
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/iron')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/iron' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><MdIron size={25}></MdIron></span>
-                            <p>Iron</p>
-                        </div>
-                    </label>
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/pen-drive')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/pen-drive' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><BsUsbDriveFill size={25}></BsUsbDriveFill></span>
-                            <p>Pen Drive</p>
+                        <div onClick={() => router.push('/products/bags-luggage')}
+                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/bags-luggage' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
+                            <span><MdLuggage size={25}></MdLuggage></span>
+                            <p>Bags & Luggage</p>
                         </div>
                     </label>
 
@@ -263,12 +224,13 @@ const CustomerSidebar = ({ drawer }) => {
                     </label>
 
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/clip-lamp')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/clip-lamp' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><TbFridge size={25}></TbFridge></span>
-                            <p>Clip Lamp</p>
+                        <div onClick={() => router.push('/products/iron')}
+                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/iron' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
+                            <span><MdIron size={25}></MdIron></span>
+                            <p>Clothing</p>
                         </div>
                     </label>
+                    
 
                 </div>
             </div>

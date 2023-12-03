@@ -48,7 +48,7 @@ const Page = () => {
         console.log('hello');
     }
     return (
-        <div className='mt-[24px]'>
+        <div className='mt-[24px] min-h-screen'>
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
                 <button style={{ background: 'purple', borderRadius: '5px' }} className="py-[8px] px-[20px]">Check Orders</button>
 
@@ -137,7 +137,7 @@ const Page = () => {
                                         <td><span className='flex justify-center'>{product?.title}</span></td>
                                         <td><span className='flex justify-center'>{parseFloat(product?.price) * parseFloat(product?.quantity)}</span></td>
                                         <td><span className='flex justify-center'>{product?.quantity}</span></td>
-                                        <td><span className='flex justify-center'>Green</span></td>
+                                        <td><span className='flex justify-center'>{product.color}</span></td>
                                     </tr>)
                                 }
                             </tbody>

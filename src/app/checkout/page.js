@@ -28,7 +28,7 @@ const Page = () => {
             router.push('/products');
         }
     }, [])
-    const [selectedOption, setSelectedOption] = useState('half');
+    const [selectedOption, setSelectedOption] = useState('quarter');
     const deliveryFee = selectedOption === 'half' ? 60 : 120;
     let totalPrice;
     if (user?.length < 2) {
@@ -150,26 +150,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Type your full name"
-                                className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
-                                type="text"
-                                name=""
-                                id=""
-                            />
-                        </div>
-                    </div>
-
-
-
-                    <div className='my-3'>
-                        <h1 className='mb-1'>Receiever Address <span className='text-red-700 text-xl pt-1'> *</span></h1>
-                        <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
-                            <input onChange={(e) => setAddress(e.target.value)}
-                                style={{
-                                    borderRadius: verificationFieldsRound,
-                                    background: 'white',
-                                }}
-                                placeholder="Type your address, include your village or flat, district and division"
+                                placeholder="আপনার নামটি লিখুন"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -188,7 +169,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Type your phone number"
+                                placeholder="আপনার সঠিক মোবাইল নাম্বার দিন"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -197,6 +178,24 @@ const Page = () => {
                         </div>
                     </div>
 
+                    <div className='my-3'>
+                        <h1 className='mb-1'>Receiever Address <span className='text-red-700 text-xl pt-1'> *</span></h1>
+                        <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                            <textarea onChange={(e) => setAddress(e.target.value)}
+                                style={{
+                                    borderRadius: verificationFieldsRound,
+                                    background: 'white',
+                                }}
+                                placeholder="আপনার সম্পুর্ন ঠিকানা লিখুন। যেমন- আপনার এলাকার বা ফ্ল্যাট নাম্বার, গ্রাম/শহর, জেলা, বিভাগ উল্লেখ করবেন"
+                                className={`w-full h-[90px] focus:outline-none border-0 pl-1 text-black`}
+                                type="text"
+                                name=""
+                                id=""
+                            />
+                        </div>
+                    </div>
+
+                    {/* ${address.length > 37 ? `${address.length > 74 ? 'h-[85px]' : 'h-[65px]'}` : 'h-[45px]'} */}
 
                     <div className='my-3'>
                         <h1 className='mb-1'>Email (optional)</h1>
@@ -207,7 +206,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Type your email"
+                                placeholder="আপনার ই-মেইল এড্রেস টি লিখুন (বাধ্যতামূলক নয়)"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -246,7 +245,7 @@ const Page = () => {
                                     className="checkbox checkbox-xs checkbox-accent"
                                     checked={selectedOption === 'half'}
                                 />
-                                <p onClick={() => handleOptionChange('half')} className='hover:underline hover:cursor-pointer'>Inside Dhaka</p>
+                                <p onClick={() => handleOptionChange('half')} className='hover:underline hover:cursor-pointer'>ঢাকার ভিতরে</p>
                             </div>
                         </div>
 
@@ -259,7 +258,7 @@ const Page = () => {
                                     className="checkbox checkbox-xs checkbox-accent"
                                     checked={selectedOption === 'quarter'}
                                 />
-                                <p onClick={() => handleOptionChange('quarter')} className='hover:underline hover:cursor-pointer'>Outside Dhaka</p>
+                                <p onClick={() => handleOptionChange('quarter')} className='hover:underline hover:cursor-pointer'>ঢাকার বাইরে</p>
                             </div>
                         </div>
 

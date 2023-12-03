@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useRouter } from 'next/navigation';
 
@@ -15,10 +15,9 @@ const Page = () => {
     const router = useRouter();
     const { user, setUser } = UserStore.useContainer();
     const { products, setProducts } = ProductsStore.useContainer();
-    useEffect(()=>{
-        const filteredProduct = products.filter(product => product.title === 'Headphone'); 
-        setProducts(filteredProduct);
-    },[])
+    const filteredproducts = products.filter(product => product.category[0].category === 'Headphone');
+    console.log(products);
+    console.log(filteredproducts);
     return (
         <div>
             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +31,7 @@ const Page = () => {
                 <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Headphones</text>
             </svg></h1>
             {
-                products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+                filteredproducts?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
                     <div>
                         <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
                         <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
@@ -40,7 +39,7 @@ const Page = () => {
                 </div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 
                     {
-                        products?.map((product, index) => <div style={{
+                        filteredproducts?.map((product, index) => <div style={{
                             borderRadius: '0 8px 0 8px'
                         }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
                             <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>

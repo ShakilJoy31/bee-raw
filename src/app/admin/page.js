@@ -212,27 +212,24 @@ const Page = () => {
                                 >
                                     <option>Best seller</option>
                                     <option>Smart Watch</option>
-                                    <option>Tripod</option>
+                                    <option>Home & Living</option>
+                                    <option>Earbud & Headphone</option>
+                                    <option>Camera</option>
+                                    <option>Islamic Accessiories</option>
+                                    <option>Gift Items</option>
+                                    <option>Electronics</option>
+                                    <option>Accessories</option>
                                     <option>Speaker</option>
-                                    <option>Microphone</option>
-                                    <option>Webcam</option>
                                     <option>RGB Light</option>
                                     <option>Fan</option>
                                     <option>Trimer</option>
                                     <option>Ring Light</option>
-                                    <option>Neck Band</option>
-                                    <option>Blender</option>
-                                    <option>Headphone</option>
                                     <option>Memory card</option>
-                                    <option>IP Camera</option>
                                     <option>Cable</option>
                                     <option>Calculator</option>
                                     <option>Bags & Luggage</option>
-                                    <option>Action Camera</option>
-                                    <option>Iron</option>
-                                    <option>Pen Drive</option>
                                     <option>Sun Glass</option>
-                                    <option>Clip Lamp</option>
+                                    <option>Clothing</option>
                                 </select>
 
                                 {
