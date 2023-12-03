@@ -26,7 +26,7 @@ const Page = () => {
         {
           individualProduct?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
           <div>
-          <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
+          <span style={{color: 'crimson'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
         <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
           </div>
         </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct} clickedFor={clickedFor}></ProductSlider>

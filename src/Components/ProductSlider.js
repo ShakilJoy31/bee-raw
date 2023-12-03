@@ -177,7 +177,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                             </div>
 
                             <div className={`${IndividualCSS.theButton}`} onClick={handleBuyNowButton}>
-                                <Button background={'#9F5AE5'} width='150px'><span className='text-white'>Buy Now</span></Button>
+                                <Button background={'rgb(28,97,231)'} width='150px'><span className='text-white'>Buy Now</span></Button>
                             </div>
 
                             {

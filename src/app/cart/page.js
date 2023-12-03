@@ -204,7 +204,7 @@ const Page = () => {
                         </div>
 
                         <div onClick={handleCheckOut}>
-                            <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Checkout</span></Button>
+                            <Button background={'rgb(28,97,231)'} width='94vw'><span className='text-white'>Checkout</span></Button>
                         </div>
 
                     </div>
@@ -220,7 +220,7 @@ const Page = () => {
                         </div>
 
                         <div onClick={handleCheckOut}>
-                            <Button background={'#9F5AE5'} width='250px'><span className='text-white'>Checkout</span></Button>
+                            <Button background={'rgb(28,97,231)'} width='250px'><span className='text-white'>Checkout</span></Button>
                         </div>
 
                     </div>

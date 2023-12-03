@@ -10,12 +10,11 @@ const Footer = () => {
              <div className={`w-full`}>
         <div
           style={{
-            background: "purple",
-            // backgroundImage: "linear-gradient(45deg, #643843, #B799FF)",
+            background: "crimson",
             backgroundSize: "100%",
             backgroundRepeat: "repeat",
           }}
-          className="w-full"
+          className="w-full from-pink-500 hover:to-yellow-500"
         >
           
           <div className={`grid items-center justify-between lg:flex md:flex p-2`}>

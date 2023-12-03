@@ -32,14 +32,14 @@
   transition-duration: 1000ms;
 }
 .sidebarHeading:hover{
-  /* background: rgb(102, 7, 190); */
-  background: purple;
+  /* background: rgb(1, 83, 247); */
+  background: crimson;
   border-radius: 8px;
   transition-duration: 100ms;
   cursor: pointer;
 }
 .sidebarHeadingSelected{
-  background: purple;
+  background: crimson;
   border-radius: 8px;
   transition-duration: 100ms;
   cursor: pointer;
@@ -65,11 +65,11 @@
 }
 
 .sidebarBackground{
-  background: radial-gradient(
+  /* background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(34, 15, 130, 0.62) 0%,
     rgba(255, 255, 255, 0.02) 100%
-  );
+  ); */
   color: white;
   overflow: hidden;
 }
@@ -78,9 +78,11 @@
 .imageContainer {
   position: relative;
   overflow: hidden;
-  background-color: purple;
+  background-color:crimson;
   transition-duration: 150ms;
   border-radius: 0;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .imageContainer img {

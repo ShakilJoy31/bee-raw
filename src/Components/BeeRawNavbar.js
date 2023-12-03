@@ -97,7 +97,7 @@ const Page = () => {
 
           <div className="indicator hover:cursor-pointer">
             <span style={{
-              background: 'purple',
+              background: 'crimson',
               borderRadius: '50%',
               fontSize: '12px'
             }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
@@ -110,7 +110,7 @@ const Page = () => {
         <div className={` ${isInputForTheProduct ? MyServiceCSS.inputDisabled : MyServiceCSS.tableRoomInput} w-full lg:w-[450px]`}>
           <div style={{ borderBottom: isInputForTheProduct ? '1px solid purple' : '' }} className='flex items-center'>
             <span className="mx-3">
-              <BiSearch color={'purple'} size={25}></BiSearch>
+              <BiSearch color={'crimson'} size={25}></BiSearch>
             </span>
             <input onChange={(e) => handleSearchProducts(e.target.value)}
               style={{
@@ -159,7 +159,7 @@ const Page = () => {
         <div className="lg:flex items-center hidden">
           <div className="indicator hover:cursor-pointer">
             <span style={{
-              background: 'purple',
+              background: 'crimson',
               borderRadius: '50%',
               fontSize: '12px'
             }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>

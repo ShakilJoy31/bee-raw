@@ -63,8 +63,8 @@ const SimpleSlider = ({ products }) => {
     return (
         <div className='mt-[12px] bg-black'>
             <div className='flex justify-between items-center px-2' style={{zIndex: '3'}}>
-                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handlePrevSlide}><BsArrowLeftCircleFill size={25} color={'purple'}></BsArrowLeftCircleFill></button>
-                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><BsArrowRightCircleFill size={25} color={'purple'}></BsArrowRightCircleFill></button>
+                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handlePrevSlide}><BsArrowLeftCircleFill size={25} color={'crimson'}></BsArrowLeftCircleFill></button>
+                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><BsArrowRightCircleFill size={25} color={'crimson'}></BsArrowRightCircleFill></button>
             </div>
             <Slider ref={sliderRef} {...settings}>
                 {onlyBestSeller?.map((product, index) => (

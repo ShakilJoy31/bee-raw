@@ -62,7 +62,7 @@ const Page = () => {
             {
                 products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
                 <div>
-                <span style={{color: 'purple'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
+                <span style={{color: 'crimson'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
               <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
                 </div>
               </div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
@@ -93,7 +93,7 @@ const Page = () => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:underline h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
+                                        }} className="hover:text-black h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
                                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
@@ -107,12 +107,12 @@ const Page = () => {
                                                 }}>{product.price} ৳</p>
                                             </div>
                                         </div>
-                                        <button onClick={()=> handleBuyNowButton(product)} className="btn btn-primary btn-sm my-1 w-full">Buy Now</button>
+                                        <button style={{background: 'rgb(28,97,231)'}} onClick={()=> handleBuyNowButton(product)} className="btn border-0 btn-sm my-1 w-full text-white normal-case">Buy Now</button>
                                     </div>
 
 
                                     <div onClick={() => handleItemAddToCart(product)} className=''>
-                                        <Button background={'#9F5AE5'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
+                                        <Button background={'rgb(28,97,231)'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
 
                                     </div>
                                 </div>

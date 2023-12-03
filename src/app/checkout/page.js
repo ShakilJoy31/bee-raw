@@ -132,7 +132,7 @@ const Page = () => {
 
 
                     <div onClick={() => router.push('/products')} className=''>
-                        <Button background={'#9F5AE5'} width='200px'><span className='text-white'>Order Extra Item</span></Button>
+                        <Button background={'crimson'} width='200px'><span className='text-white'>Order Extra Item</span></Button>
                     </div>
 
                 </div>
@@ -169,7 +169,7 @@ const Page = () => {
                                     borderRadius: verificationFieldsRound,
                                     background: 'white',
                                 }}
-                                placeholder="Type your address"
+                                placeholder="Type your address, include your village or flat, district and division"
                                 className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
                                 type="text"
                                 name=""
@@ -265,11 +265,11 @@ const Page = () => {
 
                     </div>
 
-                    <div style={{ background: 'purple' }} className='py-4 px-2'>
+                    <div style={{ background: 'crimson', borderRadius: '8px' }} className='py-4 px-2'>
                         <h1 style={{ color: 'white' }} className=''>আমাদের ডেলিভারি চার্জ:
                             ঢাকা সিটি করপোরেশনের মধ্যে -      ৬০ টাকা,
                             সারা বাংলাদেশ- (পাঠাও কুরিয়ার)-  ১২০ টাকা,
-                            ৬-৭২ ঘন্টার মধ্যে পন্য হাতে পেয়ে যাবেন🥰</h1>
+                            ৬-৭২ ঘন্টার মধ্যে পন্য হাতে পেয়ে যাবেন</h1>
                     </div>
                 </div>
 
@@ -314,13 +314,13 @@ const Page = () => {
                             </div>
 
 
-                            <div className={`flex items-center justify-between my-[8px] ${selectedOption === 'half' ? 'text-orange-600 underline' : 'text-white'}`}>
+                            <div style={{color: selectedOption === 'half' ? 'rgb(28,97,231)' : 'white'}} className={`flex items-center justify-between my-[8px] `}>
                                 <h1>Inside Dhaka</h1>
                                 <p className='ml-2'> 60 Taka</p>
                             </div>
 
 
-                            <div className={`flex items-center justify-between my-[8px] ${selectedOption === 'quarter' ? 'text-orange-600 underline' : 'text-white'}`}>
+                            <div style={{color: selectedOption === 'quarter' ? 'rgb(28,97,231)' : 'white'}} className={`flex items-center justify-between my-[8px]`}>
                                 <h1>Outside Dhaka</h1>
                                 <p className='ml-2'> 120 Taka</p>
                             </div>
@@ -345,7 +345,7 @@ const Page = () => {
                     </div>
 
                     <div onClick={handlePlaceOrderButton}>
-                        <Button background={'#9F5AE5'} width='250px'><span className='text-white'>Place Order</span></Button>
+                        <Button background={'rgb(28,97,231)'} width='250px'><span className='text-white'>Place Order</span></Button>
                     </div>
                 </div>
 
@@ -358,7 +358,7 @@ const Page = () => {
                     </div>
 
                     <div onClick={handlePlaceOrderButton} className='mt-[25px]'>
-                        <Button background={'#9F5AE5'} width='94vw'><span className='text-white'>Place Order</span></Button>
+                        <Button background={'rgb(28,97,231)'} width='94vw'><span className='text-white'>Place Order</span></Button>
                     </div>
                 </div>
 

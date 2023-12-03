@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
     <ProductsStore.Provider>
       <UserStore.Provider>
         <html lang="en">
-          <body style={{ background: 'black', fontFamily: 'Cambria' }} className='text-white'>
+          <body style={{ background: 'black', fontFamily: 'sans-serif' }} className='text-white'>
             <div className="flex">
               <div style={{ position: 'fixed', height: '100%' }} className='hidden lg:block'>
                 <CustomerSidebar></CustomerSidebar>
