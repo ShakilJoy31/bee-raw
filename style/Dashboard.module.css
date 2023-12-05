@@ -206,7 +206,7 @@
 
 
 
-.forMoreProduct {
+.forMoreProduct{
   animation: moveLeftToRight 1500ms linear infinite;
   position: absolute;
   right: 60px;

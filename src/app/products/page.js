@@ -71,23 +71,17 @@ const Page = () => {
     console.log(catrProducts);
     return (
         <div className='h-full'>
-            <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style={{ stopColor: 'crimson' }} />
-                        <stop offset="50%" style={{ stopColor: 'white' }} />
-                        <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
-                    </linearGradient>
-                    {/* <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style={{ stopColor: '#ff0000' }} />
-                        <stop offset="50%" style={{ stopColor: '#00ff00' }} />
-                        <stop offset="100%" style={{ stopColor: '#0000ff' }} />
-                    </linearGradient> */}
-                </defs>
-                <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Best Selling Product</text>
-            </svg></h1>
+            {/* Best products */}
+            {
+                products.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+                <div>
+                    <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
+                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                </div>
+            </div> : <div>
             <PauseOnHover></PauseOnHover>
-
+            </div>
+            }
 
             {/* The Categorized Product */}
             {

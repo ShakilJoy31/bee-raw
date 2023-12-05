@@ -77,6 +77,22 @@ const SimpleSlider = () => {
                 <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handlePrevSlide}><BsArrowLeftCircleFill size={25} color={'crimson'}></BsArrowLeftCircleFill></button>
                 <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><PiArrowFatLinesRightFill size={25} color={'crimson'}></PiArrowFatLinesRightFill></button>
             </div> */}
+             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style={{ stopColor: 'white' }} />
+                        <stop offset="50%" style={{ stopColor: 'magenta' }} />
+                        <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
+                    </linearGradient>
+                    {/* <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style={{ stopColor: '#ff0000' }} />
+                        <stop offset="50%" style={{ stopColor: '#00ff00' }} />
+                        <stop offset="100%" style={{ stopColor: '#0000ff' }} />
+                    </linearGradient> */}
+                </defs>
+                <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Best Selling Product</text>
+            </svg></h1>
+
             <Slider {...settings}>
                 {onlyBestSeller?.map((product, index) => (
                     <div onClick={()=> router.push(`/products/${product._id}`)} key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>

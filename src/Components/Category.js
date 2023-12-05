@@ -96,8 +96,8 @@ const Page = ({ dataForDynamicComponent }) => {
             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style={{ stopColor: 'crimson' }} />
-                        <stop offset="50%" style={{ stopColor: '#00ff00' }} />
+                        <stop offset="0%" style={{ stopColor: 'white' }} />
+                        <stop offset="50%" style={{ stopColor: 'magenta' }} />
                         <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
                     </linearGradient>
                 </defs>
