@@ -207,23 +207,26 @@
 
 
 .forMoreProduct {
-  animation: moveLeftToRight 3s linear infinite;
+  animation: moveLeftToRight 1500ms linear infinite;
   position: absolute;
-  left: 0;
+  right: 60px;
+  /* transform: translateX(-50%); Set it to the middle */
   opacity: 1;
 }
 
 @keyframes moveLeftToRight {
   0% {
-    transform: translateX(0);
+    transform: translateX(-25px); /* Start from the middle */
     opacity: 1;
   }
   50% {
-    transform: translateX(150px); /* Increased distance */
+    transform: translateX(20px); /* Move further to the right */
     opacity: 1;
   }
   100% {
-    transform: translateX(300px); /* Increased distance */
+    transform: translateX(85px); /* Adjust the final position */
     opacity: 0;
   }
 }
+
+

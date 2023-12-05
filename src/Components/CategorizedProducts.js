@@ -57,26 +57,22 @@ const Page = ({ byCategory }) => {
     }, 1800);
 
     return (
-        <div>
+        <div> 
             <div className='flex justify-between items-center'>
-            <div className='flex items-center'>
-  <h1>
-    <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style={{ stopColor: 'crimson' }} />
-          <stop offset="50%" style={{ stopColor: '#00ff00' }} />
-          <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
-        </linearGradient>
-      </defs>
-      <text x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
-    </svg>
-  </h1>
-
-  <span className={`${DashboardCSS.forMoreProduct}`} style={{ position: 'relative', left: '0', marginLeft: '10px' }}>
-    <FaAngleDoubleRight size={25} color={'crimson'} />
-  </span>
-</div>
+                <div className='flex items-center'>
+                    <h1>
+                        <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style={{ stopColor: 'crimson' }} />
+                                    <stop offset="50%" style={{ stopColor: '#00ff00' }} />
+                                    <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
+                                </linearGradient>
+                            </defs>
+                            <text x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
+                        </svg>
+                    </h1>
+                </div>
 
 
                 <div style={{ position: 'relative' }} className='flex items-center'>
@@ -92,13 +88,11 @@ const Page = ({ byCategory }) => {
                             <text x="85%" y="30" fill="url(#gradient)" textAnchor="middle">Show More</text>
                         </svg>
                     </h1>
-                    <span className={`${DashboardCSS.forMoreProduct}`} style={{ position: 'absolute', left: '0' }}>
-                        <FaAngleDoubleRight size={25} color={'crimson'} />
+                    <span className={`${DashboardCSS.forMoreProduct} mt-2`}>
+                        <FaAngleDoubleRight size={20} color={'crimson'} />
                     </span>
                 </div>
             </div>
-
-
 
             {
                 byCategory?.products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
@@ -115,7 +109,8 @@ const Page = ({ byCategory }) => {
                             <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
                                 <div>
                                     {/* style={{background: 'crimson'}} */}
-                                    <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                    <img className='h-full' src="
+                                    https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
                                     <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
                                 </div>
                             </div>

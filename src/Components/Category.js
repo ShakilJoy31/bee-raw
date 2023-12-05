@@ -26,7 +26,7 @@ const Page = ({ dataForDynamicComponent }) => {
     const [warning, setWarning] = useState(false);
     const [cartAddedMessage, setCartAddedMessage] = useState('');
     const filteredproducts = products?.filter(product => product.category[0].category === dataForDynamicComponent[0]);
-    
+
     const [loading, setLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -60,42 +60,37 @@ const Page = ({ dataForDynamicComponent }) => {
         }
     }, 1800);
 
-    // The code for showing the products when page will be scrolled.
-    if(pathname === '/products'){
-        setProducts(products.slice(0,5));
-    }else{
-        const loadMoreProducts = async (page) => {
-            if (!loading) {
-                setLoading(true);
-                const nextPageProducts = await CustomerAPI.handleGettingProducts(page, dataForDynamicComponent[0]);
-                setProducts([...products, ...nextPageProducts]);
-                setLoading(false);
-            }
+    const loadMoreProducts = async (page) => {
+        if (!loading) {
+            setLoading(true);
+            const nextPageProducts = await CustomerAPI.handleGettingProducts(page, dataForDynamicComponent[0]);
+            setProducts([...products, ...nextPageProducts]);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        const fetchInitialProducts = async () => {
+            const initialProducts = await CustomerAPI.handleGettingProducts(1, dataForDynamicComponent[0]);
+            setProducts(initialProducts);
         };
-    
-        useEffect(() => {
-            const fetchInitialProducts = async () => {
-                const initialProducts = await CustomerAPI.handleGettingProducts(1, dataForDynamicComponent[0]);
-                setProducts(initialProducts);
-            };
-            fetchInitialProducts();
-        }, []);
-    
-        useEffect(() => {
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }, [loading]); // Listen to changes in the loading state
-    
-        const handleScroll = () => {
-            if (
-                window.innerHeight + document.documentElement.scrollTop ===
-                document.documentElement.offsetHeight
-            ) {
-                const nextPage = products.length / 20 + 1;
-                loadMoreProducts(nextPage);
-            }
-        };
-    }
+        fetchInitialProducts();
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [loading]); // Listen to changes in the loading state
+
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
+        ) {
+            const nextPage = products.length / 20 + 1;
+            loadMoreProducts(nextPage);
+        }
+    };
     return (
         <div>
             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
@@ -174,11 +169,11 @@ const Page = ({ dataForDynamicComponent }) => {
 
             {
                 loading && <div className='w-full flex justify-center items-center'>
-                <div>
-                    <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
-                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                    <div>
+                        <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
+                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                    </div>
                 </div>
-            </div>
             }
 
             {/* The modal... */}
