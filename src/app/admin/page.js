@@ -212,8 +212,8 @@ const Page = () => {
                                 >
                                     <option>Best seller</option>
                                     <option>Smart Watch</option>
-                                    <option>Home & Living</option>
-                                    <option>Earbud & Headphone</option>
+                                    <option>Home and Living</option>
+                                    <option>Earbud and Headphone</option>
                                     <option>Camera</option>
                                     <option>Islamic Accessiories</option>
                                     <option>Gift Items</option>
@@ -223,11 +223,9 @@ const Page = () => {
                                     <option>RGB Light</option>
                                     <option>Fan</option>
                                     <option>Trimer</option>
-                                    <option>Ring Light</option>
                                     <option>Memory card</option>
-                                    <option>Cable</option>
                                     <option>Calculator</option>
-                                    <option>Bags & Luggage</option>
+                                    <option>Bags and Luggage</option>
                                     <option>Sun Glass</option>
                                     <option>Clothing</option>
                                 </select>

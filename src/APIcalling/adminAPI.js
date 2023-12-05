@@ -14,7 +14,6 @@ import {
     const axiosInstance = axios.create({
       baseURL: BASE_URL,
     });
-  
     try {
       const response = await axiosInstance.post(productPostingAPI, payload);
       return response.data;

@@ -28,9 +28,12 @@ import CustomerSidebar from '../Components/CustomerSidebar';
 const Page = () => {
   const { user, setUser } = UserStore.useContainer();
   const { products, setProducts } = ProductsStore.useContainer();
+  const [loading, setLoading] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
+
   const [data, setData] = useState([]);
   useEffect(() => {
-    CustomerAPI.handleGettingProducts().then(res => {
+    CustomerAPI.handleGettingProducts(pageNumber, 'Smart Watch').then(res => {
       setData(res)
       setProducts(res)
     });
@@ -62,11 +65,10 @@ const Page = () => {
     }
     else {
       setProducts(foundProducts);
-      setInputForTheProduct(true)
+      setInputForTheProduct(true);
     }
   }
-  const drawer = <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>; 
-
+  const drawer = <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>;
   return (
     <div>
       <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">

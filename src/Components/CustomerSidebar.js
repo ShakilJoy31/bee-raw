@@ -5,7 +5,6 @@ import {
   usePathname,
   useRouter,
 } from 'next/navigation';
-import { BiSolidMemoryCard } from 'react-icons/bi';
 import {
   BsDashCircleDotted,
   BsFan,
@@ -19,18 +18,17 @@ import {
   FaGift,
   FaMosque,
 } from 'react-icons/fa';
-import { FcElectronics } from 'react-icons/fc';
 import { GiLoincloth } from 'react-icons/gi';
 import {
   ImCross,
   ImHeadphones,
 } from 'react-icons/im';
-import { LuCable } from 'react-icons/lu';
 import {
   MdLuggage,
   MdMapsHomeWork,
   MdSell,
 } from 'react-icons/md';
+import { PiTelevisionDuotone } from 'react-icons/pi';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 
@@ -118,7 +116,7 @@ const CustomerSidebar = ({ drawer }) => {
                         <div onClick={() => router.push('/products/electronics')}
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/electronics' ? DashboardCSS.sidebarHeadingSelected : ''}`}
                         >
-                            <span><FcElectronics size={25}></FcElectronics></span>
+                            <span><PiTelevisionDuotone size={27}></PiTelevisionDuotone></span>
                             <p>Electronics</p>
                         </div>
                     </label>
@@ -162,23 +160,6 @@ const CustomerSidebar = ({ drawer }) => {
                             className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/trimer' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
                             <img style={{ width: '28px', height: '28px' }} src="https://i.ibb.co/ChpPqSy/clipper-icon-white-vector-16108954-removebg-preview.png" className='w-[28px] h-[28px]' alt="" />
                             <p>Trimer</p>
-                        </div>
-                    </label>
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-                        <div onClick={() => router.push('/products/memory-card')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/memory-card' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><BiSolidMemoryCard size={25}></BiSolidMemoryCard></span>
-                            <p>Memory card</p>
-                        </div>
-                    </label>
-
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay">
-
-                        <div onClick={() => router.push('/products/cable')}
-                            className={`flex items-center gap-x-4 mx-[24px] py-[4px] pl-[16px] ${DashboardCSS.sidebarHeading} ${pathname === '/products/cable' ? DashboardCSS.sidebarHeadingSelected : ''}`}>
-                            <span><LuCable size={25}></LuCable></span>
-                            <p>Cable</p>
                         </div>
                     </label>
 

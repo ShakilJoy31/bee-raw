@@ -1,9 +1,13 @@
+"use client"
 import React from 'react';
 
+import Category from '@/Components/Category';
+
 const Page = () => {
+    const dataForDynamicComponent = ['Calculator', 'Calculator'];
     return (
         <div>
-            <h1>This is calc page. </h1>
+            <Category dataForDynamicComponent={dataForDynamicComponent}></Category>
         </div>
     );
 };

@@ -1,21 +1,32 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import React, { useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 
+import Aos from 'aos';
 import { useRouter } from 'next/navigation';
-import {
-  BsArrowLeftCircleFill,
-  BsArrowRightCircleFill,
-} from 'react-icons/bs';
 import Slider from 'react-slick';
+
+import { CustomerAPI } from '@/APIcalling/customerAPI';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 
-const SimpleSlider = ({ products }) => {
+const SimpleSlider = () => {
     const router = useRouter();
-    const sliderRef = useRef();
-    const onlyBestSeller = products.filter((product) => product?.category[0].category === 'Best seller');
+    // const sliderRef = useRef();
+    const [onlyBestSeller, setOnlyBestSeller] = useState([]);
+
+    useEffect(() => {
+        CustomerAPI.handleGettingProducts(1, 'Best seller').then(res => {      
+            setOnlyBestSeller(res);
+        });
+          Aos.init({ duration: 500 });
+      }, [])
+
+      
     const settings = {
         dots: true,
         infinite: true,
@@ -53,20 +64,20 @@ const SimpleSlider = ({ products }) => {
         ],
     };
 
-    const handleNextSlide = () => {
-        sliderRef.current.slickNext();
-    };
-    const handlePrevSlide = () => {
-        sliderRef.current.slickPrev();
-    };
+    // const handleNextSlide = () => {
+    //     sliderRef.current.slickNext();
+    // };
+    // const handlePrevSlide = () => {
+    //     sliderRef.current.slickPrev();
+    // };
 
     return (
         <div className='mt-[12px] bg-black'>
-            <div className='flex justify-between items-center px-2' style={{zIndex: '3'}}>
+            {/* <div className='flex justify-between items-center px-2' style={{zIndex: '3'}}>
                 <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handlePrevSlide}><BsArrowLeftCircleFill size={25} color={'crimson'}></BsArrowLeftCircleFill></button>
-                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><BsArrowRightCircleFill size={25} color={'crimson'}></BsArrowRightCircleFill></button>
-            </div>
-            <Slider ref={sliderRef} {...settings}>
+                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><PiArrowFatLinesRightFill size={25} color={'crimson'}></PiArrowFatLinesRightFill></button>
+            </div> */}
+            <Slider {...settings}>
                 {onlyBestSeller?.map((product, index) => (
                     <div onClick={()=> router.push(`/products/${product._id}`)} key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>
                         <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className=''>

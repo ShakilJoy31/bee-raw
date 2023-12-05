@@ -4,7 +4,7 @@ import React from 'react';
 import Category from '@/Components/Category';
 
 const Page = () => {
-    const dataForDynamicComponent = ['Clothing', 'Clothing'];
+    const dataForDynamicComponent = ['Memory card', 'Memory card'];
     return (
         <div>
             <Category dataForDynamicComponent={dataForDynamicComponent}></Category>
