@@ -3,12 +3,9 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { BsArrowLeft } from 'react-icons/bs';
 
-import {
-  blackColor,
-  tableBackground,
-} from '@/constants/color-constants';
+import { blackColor } from '@/constants/color-constants';
 
-import Button from './button';
+import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 
 const EmptyCartComponent = () => {
     const router = useRouter();
@@ -26,7 +23,7 @@ const EmptyCartComponent = () => {
             </div>
             <p style={{fontSize: '24px'}} className='flex justify-center my-[75px] text-white'>Nothing in cart. Product added in the cart will be shown here.</p>
             <div onClick={()=> router.push('/products')} className='flex justify-center'>
-            <Button background={tableBackground} width='300px'><span className='text-white'>Browse products</span></Button>
+            <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Browse products</button>
             </div>
         </div>
     );
