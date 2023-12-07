@@ -20,13 +20,13 @@ const SimpleSlider = () => {
     const [onlyBestSeller, setOnlyBestSeller] = useState([]);
 
     useEffect(() => {
-        CustomerAPI.handleGettingProducts(1, 'Best seller').then(res => {      
+        CustomerAPI.handleGettingProducts(1, 'Best seller').then(res => {
             setOnlyBestSeller(res);
         });
-          Aos.init({ duration: 500 });
-      }, [])
+        Aos.init({ duration: 500 });
+    }, [])
 
-      
+
     const settings = {
         dots: true,
         infinite: true,
@@ -73,52 +73,44 @@ const SimpleSlider = () => {
 
     return (
         <div className='mt-[12px] bg-black'>
-            {/* <div className='flex justify-between items-center px-2' style={{zIndex: '3'}}>
-                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handlePrevSlide}><BsArrowLeftCircleFill size={25} color={'crimson'}></BsArrowLeftCircleFill></button>
-                <button className='mb-[-210px]' style={{zIndex: '3'}} onClick={handleNextSlide}><PiArrowFatLinesRightFill size={25} color={'crimson'}></PiArrowFatLinesRightFill></button>
-            </div> */}
-             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
+            <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" style={{ stopColor: 'white' }} />
                         <stop offset="50%" style={{ stopColor: 'magenta' }} />
                         <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
                     </linearGradient>
-                    {/* <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style={{ stopColor: '#ff0000' }} />
-                        <stop offset="50%" style={{ stopColor: '#00ff00' }} />
-                        <stop offset="100%" style={{ stopColor: '#0000ff' }} />
-                    </linearGradient> */}
                 </defs>
                 <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Best Selling Product</text>
             </svg></h1>
 
             <Slider {...settings}>
                 {onlyBestSeller?.map((product, index) => (
-                    <div onClick={()=> router.push(`/products/${product._id}`)} key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>
-                        <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className=''>
-                        </div>
-                        <div style={{position: 'absolute', bottom: '10px', zIndex:'3'}} className='px-2 w-full'>
-                            <h1 className='h-8'>{product.title.length > 35 ? (product.title.slice(0, 35)+'...') : product.title}</h1>
+                    <div onClick={() => router.push(`/products/${product._id}`)} key={index} className={`w-full px-2 hover:cursor-pointer ${DashboardCSS.carslImgContainer}`}>
+
+                        <div style={{ position: 'absolute', bottom: '10px', zIndex: '3' }} className='px-2 w-full'>
+                            <h1 className='h-8'>{product.title.length > 35 ? (product.title.slice(0, 35) + '...') : product.title}</h1>
                             <div className='flex justify-between items-center'>
                                 <p style={{ textDecoration: 'line-through' }} className='text-slate-400' >{product.offerPrice} ৳</p>
                                 <p className='mr-4'>{product.price} ৳</p>
                             </div>
                         </div>
-                        <div className={`${DashboardCSS.carslImgContainer}`}>
+
+                        <div className={`${DashboardCSS.carslImgContainer}`} style={{border: '3px solid crimson', borderRadius: '8px'}}>
                             <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '8px' }} /></figure>
                         </div>
+
                         <div
-                        style={{
-                            position: 'absolute',
-                            bottom: '0',
-                            left: '0',
-                            width: '100%',
-                            height: '50%',
-                            background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
-                            zIndex: '2',
-                        }}
-                    ></div>
+                            style={{
+                                position: 'absolute',
+                                bottom: '0',
+                                left: '0',
+                                width: '100%',
+                                height: '50%',
+                                background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
+                                zIndex: '2',
+                            }}
+                        ></div>
                     </div>
                 ))}
             </Slider>

@@ -105,6 +105,7 @@
   background-color: black;
   transition-duration: 150ms;
   border-radius: 0;
+  /* border: 2px solid crimson; */
 }
 
 .carslImgContainer img {
@@ -253,4 +254,38 @@
   background: black;
   color: white;
   transition-duration: 500ms;
+}
+
+
+.IndividualProductBuyNowButton{
+  background: crimson;
+  color: white;
+  border-radius: 4px;
+  border: 2px solid black;
+  transition-duration: 300ms;
+}
+.IndividualProductBuyNowButton:hover{
+  background: black;
+  color: crimson;
+  border-radius: 4px;
+  border: 2px solid white;
+  transition-duration: 500ms;
+}
+
+.showMoreButton{
+  background: crimson;
+  transition-duration: 500ms;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.showMoreButton:hover{
+  background: black;
+  transition-duration: 500ms;
+  border: 2px solid crimson;
+  
 }

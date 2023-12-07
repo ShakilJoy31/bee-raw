@@ -39,13 +39,15 @@ export default function RootLayout({ children }) {
                   {children}
                 </div>
 
-                <div className='hidden lg:block md:block mb-4' data-aos="zoom-in-up">
+                <div className='hidden lg:block md:block mb-4'>
                   <Footer></Footer>
                 </div>
               </div>
             </div>
 
-            <div className='block lg:hidden md:hidden' data-aos="zoom-in-up">
+            <div className='block lg:hidden md:hidden'>
+              {/* data-aos="zoom-in-up"
+data-aos="zoom-in-up" */}
               <Footer></Footer>
             </div>
           </body>

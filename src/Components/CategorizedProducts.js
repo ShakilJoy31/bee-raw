@@ -77,35 +77,24 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                 </div>
 
 
-                <div style={{ position: 'relative' }} className='flex items-center w-24 lg:w-50 md:w-50'>
-                    <h1 className='hover:cursor-pointer' onClick={() => { handleClickedCategoryForMore(byCategory?.category[0].category) }}>
-                        <svg className="gradient-text font-bold text-sm" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style={{ stopColor: 'crimson' }} />
-                                    <stop offset="50%" style={{ stopColor: 'yellow' }} />
-                                    <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
-                                </linearGradient>
-                            </defs>
-                            <text className='block lg:hidden md:hidden' x="55%" y="30" fill="url(#gradient)" textAnchor="middle">Show More</text>
-
-                            {/* For Large screen... */}
-                            <text className='hidden lg:block md:block' x="55%" y="30" fill="url(#gradient)" textAnchor="middle">Show More</text>
-                        </svg>
+                <div style={{ position: 'relative' }} className='flex items-center w-32 lg:w-50 md:w-50'>
+                    <h1 className={`hover:cursor-pointer ${DashboardCSS.showMoreButton}`} onClick={() => { handleClickedCategoryForMore(byCategory?.category[0].category) }}>
+                        Show more
                     </h1>
-                    <span className={`${DashboardCSS.forMoreProduct} mt-2`}>
-                        <FaAngleDoubleRight size={20} color={'crimson'} />
+                    <span className={`${DashboardCSS.forMoreProduct}`}>
+                        <FaAngleDoubleRight size={20} color={'black'} />
                     </span>
                 </div>
             </div>
 
             {
-                byCategory?.products?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
-                    <div>
-                        <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
-                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
-                    </div>
-                </div> : <div>
+                byCategory?.products?.length < 1 ? <div className='w-full min-h-screen items-center flex justify-center'>
+                <div>
+                    <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
+                    {/* <span className="loading loading-ring loading-lg"></span> */}
+                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
+                </div>
+            </div> : <div>
                     {/* For mobile */}
                     <div className='grid lg:hidden md:hidden grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 

@@ -146,7 +146,7 @@ const Page = ({ dataForDynamicComponent }) => {
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                         }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
 
-                                        
+
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
                                                 <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
@@ -177,10 +177,11 @@ const Page = ({ dataForDynamicComponent }) => {
             }
 
             {
-                loading && <div className='w-full flex justify-center items-center'>
+                loading && <div className='w-full min-h-screen items-center flex justify-center'>
                     <div>
-                        <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
-                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+                        <span style={{ color: 'crimson' }} className="loading loading-ring w-16 h-16 block mx-auto"></span>
+                        {/* <span className="loading loading-ring loading-lg"></span> */}
+                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
                     </div>
                 </div>
             }

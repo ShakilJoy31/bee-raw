@@ -98,11 +98,11 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
         router.push('/admin');
     }
 
-    
+
     const handleDeleteProductByAdmin = () => {
         AdminAPI.handleDeletingProductByAdmin(individualProduct?._id).then(res => {
             if (res) {
-                router.push('/products')                
+                router.push('/products')
                 document.getElementById('beforeDelete').close();
             }
         })
@@ -139,7 +139,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                     <div className={`${IndividualCSS.headingLeftBorder} lg:pl-3 md:pl-2`}>
                         <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>{individualProduct?.title}</h1>
                         <p style={{ marginBottom: '12px' }}>
-                            {/* <span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + individualProduct?.offerPrice + ' BDT'}</span> */}
                             <span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + parseFloat(individualProduct?.offerPrice) * parseFloat(individualProduct.quantity) + ' BDT'}</span>
 
                             {'Taka ' + parseFloat(individualProduct?.price) * parseFloat(individualProduct?.quantity) + ' BDT'}
@@ -173,11 +172,15 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
 
                         <div className={`${IndividualCSS.decissionButton}`}>
                             <div onClick={handleAddToCartButton}>
-                                <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button>
+                                <button className={`btn border-0 btn-sm w-[150px] normal-case ${DashboardCSS.IndividualProductBuyNowButton}`}>Add to cart</button>
+
+                                {/* <Button background='#DC3545' width='150px'><span className='text-white'>Add to cart</span></Button> */}
                             </div>
 
                             <div className={`${IndividualCSS.theButton}`} onClick={handleBuyNowButton}>
-                                <Button background={'rgb(28,97,231)'} width='150px'><span className='text-white'>Buy Now</span></Button>
+                                <button className={`btn border-0 btn-sm w-[150px] normal-case ${DashboardCSS.IndividualProductBuyNowButton}`}>Buy Now</button>
+
+                                {/* <Button background={'rgb(28,97,231)'} width='150px'><span className='text-white'>Buy Now</span></Button> */}
                             </div>
 
                             {
@@ -187,7 +190,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                             }
 
                             {
-                                isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={()=> document.getElementById('beforeDelete').showModal()}>
+                                isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={() => document.getElementById('beforeDelete').showModal()}>
                                     <Button background={'#DC3545'} width='150px'><span className='text-white'>Delete</span></Button>
                                 </div>
                             }
@@ -201,7 +204,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                         }
 
                         {
-                            isEditable && <div className={`${IndividualCSS.theButton} lg:hidden block md:hidden mt-[24px]`} onClick={()=> document.getElementById('beforeDelete').showModal()}>
+                            isEditable && <div className={`${IndividualCSS.theButton} lg:hidden block md:hidden mt-[24px]`} onClick={() => document.getElementById('beforeDelete').showModal()}>
                                 <Button background={'#DC3545'} width='100%'><span className='text-white'>Delete</span></Button>
                             </div>
                         }
@@ -225,43 +228,62 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                     <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>
                     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
                         {
-                            moreProducts.map((product, index) => <div key={index} style={{
+                            moreProducts.map((product, index) => <div style={{
                                 borderRadius: '8px',
-                                position: 'relative',
-                                zIndex: '0'
-                            }} className={`w-full glass hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                                border: '2px solid crimson'
+                            }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer} ${DashboardCSS.productBackground}`} data-aos="zoom-in-up">
                                 <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
                                     <div>
                                         <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
-                                        <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{individualProduct?.offer}% off</p>
+                                        <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
                                     </div>
                                 </div>
-                                <span style={{ zIndex: '1' }} className={`${IndividualCSS.inStockSuggestion}`}>{individualProduct.availability}</span>
                                 <div onClick={() => {
                                     {
-                                        router.push(`/products/${individualProduct._id}`)
-                                        localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
+                                        router.push(`/products/${product._id}`)
+                                        localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                     }
                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                 }} className={`${DashboardCSS.imageContainer}`}>
-                                    <figure><img src={product?.productPicture} alt="Product Image" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '10px 10px 0 0' }} /></figure>
+                                    <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                                 </div>
 
                                 <div className=''>
-                                    <div className='mt-4'>
-                                        <div className="lg:px-4 px-1">
+                                    <div className='mt-1'>
+                                        <div className="px-1">
                                             <h2 onClick={() => {
-                                                router.push(`/products/${individualProduct._id}`)
-                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([individualProduct]));
-                                            }} className="h-16 hover:underline">{individualProduct.title}</h2>
+                                                router.push(`/products/${product._id}`)
+                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
 
-                                            <div className=''>
-                                                <p className='my-[12px] flex justify-between items-center'><span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{individualProduct.offerPrice + ' BDT'}</span> {individualProduct?.price + ' BDT'}</p>
+                                            {/* For large screen */}
+                                            <h2 onClick={() => {
+                                                router.push(`/products/${product._id}`)
+                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
+
+
+                                            <div className="flex justify-between items-center">
+                                                <div className='flex justify-between items-center w-full'>
+                                                    <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
+                                                        router.push(`/products/${product._id}`)
+                                                        localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                    }}>{product.offerPrice} ৳</p>
+
+                                                    <p style={{ color: 'white' }} onClick={() => {
+                                                        router.push(`/products/${product._id}`)
+                                                        localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                                    }}>{product.price} ৳</p>
+                                                </div>
                                             </div>
+                                            <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                         </div>
 
 
+                                        <div onClick={() => handleItemAddToCart(product)} className=''>
+                                            <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
 
+                                        </div>
                                     </div>
                                 </div>
 
@@ -300,7 +322,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                         <h1 className="flex justify-center">Do you want to delete this product?</h1>
                         <h1 className="flex justify-center">This is not reverseable!</h1>
                         <div className='flex justify-between items-center mt-[24px]'>
-                            <div onClick={()=> document.getElementById('beforeDelete').close()}>
+                            <div onClick={() => document.getElementById('beforeDelete').close()}>
                                 <Button background='green' width='150px'><span className='text-white'>Cancel</span></Button>
                             </div>
 
