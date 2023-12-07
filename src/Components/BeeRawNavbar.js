@@ -129,14 +129,14 @@ const Page = () => {
 
 
           {
-            isInputForTheProduct ? <div style={{position: 'absolute', zIndex: '1000', background: 'crimson' }} className={`text-white mr-[10px] lg:mr-0 md:mr-0 lg:w-[450px] ${MyServiceCSS.searchResult}`} data-aos="zoom-out">
+            isInputForTheProduct ? <div style={{position: 'absolute', zIndex: '1000', background: 'crimson' }} className={`text-white mr-[10px] lg:mr-0 md:mr-0 lg:w-[450px] ${MyServiceCSS.searchResult}`} data-aos="zoom-in-up">
             {
               products?.map((product, index) => <div onClick={()=> {
                 router.push(`/products/${product._id}`) 
                 setTimeout(function () {
                   setInputForTheProduct(false)
               }, 600);
-              }} key={index} style={{borderBottom: products.length !== index + 1 ? '1px solid white' : ''}} className={`flex items-center gap-x-2 p-1 ${MyServiceCSS.searchedProduct}`} data-aos="zoom-out">
+              }} key={index} style={{borderBottom: products.length !== index + 1 ? '1px solid white' : ''}} className={`flex items-center gap-x-2 p-1 ${MyServiceCSS.searchedProduct}`} data-aos="zoom-in-up">
                 {/* data-aos="zoom-in" */}
               <div>
                 <img src={product?.productPicture[0]} alt="Product Image" style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '0 8px 0 8px' }} />

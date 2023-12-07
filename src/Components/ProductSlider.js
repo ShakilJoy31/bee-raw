@@ -108,7 +108,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
         })
     }
     return (
-        <div>
+        <div data-aos="zoom-in-up">
             <div style={{ marginTop: '25px' }} className='text-white'>
                 <div className={`${IndividualCSS.container}`}>
                     <div>

@@ -1,12 +1,14 @@
 import { useRouter } from 'next/navigation';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
+import { ProductsStore } from '../../userStore';
 import Divider from './Divider';
 
 const Footer = () => {
     const router = useRouter();
+    const { products, setProducts } = ProductsStore.useContainer();
     return (
-        <div className=''>
+        <div className={`${products.length < 1 ? 'hidden':'block'}`}>
              <div className={`w-full`}>
         <div
           style={{

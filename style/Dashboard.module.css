@@ -75,12 +75,13 @@
 }
 
 
+
 .imageContainer {
   position: relative;
   overflow: hidden;
-  background-color:crimson;
   transition-duration: 150ms;
   border-radius: 0;
+  background: crimson;
   font-size: 16px;
   font-weight: 500;
 }
@@ -230,3 +231,26 @@
 }
 
 
+
+.productTitle{
+  color: white;
+  font-size: 14px;
+  transition-duration: 300ms;
+}
+
+.productTitle:hover{
+  font-size: 14px;
+  color: lightskyblue;
+  transition-duration: 300ms;
+}
+
+.productBuyNowButton{
+  background: white;
+  color: black;
+  transition-duration: 300ms;
+}
+.productBuyNowButton:hover{
+  background: black;
+  color: white;
+  transition-duration: 500ms;
+}

@@ -24,12 +24,13 @@ const Page = () => {
     <div>
       <div className='text-white'>
         {
-          individualProduct?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
+          individualProduct?.length < 1 ? <div className='w-full min-h-screen items-center flex justify-center'>
           <div>
-          <span style={{color: 'crimson'}} className="loading loading-infinity w-[250px] h-[150px] "></span>
-        <p style={{fontFamily: 'Lucida Sans Unicode'}} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
+              <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
+              {/* <span className="loading loading-ring loading-lg"></span> */}
+              <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
           </div>
-        </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct} clickedFor={clickedFor}></ProductSlider>
+      </div> : <ProductSlider individualProduct={individualProduct} setIndividualProduct={setIndividualProduct} clickedFor={clickedFor}></ProductSlider>
         }
       </div>
     </div>);

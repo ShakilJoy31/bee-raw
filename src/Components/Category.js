@@ -10,7 +10,6 @@ import {
 } from 'next/navigation';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
-import Button from '@/Components/button';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
@@ -104,17 +103,19 @@ const Page = ({ dataForDynamicComponent }) => {
                 <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">{dataForDynamicComponent[1]}</text>
             </svg></h1>
             {
-                filteredproducts?.length < 1 ? <div className='w-full min-h-screen flex justify-center items-center'>
-                    <div>
-                        <span style={{ color: 'crimson' }} className="loading loading-infinity w-[250px] h-[150px] "></span>
-                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center items-center'>Loading. Please wait...</p>
-                    </div>
-                </div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
+                filteredproducts?.length < 1 ? <div className='w-full min-h-screen items-center flex justify-center'>
+                <div>
+                    <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
+                    {/* <span className="loading loading-ring loading-lg"></span> */}
+                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
+                </div>
+            </div> : <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 
                     {
                         filteredproducts?.map((product, index) => <div style={{
-                            borderRadius: '0 8px 0 8px'
-                        }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                            borderRadius: '8px',
+                            border: '2px solid crimson'
+                        }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer} ${DashboardCSS.productBackground}`} data-aos="zoom-in-up">
                             <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
                                 <div>
                                     <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
@@ -128,7 +129,7 @@ const Page = ({ dataForDynamicComponent }) => {
                                 }
                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                             }} className={`${DashboardCSS.imageContainer}`}>
-                                <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
+                                <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                             </div>
 
                             <div className=''>
@@ -137,26 +138,34 @@ const Page = ({ dataForDynamicComponent }) => {
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                        }} className="hover:text-black h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
+                                        }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
+
+                                        {/* For large screen */}
+                                        <h2 onClick={() => {
+                                            router.push(`/products/${product._id}`)
+                                            localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                        }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
+
+                                        
                                         <div className="flex justify-between items-center">
                                             <div className='flex justify-between items-center w-full'>
-                                                <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
+                                                <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                 }}>{product.offerPrice} ৳</p>
 
-                                                <p onClick={() => {
+                                                <p style={{color:'white'}} onClick={() => {
                                                     router.push(`/products/${product._id}`)
                                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                 }}>{product.price} ৳</p>
                                             </div>
                                         </div>
-                                        <button style={{ background: 'rgb(28,97,231)' }} onClick={() => handleBuyNowButton(product)} className="btn border-0 btn-sm my-1 w-full text-white normal-case">Buy Now</button>
+                                        <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                     </div>
 
 
                                     <div onClick={() => handleItemAddToCart(product)} className=''>
-                                        <Button background={'rgb(28,97,231)'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
+                                    <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
 
                                     </div>
                                 </div>

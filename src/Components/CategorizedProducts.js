@@ -7,22 +7,19 @@ import {
 } from 'next/navigation';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 
-import Button from '@/Components/button';
-
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
   ProductsStore,
   UserStore,
 } from '../../userStore';
 
-const Page = ({ byCategory }) => {
+const Page = ({ byCategory, handleClickedCategoryForMore }) => {
     const router = useRouter();
     const pathname = usePathname();
     const { user, setUser } = UserStore.useContainer();
     const { products, setProducts } = ProductsStore.useContainer();
     const [warning, setWarning] = useState(false);
     const [cartAddedMessage, setCartAddedMessage] = useState('');
-    console.log(byCategory);
     const [loading, setLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -73,7 +70,7 @@ const Page = ({ byCategory }) => {
 
 
                             {/* for large screen */}
-                            <text  className='hidden lg:block md:block' x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
+                            <text className='hidden lg:block md:block' x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
 
                         </svg>
                     </h1>
@@ -81,7 +78,7 @@ const Page = ({ byCategory }) => {
 
 
                 <div style={{ position: 'relative' }} className='flex items-center w-24 lg:w-50 md:w-50'>
-                    <h1>
+                    <h1 className='hover:cursor-pointer' onClick={() => { handleClickedCategoryForMore(byCategory?.category[0].category) }}>
                         <svg className="gradient-text font-bold text-sm" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -113,14 +110,13 @@ const Page = ({ byCategory }) => {
                     <div className='grid lg:hidden md:hidden grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 
                         {
-                            byCategory?.products?.slice(0,4)?.map((product, index) => <div style={{
-                                borderRadius: '0 8px 0 8px'
-                            }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                            byCategory?.products?.slice(0, 4)?.map((product, index) => <div style={{
+                                borderRadius: '8px',
+                                border: '2px solid crimson'
+                            }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer} ${DashboardCSS.productBackground}`} data-aos="zoom-in-up">
                                 <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
                                     <div>
-                                        {/* style={{background: 'crimson'}} */}
-                                        <img className='h-full' src="
-                https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                        <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
                                         <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
                                     </div>
                                 </div>
@@ -131,40 +127,48 @@ const Page = ({ byCategory }) => {
                                     }
                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                 }} className={`${DashboardCSS.imageContainer}`}>
-                                    <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
+                                    <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                                 </div>
-
+    
                                 <div className=''>
                                     <div className='mt-1'>
                                         <div className="px-1">
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                            }} className="hover:text-black h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
+    
+                                            {/* For large screen */}
+                                            <h2 onClick={() => {
+                                                router.push(`/products/${product._id}`)
+                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
+    
+                                            
                                             <div className="flex justify-between items-center">
                                                 <div className='flex justify-between items-center w-full'>
-                                                    <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
+                                                    <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.offerPrice} ৳</p>
-
-                                                    <p onClick={() => {
+    
+                                                    <p style={{color:'white'}} onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.price} ৳</p>
                                                 </div>
                                             </div>
-                                            <button style={{ background: 'rgb(28,97,231)' }} onClick={() => handleBuyNowButton(product)} className="btn border-0 btn-sm my-1 w-full text-white normal-case">Buy Now</button>
+                                            <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                         </div>
-
-
+    
+    
                                         <div onClick={() => handleItemAddToCart(product)} className=''>
-                                            <Button background={'rgb(28,97,231)'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
-
+                                        <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
+    
                                         </div>
                                     </div>
                                 </div>
-
+    
                             </div>)
                         }
                     </div>
@@ -174,13 +178,12 @@ const Page = ({ byCategory }) => {
 
                         {
                             byCategory?.products?.map((product, index) => <div style={{
-                                borderRadius: '0 8px 0 8px'
-                            }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer}`}>
+                                borderRadius: '8px',
+                                border: '2px solid crimson'
+                            }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer} ${DashboardCSS.productBackground}`} data-aos="zoom-in-up">
                                 <div style={{ position: 'absolute', top: '0', zIndex: '1' }} className='flex justify-between w-full'>
                                     <div>
-                                        {/* style={{background: 'crimson'}} */}
-                                        <img className='h-full' src="
-                                    https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
+                                        <img className='h-full' src="https://i.ibb.co/XYxDz3W/Rectangle-223.png" alt="" />
                                         <p style={{ position: 'absolute', top: '20px', transform: 'rotate(-45deg)' }}>{product?.offer}% off</p>
                                     </div>
                                 </div>
@@ -191,40 +194,48 @@ const Page = ({ byCategory }) => {
                                     }
                                     localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                 }} className={`${DashboardCSS.imageContainer}`}>
-                                    <figure><img src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
+                                    <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                                 </div>
-
+    
                                 <div className=''>
                                     <div className='mt-1'>
                                         <div className="px-1">
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
-                                            }} className="hover:text-black h-[100px] lg:h-[75px]">{product.title.slice(0, 70)}</h2>
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
+    
+                                            {/* For large screen */}
+                                            <h2 onClick={() => {
+                                                router.push(`/products/${product._id}`)
+                                                localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
+                                            }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
+    
+                                            
                                             <div className="flex justify-between items-center">
                                                 <div className='flex justify-between items-center w-full'>
-                                                    <p style={{ textDecoration: 'line-through' }} className='text-slate-400 mb-1' onClick={() => {
+                                                    <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.offerPrice} ৳</p>
-
-                                                    <p onClick={() => {
+    
+                                                    <p style={{color:'white'}} onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.price} ৳</p>
                                                 </div>
                                             </div>
-                                            <button style={{ background: 'rgb(28,97,231)' }} onClick={() => handleBuyNowButton(product)} className="btn border-0 btn-sm my-1 w-full text-white normal-case">Buy Now</button>
+                                            <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                         </div>
-
-
+    
+    
                                         <div onClick={() => handleItemAddToCart(product)} className=''>
-                                            <Button background={'rgb(28,97,231)'} width='100%' borderRadius='0 8px 0 8px'><span className='text-white'>Add to cart</span></Button>
-
+                                        <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
+    
                                         </div>
                                     </div>
                                 </div>
-
+    
                             </div>)
                         }
                     </div>
