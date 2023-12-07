@@ -228,7 +228,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                     <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>
                     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
                         {
-                            moreProducts.map((product, index) => <div style={{
+                            moreProducts.slice(0, 4)?.map((product, index) => <div style={{
                                 borderRadius: '8px',
                                 border: '2px solid crimson'
                             }} key={index} className={`w-full hover:cursor-pointer ${DashboardCSS.imageContainer} ${DashboardCSS.productBackground}`} data-aos="zoom-in-up">
