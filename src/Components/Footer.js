@@ -8,7 +8,7 @@ const Footer = () => {
     const router = useRouter();
     const { products, setProducts } = ProductsStore.useContainer();
     return (
-        <div className={`${products.length < 1 ? 'hidden':'block'}`}>
+        <div className={`${products?.length < 1 ? 'hidden':'block'}`}>
              <div className={`w-full`}>
         <div
           style={{

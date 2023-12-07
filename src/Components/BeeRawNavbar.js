@@ -33,7 +33,8 @@ const Page = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    CustomerAPI.handleGettingProducts(pageNumber, 'Smart Watch').then(res => {
+    CustomerAPI.handleGettingAllProducts().then(res => {
+      console.log(res);
       setData(res)
       setProducts(res)
     });

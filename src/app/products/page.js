@@ -144,7 +144,7 @@ const Page = () => {
         <div className='h-full'>
             {/* Best products */}
             {
-                (products?.length < 1 && catrProducts.length < 1) ? <div className='w-full min-h-screen items-center flex justify-center'>
+                (products?.length < 1) ? <div className='w-full min-h-screen items-center flex justify-center'>
                     <div>
                         <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
                         {/* <span className="loading loading-ring loading-lg"></span> */}
@@ -157,10 +157,21 @@ const Page = () => {
 
             {/* The Categorized Product */}
             {
-                catrProducts.map((byCategory, index) => <div key={index} data-aos="zoom-in-up">
+                (catrProducts?.length < 1 && products?.length > 1) ? <div className='w-full items-center flex justify-center mb-4'>
+                <div>
+                    <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
+                    {/* <span className="loading loading-ring loading-lg"></span> */}
+                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
+                </div>
+            </div> : <div>
+            {
+                catrProducts?.map((byCategory, index) => <div key={index} data-aos="zoom-in-up">
                     <CategorizedProducts byCategory={byCategory} handleClickedCategoryForMore={handleClickedCategoryForMore}></CategorizedProducts>
                 </div>)
             }
+            </div>
+            }
+            
 
             {/* The modal... */}
             <dialog id="alReadyExistsOnTheCartModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>

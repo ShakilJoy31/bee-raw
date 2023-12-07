@@ -3,9 +3,24 @@ import axios from 'axios';
 import {
   BASE_URL,
   categorizedProductsAPI,
+  gettingAllProductsAPI,
   placedOrderAPI,
   productsGettingAPI,
 } from '@/constants/routeConstants';
+
+// Fetching all product for search. 
+const handleGettingAllProducts = async () => {
+  const axiosInstance = axios.create({
+      baseURL: BASE_URL
+    });
+  try {
+    const response = await axiosInstance.get(gettingAllProductsAPI);
+    return response.data;
+  } catch (error) {
+  }
+};
+
+
 
 // Fetching caterized products.....
 const getCategorizedProductsForCustomer = async () => {
@@ -22,7 +37,7 @@ const getCategorizedProductsForCustomer = async () => {
 
 
 
-// Fetching specific products.....
+// Fetching specific category products.....
 const handleGettingProducts = async (pageNumber, category) => {
   const axiosInstance = axios.create({
     baseURL: BASE_URL
@@ -73,5 +88,6 @@ export const CustomerAPI = {
   handleGettingProducts,
   userInformationForPlacOrderProduct,
   handleGettingProduct,
-  getCategorizedProductsForCustomer
+  getCategorizedProductsForCustomer,
+  handleGettingAllProducts
 }

@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { BsArrowLeft } from 'react-icons/bs';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
-import Button from '@/Components/button';
 import { verificationFieldsRound } from '@/constants/speceing';
 import { useForm } from '@formspree/react';
 
@@ -132,7 +131,8 @@ const Page = () => {
 
 
                     <div onClick={() => router.push('/products')} className=''>
-                        <Button background={'crimson'} width='200px'><span className='text-white'>Order Extra Item</span></Button>
+                    <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Order Extra Item</button>
+                        
                     </div>
 
                 </div>
@@ -142,9 +142,6 @@ const Page = () => {
                     <div>
                         <h1 className='mb-1'>Receiever Name <span className='text-red-700 text-xl pt-1'> *</span></h1>
                         <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
-                            {/* <span className="mx-3">
-                                <FaUser color={'purple'} size={25}></FaUser>
-                            </span> */}
                             <input onChange={(e) => setName(e.target.value)}
                                 style={{
                                     borderRadius: verificationFieldsRound,
@@ -214,26 +211,6 @@ const Page = () => {
                             />
                         </div>
                     </div>
-
-
-
-                    {/* <div>
-                        <h1 className='mb-1'>Payment Transaction id</h1>
-                        <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
-
-                            <input onChange={(e) => setPaymentTrId(e.target.value)}
-                                style={{
-                                    borderRadius: verificationFieldsRound,
-                                    background: 'white',
-                                }}
-                                placeholder="Search for anything"
-                                className="lg:w-[450px] w-full h-[45px] focus:outline-none border-0 pl-1 text-black"
-                                type="text"
-                                name=""
-                                id=""
-                            />
-                        </div>
-                    </div> */}
 
 
                     <div className='flex gap-x-8 my-3'>
@@ -335,31 +312,34 @@ const Page = () => {
 
 
 
-                <div className='lg:flex items-center justify-center hidden lg:justify-end md:justify-end gap-x-[48px] py-[25px] '>
+                <div className='flex items-center justify-center lg:justify-end md:justify-end gap-x-[48px] py-[25px] '>
                     <div onClick={() => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
-                    }}>
-                        <Button background='#DC3545' width='200px'><span className='text-white'>Cancel</span></Button>
+                    }}><button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButton}`}>Cancel</button>
+                        
+
+                        
                     </div>
 
                     <div onClick={handlePlaceOrderButton}>
-                        <Button background={'rgb(28,97,231)'} width='250px'><span className='text-white'>Place Order</span></Button>
+                    <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Place Order</button>
+                    
                     </div>
                 </div>
 
-                <div className='grid lg:hidden items-center py-[25px]'>
+                {/* <div className='grid lg:hidden items-center py-[25px]'>
                     <div onClick={() => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
                     }}>
-                        <Button background='#DC3545' width='94vw'><span className='text-white'>Cancel</span></Button>
+                        <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButton}`}>Cancel</button>
                     </div>
 
                     <div onClick={handlePlaceOrderButton} className='mt-[25px]'>
-                        <Button background={'rgb(28,97,231)'} width='94vw'><span className='text-white'>Place Order</span></Button>
+                    <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Place Order</button>  
                     </div>
-                </div>
+                </div> */}
 
             </div>
 

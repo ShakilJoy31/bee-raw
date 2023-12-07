@@ -1,7 +1,7 @@
 // Production URL
-export const BASE_URL = 'https://tradesent-server.onrender.com';
+// export const BASE_URL = 'https://tradesent-server.onrender.com';
 // Development URL
-// export const BASE_URL = 'http://localhost:5000';
+export const BASE_URL = 'http://localhost:5000';
 
 
 
@@ -23,3 +23,4 @@ export const placedOrderAPIForAdmin = '/get-orders';
 export const editProductAPIForAdmin = '/edit-product/';
 export const productDeleteByAdmin = '/deleteProduct/';
 export const productDeleteAPI = '/deleteProductByAdmin/';
+export const gettingAllProductsAPI = '/get-all-products';

@@ -78,7 +78,7 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
 
 
                 <div style={{ position: 'relative' }} className='flex items-center w-32 lg:w-50 md:w-50'>
-                    <h1 className={`hover:cursor-pointer ${DashboardCSS.showMoreButton}`} onClick={() => { handleClickedCategoryForMore(byCategory?.category[0].category) }}>
+                    <h1 className={`hover:cursor-pointer ${DashboardCSS.showMoreButton}`} onClick={() => {handleClickedCategoryForMore(byCategory?.category[0].category) }}>
                         Show more
                     </h1>
                     <span className={`${DashboardCSS.forMoreProduct}`}>

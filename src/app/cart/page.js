@@ -13,6 +13,7 @@ import Divider from '@/Components/Divider';
 // import { CustomerAPI } from '@/redux/sagas/customerAPI';
 import EmptyCartComponent from '@/Components/EmptyCartComponent';
 
+import HomeComponentCss from '../../../style/ComponentStyle.module.css';
 import { UserStore } from '../../../userStore';
 
 const Page = () => {
@@ -98,7 +99,7 @@ const Page = () => {
                     {
 
                         cartItem?.map((item, index) => <div key={index}>
-                            <div className={`lg:flex md:flex grid items-center justify-between`}>
+                            <div className={`lg:flex md:flex grid items-center justify-between ${HomeComponentCss.cartItemSelected}`}>
                                 <div className='flex items-center'>
                                     <img onClick={() => router.push(`/products/${item._id}`)} style={{ borderRadius: '8px' }} className='lg:w-[250px] lg:h-[200px] md:w-[200px] md:h-[170px] w-[170px] h-[145px]' src={item.productPicture[0]} alt="" />
                                     <div className='ml-[24px]'>
