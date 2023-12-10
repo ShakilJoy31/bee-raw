@@ -14,3 +14,10 @@ function useProductStore () {
     return {products, setProducts}; 
 }
 export const ProductsStore = createContainer(useProductStore);
+
+// categorywise products....
+function useCategoryWiseProductStore () {
+    const [catrProducts, setCatrProducts] = useState([]);
+    return {catrProducts, setCatrProducts};
+}
+export const CategoryWisedProductsStore = createContainer(useCategoryWiseProductStore);

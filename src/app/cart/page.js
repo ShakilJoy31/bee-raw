@@ -14,6 +14,7 @@ import Divider from '@/Components/Divider';
 import EmptyCartComponent from '@/Components/EmptyCartComponent';
 
 import HomeComponentCss from '../../../style/ComponentStyle.module.css';
+import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../../userStore';
 
 const Page = () => {
@@ -201,11 +202,15 @@ const Page = () => {
                             setCartItem(null);
                             setUser(null)
                         }} className='mb-[25px]'>
-                            <Button background='#DC3545' width='94vw'><span className='text-white'>Empty Cart</span></Button>
+                            <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Empty Cart</button>
+
+                            
                         </div>
 
                         <div onClick={handleCheckOut}>
-                            <Button background={'rgb(28,97,231)'} width='94vw'><span className='text-white'>Checkout</span></Button>
+                        <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Checkout</button>
+
+                           
                         </div>
 
                     </div>
@@ -217,11 +222,12 @@ const Page = () => {
                             setCartItem(null);
                             setUser(null)
                         }}>
-                            <Button background='#DC3545' width='250px'><span className='text-white'>Empty Cart</span></Button>
+                            <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Empty Cart</button>
                         </div>
 
                         <div onClick={handleCheckOut}>
-                            <Button background={'rgb(28,97,231)'} width='250px'><span className='text-white'>Checkout</span></Button>
+                        <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Checkout</button>
+                            
                         </div>
 
                     </div>

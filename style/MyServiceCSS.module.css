@@ -129,3 +129,21 @@ border-top-color: white; */
   border-radius: 8px;
   transition-duration: 300ms;
 }
+
+.contactOptionAddress{
+  border: 2px solid black;
+  background: white;
+  color: black;
+  transition-duration: 150ms;
+  padding: 5px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.contactOptionAddress:hover{
+  border: 2px solid crimson;
+  background: crimson;
+  color: white;
+  padding: 5px;
+  border-radius: 8px;
+  transition-duration: 300ms;
+}

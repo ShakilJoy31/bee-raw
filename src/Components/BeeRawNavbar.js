@@ -20,6 +20,7 @@ import { verificationFieldsRound } from '@/constants/speceing';
 
 import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 import {
+  CategoryWisedProductsStore,
   ProductsStore,
   UserStore,
 } from '../../userStore';
@@ -27,6 +28,7 @@ import CustomerSidebar from '../Components/CustomerSidebar';
 
 const Page = () => {
   const { user, setUser } = UserStore.useContainer();
+  const { catrProducts, setCatrProducts } = CategoryWisedProductsStore.useContainer();
   const { products, setProducts } = ProductsStore.useContainer();
   const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
@@ -34,7 +36,6 @@ const Page = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     CustomerAPI.handleGettingAllProducts().then(res => {
-      console.log(res);
       setData(res)
       setProducts(res)
     });
@@ -69,6 +70,11 @@ const Page = () => {
       setInputForTheProduct(true);
     }
   }
+  useEffect(() => {
+    CustomerAPI.getCategorizedProductsForCustomer().then(res => {
+        setCatrProducts(res);
+    })
+}, [])
   const drawer = <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>;
   return (
     <div>

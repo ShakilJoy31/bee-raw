@@ -12,11 +12,11 @@ import {
   useRouter,
 } from 'next/navigation';
 
-import { CustomerAPI } from '@/APIcalling/customerAPI';
 import CategorizedProducts from '@/Components/CategorizedProducts';
 import PauseOnHover from '@/Components/PauseOnHover';
 
 import {
+  CategoryWisedProductsStore,
   ProductsStore,
   UserStore,
 } from '../../../userStore';
@@ -66,14 +66,7 @@ const Page = () => {
     }
 
     // Updated one for fetching the data.
-    const [catrProducts, setCatrProducts] = useState([]);
-    useEffect(() => {
-        CustomerAPI.getCategorizedProductsForCustomer().then(res => {
-            // const filteredProduct = res?.filter(product => product.category[0].category === product.products[0].category[0].category);
-            // console.log(filteredProduct);
-            setCatrProducts(res);
-        })
-    }, [])
+    const { catrProducts, setCatrProducts } = CategoryWisedProductsStore.useContainer();
     const handleClickedCategoryForMore = (getCategory) => {
         console.log(getCategory);
         if (getCategory === 'Best seller') {
