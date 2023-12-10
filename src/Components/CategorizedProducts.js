@@ -68,7 +68,6 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                             </defs>
                             <text className='block lg:hidden md:hidden' x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
 
-
                             {/* for large screen */}
                             <text className='hidden lg:block md:block' x="20" y="30" fill="url(#gradient)" textAnchor="start">{byCategory.category[0].category}</text>
 

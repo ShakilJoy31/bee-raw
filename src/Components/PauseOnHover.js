@@ -64,13 +64,6 @@ const SimpleSlider = () => {
         ],
     };
 
-    // const handleNextSlide = () => {
-    //     sliderRef.current.slickNext();
-    // };
-    // const handlePrevSlide = () => {
-    //     sliderRef.current.slickPrev();
-    // };
-
     return (
         <div className='mt-[12px] bg-black'>
             <h1 className='my-2'> <svg className="gradient-text text-3xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">

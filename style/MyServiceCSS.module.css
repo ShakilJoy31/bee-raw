@@ -111,3 +111,21 @@ border-top-color: white; */
   border: 2px solid white;
   transition-duration: 300ms;
 }
+
+.contactOption{
+  border: 2px solid white;
+  background: black;
+  color: white;
+  transition-duration: 150ms;
+  padding: 5px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.contactOption:hover{
+  border: 2px solid crimson;
+  background: crimson;
+  color:white;
+  padding: 5px;
+  border-radius: 8px;
+  transition-duration: 300ms;
+}
