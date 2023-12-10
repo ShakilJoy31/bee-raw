@@ -85,7 +85,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
         setSelectedColor(color)
     }
     const handleBuyNowButton = () => {
-        if (selectedColor === '') {
+        if (selectedColor === '' && individualProduct?.color?.split(',')?.length > 1) {
             document.getElementById('alReadyExistsOnTheCartModal').showModal();
             setWarning(true)
             setMessage('Please select a color you want.');
@@ -93,6 +93,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
             router.push('/checkout')
         }
     }
+    
     const handleEditByAdmin = () => {
         localStorage.setItem("productToEdit", JSON.stringify(individualProduct));
         router.push('/admin');
@@ -179,8 +180,6 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
 
                             <div className={`${IndividualCSS.theButton}`} onClick={handleBuyNowButton}>
                                 <button className={`btn border-0 btn-sm w-[150px] normal-case ${DashboardCSS.IndividualProductBuyNowButton}`}>Buy Now</button>
-
-                                {/* <Button background={'rgb(28,97,231)'} width='150px'><span className='text-white'>Buy Now</span></Button> */}
                             </div>
 
                             {

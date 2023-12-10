@@ -35,6 +35,7 @@ const Page = () => {
     const [picture, setPicture] = useState('');
     const [hostedImage, setHostedImage] = useState()
     const [hostedImages, setHostedImages] = useState([])
+    const [isAdmin, setIsAdmin] = useState(false);
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('productToEdit'))) {
             setProductToEdit(JSON.parse(localStorage.getItem('productToEdit')));
@@ -46,9 +47,10 @@ const Page = () => {
             setDescription(JSON.parse(localStorage.getItem('productToEdit')).description);
             setHostedImages(JSON.parse(localStorage.getItem('productToEdit')).productPicture);
         }
+        if (JSON.parse(localStorage.getItem('editable'))) {
+            setIsAdmin(true)
+        }
     }, [])
-
-
     if (picture) {
         const formDataImage = new FormData();
         formDataImage.append("image", picture);
@@ -137,7 +139,7 @@ const Page = () => {
         <div className='mt-[24px]'>
             <div className='flex lg:justify-end md:justify-end justify-center mb-2 gap-x-2'>
                 {
-                    productToEdit ? '' : <button onClick={() => document.getElementById('productEditConfirmation').showModal()} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">Edit Product</button>
+                    isAdmin ? '' : <button onClick={() => document.getElementById('productEditConfirmation').showModal()} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">Edit Product</button>
                 }
 
                 <button onClick={() => router.push('/admin/user-order')} style={{ background: 'purple', borderRadius: '5px' }} className="py-[5px] px-[5px]">Check Orders</button>
@@ -162,7 +164,7 @@ const Page = () => {
                     {
                         productToEdit ? <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && price} /> : <textarea onChange={(e) => setPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type price' />
                     }
-                    
+
                 </div>
             </div>
 
@@ -173,7 +175,7 @@ const Page = () => {
                     {
                         productToEdit ? <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offerPrice} /> : <textarea onChange={(e) => setOfferPrice(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md" placeholder='Type old price' />
                     }
-                    
+
                 </div>
             </div>
 
@@ -184,7 +186,7 @@ const Page = () => {
                     {
                         productToEdit ? <textarea onChange={(e) => setOffer(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && offer} /> : <textarea onChange={(e) => setOffer(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type offer here' />
                     }
-                    
+
                 </div>
             </div>
 
@@ -193,9 +195,9 @@ const Page = () => {
                 <div>
                     <span className=''>Color</span>
                     {
-                        productToEdit ?  <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && color} /> :  <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type color here' />
+                        productToEdit ? <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " value={productToEdit && color} /> : <textarea onChange={(e) => setColor(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input focus:outline-none input-md " placeholder='Type color here' />
                     }
-                   
+
                 </div>
             </div>
 
@@ -260,7 +262,7 @@ const Page = () => {
                     {
                         productToEdit ? <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " value={productToEdit && description} /> : <textarea onChange={(e) => setDescription(e.target.value)} style={{ background: 'purple' }} type="text" className="w-full pt-2 input-lg input focus:outline-none " placeholder='Type description here' />
                     }
-                    
+
                 </div>
             </div>
 

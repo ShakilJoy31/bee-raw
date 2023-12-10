@@ -203,14 +203,10 @@ const Page = () => {
                             setUser(null)
                         }} className='mb-[25px]'>
                             <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Empty Cart</button>
-
-                            
                         </div>
 
                         <div onClick={handleCheckOut}>
-                        <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Checkout</button>
-
-                           
+                        <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
                         </div>
 
                     </div>
@@ -226,7 +222,7 @@ const Page = () => {
                         </div>
 
                         <div onClick={handleCheckOut}>
-                        <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.orderExtraItemButton}`}>Checkout</button>
+                        <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
                             
                         </div>
 

@@ -147,3 +147,72 @@ border-top-color: white; */
   border-radius: 8px;
   transition-duration: 300ms;
 }
+
+
+.cartIconOnNavbar{
+  border: 2px solid black;
+  background: black;
+  color: white;
+  transition-duration: 150ms;
+  padding: 2px;
+  border-radius: 50%;
+}
+.cartIconOnNavbar:hover{
+  border: 2px solid crimson;
+  background: white;
+  color: black;
+  padding: 2px;
+  border-radius: 50%;
+  transition-duration: 300ms;
+}
+
+
+
+/* Define the styles */
+.homeImage {
+  animation: changeBackgroundColorPc 2s ease-out;
+  width: 100%;
+  border-radius: 8px;
+}
+
+@keyframes changeBackgroundColorPc {
+  0% {
+    background-image: linear-gradient(to right, crimson, black);
+  }
+  25% {
+    background-image: linear-gradient(to right, black, rgb(1, 83, 247));
+  }
+  50% {
+    background-image: linear-gradient(to right, crimson, black);
+  }
+  75% {
+    background-image: linear-gradient(to right, black, rgb(1, 83, 247));
+  }
+  100% {
+    background-image: linear-gradient(to right, crimson, black);
+
+  }
+}
+
+.homeImageForMobile {
+  animation: changeBackgroundColor 2s ease-out;
+  border-radius: 8px;
+}
+
+@keyframes changeBackgroundColor {
+  0% {
+    background-image: linear-gradient(to right, crimson, black);
+  }
+  25% {
+    background-image: linear-gradient(to right, black, rgb(1, 83, 247));
+  }
+  50% {
+    background-image: linear-gradient(to right, crimson, black);
+  }
+  75% {
+    background-image: linear-gradient(to right, black, rgb(1, 83, 247));
+  }
+  100% {
+    background-image: linear-gradient(to right, crimson, black);
+  }
+}
