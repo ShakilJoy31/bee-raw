@@ -9,6 +9,7 @@ import Footer from '@/Components/Footer';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
+  BlurForSafety,
   CategoryWisedProductsStore,
   ProductsStore,
   UserStore,
@@ -25,6 +26,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
+    <BlurForSafety.Provider>
     <ProductsStore.Provider>
       <CategoryWisedProductsStore.Provider>
         <UserStore.Provider>
@@ -55,5 +57,6 @@ export default function RootLayout({ children }) {
         </UserStore.Provider>
       </CategoryWisedProductsStore.Provider>
     </ProductsStore.Provider>
+    </BlurForSafety.Provider>
   )
 }

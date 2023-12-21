@@ -33,13 +33,11 @@ const Page = () => {
     if (user?.length < 2) {
         totalPrice = parseFloat(user[0]?.price) * parseFloat(user[0]?.quantity) + deliveryFee;
     } else {
-        totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)) + deliveryFee, 0);
+        totalPrice = user?.reduce((total, cart) => total + (parseFloat(cart.price) * parseFloat(cart.quantity)), 0) + deliveryFee;
     }
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
-
-    // Working for placeing an order........
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -317,30 +315,13 @@ const Page = () => {
                         localStorage.removeItem('beeRawCartSingle')
                         router.push('/products')
                     }}><button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButton}`}>Cancel</button>
-                        
-
-                        
                     </div>
 
                     <div onClick={handlePlaceOrderButton}>
                     <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Place Order</button>
-                    
                     </div>
                 </div>
-
-                {/* <div className='grid lg:hidden items-center py-[25px]'>
-                    <div onClick={() => {
-                        localStorage.removeItem('beeRawCartSingle')
-                        router.push('/products')
-                    }}>
-                        <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButton}`}>Cancel</button>
-                    </div>
-
-                    <div onClick={handlePlaceOrderButton} className='mt-[25px]'>
-                    <button className={`btn border-0 btn-sm w-[150px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Place Order</button>  
-                    </div>
-                </div> */}
-
+                
             </div>
 
             <dialog id="placeOrderModal" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>

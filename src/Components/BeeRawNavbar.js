@@ -7,7 +7,10 @@ import React, {
 } from 'react';
 
 import Aos from 'aos';
-import { useRouter } from 'next/navigation';
+import {
+  usePathname,
+  useRouter,
+} from 'next/navigation';
 import { BiSearch } from 'react-icons/bi';
 import { BsMinecartLoaded } from 'react-icons/bs';
 import { FcOnlineSupport } from 'react-icons/fc';
@@ -21,6 +24,7 @@ import { verificationFieldsRound } from '@/constants/speceing';
 
 import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 import {
+  BlurForSafety,
   CategoryWisedProductsStore,
   ProductsStore,
   UserStore,
@@ -28,13 +32,15 @@ import {
 import CustomerSidebar from '../Components/CustomerSidebar';
 
 const Page = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isModalOpen, setIsModalOpen } = BlurForSafety.useContainer();
   const { user, setUser } = UserStore.useContainer();
   const { catrProducts, setCatrProducts } = CategoryWisedProductsStore.useContainer();
   const { products, setProducts } = ProductsStore.useContainer();
   const [loading, setLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
-
   const [data, setData] = useState([]);
   useEffect(() => {
     CustomerAPI.handleGettingAllProducts().then(res => {
@@ -42,8 +48,10 @@ const Page = () => {
       setProducts(res)
     });
       Aos.init({ duration: 500 });
+      if(JSON.parse(localStorage.getItem('editable'))){
+        setIsAdmin(true);
+      }
   }, [])
-  const router = useRouter();
   const handleCartFromNavbar = () => {
     if (JSON.parse(localStorage.getItem('beeRawCartSingle'))) {
       localStorage.removeItem('addedProduct');
@@ -57,9 +65,6 @@ const Page = () => {
       setCartItem((JSON.parse(localStorage.getItem("beeRawCart")))?.length)
     } else {
       setCartItem(user?.length)
-    }
-    if(JSON.parse(localStorage.getItem('editable'))){
-      setIsAdmin(true);
     }
   }, [user]);
 
@@ -92,7 +97,7 @@ const [isBackgroundActive, setIsBackgroundActive] = useState(false);
   };
   const drawer = <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>;
   return (
-    <div>
+    <div style={{filter: `${(isModalOpen && (pathname === '/admin' || pathname === '/admin/user-order')) ? 'blur(3px)' : ''}`}}>
       <div className="lg:flex md:flex justify-between items-center lg:pt-[24px] md:pt-[18px] pt-0">
         {/* For mobile user */}
         <div className='flex items-center lg:hidden md:hidden w-full justify-between mb-2'>
@@ -113,11 +118,24 @@ const [isBackgroundActive, setIsBackgroundActive] = useState(false);
             <img onClick={handleHomeImage} className={`block mx-auto hover:cursor-pointer w-[180px] h-[60px] ${MyServiceCSS.homeImage}`} src='https://i.ibb.co/X4wqGHL/IMG-20231028-225506-1-removebg-preview.png' alt="" />
           </div>
 
-          <span onClick={()=> router.push('/support')} className='hover:cursor-pointer'>
+
+          {
+            isAdmin ? <span onClick={()=> {
+              localStorage.removeItem('editable')
+              if(JSON.parse(localStorage.getItem('authenticAdmin')) === 'authenticAdmin'){
+                localStorage.removeItem('authenticAdmin')
+              }
+              setIsAdmin(false);
+            }} className={`mx-[24px] hover:cursor-pointer ${MyServiceCSS.cartIconOnNavbar}`}>
+            <RiLogoutCircleRLine 
+              size={30}
+            ></RiLogoutCircleRLine >
+          </span> : <span onClick={()=> router.push('/support')} className={`hover:cursor-pointer ${MyServiceCSS.cartIconOnNavbar}`}>
             <FcOnlineSupport 
               size={30}
             ></FcOnlineSupport >
           </span>
+          }
 
           <button className={`btn border-0 btn-sm normal-case ${MyServiceCSS.cartIconOnNavbar}`}><div className="indicator hover:cursor-pointer">
             <span style={{
@@ -125,6 +143,7 @@ const [isBackgroundActive, setIsBackgroundActive] = useState(false);
               borderRadius: '50%',
               fontSize: '12px'
             }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
+
             <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded
               size={25}></BsMinecartLoaded></span>
           </div></button>
@@ -168,7 +187,6 @@ const [isBackgroundActive, setIsBackgroundActive] = useState(false);
                 <p className='font-bold'>{product?.title}</p>
                 <div className='flex justify-between items-center mt-2'>
                 <p style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400 flex items-center'><span>{product?.offerPrice}</span> <span className='text-slate-400'><TbCurrencyTaka size={20}></TbCurrencyTaka></span></p>
-
                 <p className='flex items-center'><span>{product?.price}</span> <span><TbCurrencyTaka size={20} color={'white'}></TbCurrencyTaka></span></p>
                 </div>
               </div>
@@ -187,16 +205,23 @@ const [isBackgroundActive, setIsBackgroundActive] = useState(false);
               borderRadius: '50%',
               fontSize: '12px'
             }} className="px-[6px] text-white indicator-item">{cartItem === 0 ? '' : cartItem}</span>
+
             <span onClick={handleCartFromNavbar} className='hover:cursor-pointer'><BsMinecartLoaded
               size={25}></BsMinecartLoaded></span>
           </div></button>
 
           {
-            isAdmin ? <span onClick={()=> localStorage.removeItem('editable')} className='mx-[24px] hover:cursor-pointer'>
+            isAdmin ? <span onClick={()=> {
+              localStorage.removeItem('editable')
+              if(JSON.parse(localStorage.getItem('authenticAdmin')) === 'authenticAdmin'){
+                localStorage.removeItem('authenticAdmin')
+              }
+              setIsAdmin(false);
+            }} className={`mx-[24px] hover:cursor-pointer ${MyServiceCSS.cartIconOnNavbar}`}>
             <RiLogoutCircleRLine 
               size={30}
             ></RiLogoutCircleRLine >
-          </span> : <span onClick={()=> router.push('/support')} className='mx-[24px] hover:cursor-pointer'>
+          </span> : <span onClick={()=> router.push('/support')} className={`mx-[24px] hover:cursor-pointer ${MyServiceCSS.cartIconOnNavbar}`}>
             <FcOnlineSupport 
               size={30}
             ></FcOnlineSupport >

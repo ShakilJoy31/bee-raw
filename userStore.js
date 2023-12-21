@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import { createContainer } from 'unstated-next';
 
@@ -21,3 +24,18 @@ function useCategoryWiseProductStore () {
     return {catrProducts, setCatrProducts};
 }
 export const CategoryWisedProductsStore = createContainer(useCategoryWiseProductStore);
+
+
+// This state is decleared for blur.
+function useBlueForSafety () {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    useEffect(()=>{
+        if (JSON.parse(localStorage.getItem('authenticAdmin')) === 'authenticAdmin') {
+            setIsModalOpen(false);
+        }else{
+            setIsModalOpen(true);
+        }
+    },[])
+    return {isModalOpen, setIsModalOpen};
+}
+export const BlurForSafety = createContainer(useBlueForSafety);

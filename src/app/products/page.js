@@ -148,7 +148,6 @@ const Page = () => {
                 </div>
             }
 
-            {/* The Categorized Product */}
             {
                 (catrProducts?.length < 1 && products?.length > 1) ? <div className='w-full items-center flex justify-center mb-4'>
                 <div>

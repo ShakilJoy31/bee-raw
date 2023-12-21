@@ -181,7 +181,7 @@
 
 .littleImageOfProduct{
     width: 70px; 
-    height: 55px; 
+    height: 70px; 
     border-radius: 8px;
     background: purple;
     opacity: 0.4;
@@ -190,7 +190,7 @@
 
 .littleImageOfProduct:hover{
     width: 70px; 
-    height: 55px; 
+    height: 70px; 
     border-radius: 8px;
     cursor: pointer;
     opacity: 1;
@@ -198,7 +198,7 @@
 }
 .littleImageOfProductSelected{
     width: 70px; 
-    height: 55px; 
+    height: 70px; 
     border-radius: 8px;
     cursor: pointer;
     opacity: 1;
@@ -213,4 +213,9 @@
         padding: 3px;
         opacity: 0.8;
         border-radius: 0 8px 0 8px;
+}
+
+.priceIncreasingDecrising:hover {
+    background: crimson;
+    transition-duration: 350ms;
 }

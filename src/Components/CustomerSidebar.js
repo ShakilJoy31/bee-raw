@@ -32,8 +32,10 @@ import { PiTelevisionDuotone } from 'react-icons/pi';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import MyServiceCSS from '../../style/MyServiceCSS.module.css';
+import { BlurForSafety } from '../../userStore';
 
 const CustomerSidebar = ({ drawer }) => {
+    const { isModalOpen, setIsModalOpen } = BlurForSafety.useContainer();
     const router = useRouter();
     const pathname = usePathname();
     const [isBackgroundActive, setIsBackgroundActive] = useState(false);
@@ -46,7 +48,7 @@ const CustomerSidebar = ({ drawer }) => {
   };
 
     return (
-        <div style={{ background: 'black' }} className={`h-full w-[300px] md:w-[310px] lg:w-[320px]`}>
+        <div style={{ background: 'black', filter: `${(isModalOpen && (pathname === '/admin' || pathname === '/admin/user-order')) ? 'blur(3px)' : ''}`}} className={`h-full w-[300px] md:w-[310px] lg:w-[320px]`}>
             <div style={{ overflow: 'hidden' }} className={`h-full text-white ${DashboardCSS.customerSidebar} ${DashboardCSS.sidebarBackground}`}>
                 <div className={`flex items-center justify-around w-full ${isBackgroundActive ? MyServiceCSS.homeImage : ''}`}>
                     <img onClick={handleHomeImage} style={{ width: '150px', height: '100px' }} className={`lg:block lg:mx-auto md:block md:mx-auto py-[

@@ -23,3 +23,4 @@ export const editProductAPIForAdmin = '/edit-product/';
 export const productDeleteByAdmin = '/deleteProduct/';
 export const productDeleteAPI = '/deleteProductByAdmin/';
 export const gettingAllProductsAPI = '/get-all-products';
+export const productUpdateAPI = '/accepted-order-by-admin';

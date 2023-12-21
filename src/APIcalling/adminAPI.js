@@ -7,6 +7,7 @@ import {
   productDeleteAPI,
   productDeleteByAdmin,
   productPostingAPI,
+  productUpdateAPI,
 } from '@/constants/routeConstants';
 
 // Post request...
@@ -60,6 +61,7 @@ import {
         const response = await axiosInstance.delete(`${productDeleteByAdmin}${orderId}`);
         return response.data;
     } catch (error) {
+      console.log(error);
     }
 };
 
@@ -76,6 +78,21 @@ import {
     }
 };
 
+
+const handleAcceptOrderByAdmin = async (productId, payload) => {
+  const axiosInstance = axios.create({
+      baseURL: BASE_URL
+  });
+  try {
+      const response = await axiosInstance.put(`${productUpdateAPI}/${productId}`, payload);
+      return response.data;
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
+};
+
+
   
 
   export const AdminAPI = {
@@ -84,6 +101,7 @@ import {
     handleGettingOrders,
     handleDeletingOrder,
     handleUpdateProduct,
-    handleDeletingProductByAdmin
+    handleDeletingProductByAdmin,
+    handleAcceptOrderByAdmin
   }
 

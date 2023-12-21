@@ -139,9 +139,9 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                     {/* Information part........ */}
                     <div className={`${IndividualCSS.headingLeftBorder} lg:pl-3 md:pl-2`}>
                         <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>{individualProduct?.title}</h1>
+
                         <p style={{ marginBottom: '12px' }}>
                             <span style={{ textDecoration: 'line-through', marginRight: '12px' }} className='text-slate-400'>{'Taka ' + parseFloat(individualProduct?.offerPrice) * parseFloat(individualProduct.quantity) + ' BDT'}</span>
-
                             {'Taka ' + parseFloat(individualProduct?.price) * parseFloat(individualProduct?.quantity) + ' BDT'}
                         </p>
 
@@ -154,19 +154,21 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                                     </p>
                                 ))}
                             </div>
-
                         </div>
 
-                        {/* Counting quantity */}
                         <div className='flex items-center mt-[12px]'>
                             <p>Quantity: </p>
                             <div className='ml-4'>
-                                <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
-                                    <p onClick={() => quantityDecrease()}><span className=''>-</span></p>
-                                    <p>|</p>
-                                    <p>{individualProduct.quantity}</p>
-                                    <p>|</p>
-                                    <p onClick={() => quantityIncrease()}><span className=''>+</span></p>
+                                <div className='flex items-center justify-evenly bg-slate-500 text-white hover:cursor-pointer'>
+                                    <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityDecrease()}><span className='flex justify-center w-[35px]'>-</span></p>
+
+                                    <p style={{borderRight: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse'}}></p>
+
+                                    <p className=''><span className='flex justify-center w-[35px]'>{individualProduct.quantity}</span></p>
+
+                                    <p style={{borderLeft: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse'}}></p>
+
+                                    <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityIncrease()}><span className='flex justify-center w-[35px]'>+</span></p>
                                 </div>
                             </div>
                         </div>
@@ -181,19 +183,16 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                             <div className={`${IndividualCSS.theButton}`} onClick={handleBuyNowButton}>
                                 <button className={`btn border-0 btn-sm w-[150px] normal-case ${DashboardCSS.IndividualProductBuyNowButton}`}>Buy Now</button>
                             </div>
-
                             {
                                 isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={handleEditByAdmin}>
                                     <Button background={'purple'} width='150px'><span className='text-white'>Edit</span></Button>
                                 </div>
                             }
-
                             {
                                 isEditable && <div className={`${IndividualCSS.theButton} hidden lg:block md:block`} onClick={() => document.getElementById('beforeDelete').showModal()}>
                                     <Button background={'#DC3545'} width='150px'><span className='text-white'>Delete</span></Button>
                                 </div>
                             }
-
                         </div>
 
                         {

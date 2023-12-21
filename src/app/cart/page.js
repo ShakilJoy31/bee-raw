@@ -14,6 +14,7 @@ import Divider from '@/Components/Divider';
 import EmptyCartComponent from '@/Components/EmptyCartComponent';
 
 import HomeComponentCss from '../../../style/ComponentStyle.module.css';
+import IndividualCSS from '../../../style/Individual.module.css';
 import MyServiceCSS from '../../../style/MyServiceCSS.module.css';
 import { UserStore } from '../../../userStore';
 
@@ -23,7 +24,7 @@ const Page = () => {
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("beeRawCart"))) {
             setCartItem((JSON.parse(localStorage.getItem("beeRawCart"))))
-        }else{
+        } else {
             setCartItem(null);
         }
     }, []);
@@ -67,19 +68,19 @@ const Page = () => {
     const [orderDuplicateError, setOrderDuplicateError] = useState('');
     const [productToDelete, setProductToDelete] = useState('');
 
-    const handleDeleteFromCart = () =>{
+    const handleDeleteFromCart = () => {
         const restProduct = cartItem.filter((item, index) => item?._id !== productToDelete);
-        if(restProduct.length === 0){
+        if (restProduct.length === 0) {
             setCartItem(null);
             localStorage.removeItem('beeRawCart');
-        }else{
+        } else {
             setCartItem(restProduct);
             localStorage.setItem("beeRawCart", JSON.stringify(restProduct));
         }
         setUser(restProduct);
         document.getElementById('deleteProductFromCart').close();
     }
-    const handleCheckOut = () =>{
+    const handleCheckOut = () => {
         console.log('Button is clicked');
         router.push('/checkout');
     }
@@ -107,29 +108,33 @@ const Page = () => {
                                         <h1 onClick={() => router.push(`/products/${item._id}`)} className='font-bold mb-[8px] mr-[8px] lg:text-2xl md:text-xl'>{item.title}</h1>
 
                                         <div className='flex items-center w-full gap-x-3'>
-                                                <p style={{ textDecoration: 'line-through' }} className='text-slate-400' onClick={() => {
-                                                    router.push(`/products/${item._id}`)
-                                                }}>{parseFloat(item.offerPrice) * parseFloat(item.quantity)} ৳</p>
+                                            <p style={{ textDecoration: 'line-through' }} className='text-slate-400' onClick={() => {
+                                                router.push(`/products/${item._id}`)
+                                            }}>{parseFloat(item.offerPrice) * parseFloat(item.quantity)} ৳</p>
 
-                                                <p onClick={() => {
-                                                    router.push(`/products/${item._id}`)
-                                                }}>{parseFloat(item.price) * parseFloat(item.quantity)} ৳</p>
-                                            </div>
-                                        
+                                            <p onClick={() => {
+                                                router.push(`/products/${item._id}`)
+                                            }}>{parseFloat(item.price) * parseFloat(item.quantity)} ৳</p>
+                                        </div>
+
                                         {/* For mobile... */}
                                         <div className='block lg:hidden md:hidden mt-[8px]'>
                                             <div className='flex items-center gap-x-2'>
-                                                <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
-                                                    <p onClick={() => quantityDecrease(item)}><span className=''>-</span></p>
-                                                    <p>|</p>
-                                                    <p>{item.quantity}</p>
-                                                    <p>|</p>
-                                                    <p onClick={() => quantityIncrease(item)}><span className=''>+</span></p>
+                                                <div className='flex items-center justify-evenly bg-slate-500 text-white hover:cursor-pointer'>
+                                                    <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityDecrease(item)}><span className='flex justify-center w-[35px]'>-</span></p>
+
+                                                    <p style={{ borderRight: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
+
+                                                    <p className=''><span className='flex justify-center w-[35px]'>{item.quantity}</span></p>
+
+                                                    <p style={{ borderLeft: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
+
+                                                    <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityIncrease(item)}><span className='flex justify-center w-[35px]'>+</span></p>
                                                 </div>
-                                                <span onClick={()=> {
-                                            document.getElementById('deleteProductFromCart')?.showModal();
-                                            setProductToDelete(item?._id)
-                                        }} className='flex justify-center hover:cursor-pointer hover:text-white'><IoTrashBin size={25} color={'red'} /></span>
+                                                <span onClick={() => {
+                                                    document.getElementById('deleteProductFromCart')?.showModal();
+                                                    setProductToDelete(item?._id)
+                                                }} className='flex justify-center hover:cursor-pointer hover:text-white'><IoTrashBin size={25} color={'red'} /></span>
                                             </div>
 
                                         </div>
@@ -139,14 +144,21 @@ const Page = () => {
                                 {/* For Computer... */}
                                 <div className='hidden lg:flex md:flex justify-end h-full'>
                                     <div className=''>
-                                        <div className='flex items-center justify-evenly bg-slate-500 rounded-sm w-[125px] text-white hover:cursor-pointer'>
-                                            <p onClick={() => quantityDecrease(item)}><span className=''>-</span></p>
-                                            <p>|</p>
-                                            <p>{item.quantity}</p>
-                                            <p>|</p>
-                                            <p onClick={() => quantityIncrease(item)}><span className=''>+</span></p>
+                                        <div className='flex items-center gap-x-2'>
+                                            <div className='flex items-center justify-evenly bg-slate-500 text-white hover:cursor-pointer'>
+                                                <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityDecrease(item)}><span className='flex justify-center w-[35px]'>-</span></p>
+
+                                                <p style={{ borderRight: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
+
+                                                <p className=''><span className='flex justify-center w-[35px]'>{item.quantity}</span></p>
+
+                                                <p style={{ borderLeft: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
+
+                                                <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityIncrease(item)}><span className='flex justify-center w-[35px]'>+</span></p>
+                                            </div>
                                         </div>
-                                        <span onClick={()=> {
+
+                                        <span onClick={() => {
                                             document.getElementById('deleteProductFromCart')?.showModal();
                                             setProductToDelete(item?._id)
                                         }} className='flex justify-center mt-[10px] hover:cursor-pointer hover:text-white'><IoTrashBin size={25} color={'red'} /></span>
@@ -195,7 +207,6 @@ const Page = () => {
 
 
 
-                    {/* Empty cart and add date time button */}
                     <div className='lg:hidden md:hidden items-center justify-center grid my-[25px]'>
                         <div onClick={() => {
                             localStorage.removeItem('beeRawCart')
@@ -206,7 +217,7 @@ const Page = () => {
                         </div>
 
                         <div onClick={handleCheckOut}>
-                        <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
+                            <button className={`btn border-0 btn-sm w-[300px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
                         </div>
 
                     </div>
@@ -222,40 +233,40 @@ const Page = () => {
                         </div>
 
                         <div onClick={handleCheckOut}>
-                        <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
-                            
-                        </div>
+                            <button className={`btn border-0 btn-sm w-[250px] normal-case ${MyServiceCSS.IndividualProductBuyNowButtonForPlacingOrder}`}>Checkout</button>
 
+                        </div>
                     </div>
+
 
                     <dialog id="deleteProductFromCart" className="modal" style={{ maxWidth: '480px', transform: 'translateX(-50%)', left: '50%' }}>
-                <div style={{
-                    color: 'white',
-                    background: '#DC3545',
-                    border: '1px solid white'
-                }} className="modal-box">
-                    <h3 className="flex justify-center text-white">This product that you have added will be deleted from your the cart.</h3>
-                    {/* <h3 className="flex justify-center text-white">এই বাইঞ্চোদ, প্রোডাক্ট কিন্তু ডিলেট হয়ে যাবে।</h3> */}
+                        <div style={{
+                            color: 'white',
+                            background: 'crimson',
+                            border: '2px solid white'
+                        }} className="modal-box">
+                            <h3 className="flex justify-center text-white">This product that you have added will be deleted from your the cart.</h3>
+                            {/* <h3 className="flex justify-center text-white">এই বাইঞ্চোদ, প্রোডাক্ট কিন্তু ডিলেট হয়ে যাবে।</h3> */}
 
-                    <div className='flex justify-between items-center my-[10px] gap-x-2'>
-                    
-                    <div onClick={()=>{
-                        document.getElementById('deleteProductFromCart').close();
-                    }}>
-                        <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Cancel</span></div></Button>
-                        {/* <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>এই না না</span></div></Button> */}
-                    </div>
+                            <div className='flex justify-between items-center my-[10px] gap-x-2'>
 
-                    <div onClick={handleDeleteFromCart} className=''>
-                        <Button background={'red'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Confirm</span></div> </Button>
-                        {/* <Button background={'#9F5AE5'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>আচ্ছা হোক</span></div> </Button> */}
-                    </div>
-                </div>
-                </div>
-                <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
+                                <div onClick={() => {
+                                    document.getElementById('deleteProductFromCart').close();
+                                }}>
+                                    <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Cancel</span></div></Button>
+                                    {/* <Button background='green' width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>এই না না</span></div></Button> */}
+                                </div>
+
+                                <div onClick={handleDeleteFromCart} className=''>
+                                    <Button background={'red'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>Confirm</span></div> </Button>
+                                    {/* <Button background={'#9F5AE5'} width='120px'><div className='flex justify-around px-3 items-center'><span className='text-white'>আচ্ছা হোক</span></div> </Button> */}
+                                </div>
+                            </div>
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                            <button>close</button>
+                        </form>
+                    </dialog>
 
 
                 </div> : <div className='min-h-screen text-black mx-[48px]'>
