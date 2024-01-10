@@ -22,35 +22,35 @@
 }
 
 /* Customer */
-.customerSidebar{
+.customerSidebar {
   box-shadow: 6px 0px 6px white;
   margin-right: 10px;
 }
-.sidebarHeading{
+.sidebarHeading {
   margin-top: 4px;
   margin-bottom: 4px;
   transition-duration: 1000ms;
 }
-.sidebarHeading:hover{
+.sidebarHeading:hover {
   /* background: rgb(1, 83, 247); */
   background: crimson;
   border-radius: 8px;
   transition-duration: 100ms;
   cursor: pointer;
 }
-.sidebarHeadingSelected{
+.sidebarHeadingSelected {
   background: crimson;
   border-radius: 8px;
   transition-duration: 100ms;
   cursor: pointer;
 }
 
-.offerSlider{
+.offerSlider {
   border-radius: 16px;
   border: 1px solid rgba(18, 18, 18, 0.16);
 }
 
-.categoryItem{
+.categoryItem {
   border-radius: 30px;
   box-shadow: 0px 6px 18px 0px rgba(48, 48, 48, 0.05);
   /* box-shadow: 0px 27px 80px 0px rgba(48, 48, 48, 0.08); */
@@ -64,7 +64,7 @@
   background-color: transparent;
 }
 
-.sidebarBackground{
+.sidebarBackground {
   /* background: radial-gradient(
     50% 50% at 50% 50%,
     rgba(34, 15, 130, 0.62) 0%,
@@ -73,8 +73,6 @@
   color: white;
   overflow: hidden;
 }
-
-
 
 .imageContainer {
   position: relative;
@@ -97,8 +95,6 @@
   transition-duration: 450ms;
 }
 
-
-
 .carslImgContainer {
   position: relative;
   overflow: hidden;
@@ -107,6 +103,47 @@
   border-radius: 0;
   /* border: 2px solid crimson; */
 }
+
+
+
+
+
+
+
+/* Styles for the comment */
+
+.commentsContainer {
+  margin-top: 20px;
+}
+
+.comment {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.user {
+  font-weight: bold;
+}
+
+.date {
+  color: #888;
+  font-size: 12px;
+  transition-duration: 220ms;
+}
+
+.date:hover{
+  color: white;
+  font-size: 12px;
+  transition-duration: 220ms;
+}
+
+.commentText {
+  margin-top: 5px;
+}
+
+
+
+
 
 .carslImgContainer img {
   transition: transform 0.3s ease;
@@ -118,8 +155,6 @@
   transform: scale(1.2);
   transition-duration: 450ms;
 }
-
-
 
 .imageContainerDifferent {
   position: relative;
@@ -140,10 +175,6 @@
   border-radius: 10px;
 }
 
-
-
-
-
 .tableRoomInput {
   border-radius: 8px;
   border: 1px solid rgba(18, 18, 18, 0.15);
@@ -162,53 +193,49 @@
   background: rgba(229, 229, 229, 0.4);
 }
 
-.customInputSelect{
+.customInputSelect {
   border-radius: 8px;
   background: rgba(229, 229, 229, 0.179);
   /* color: rgba(255, 255, 255, 0.385); */
 }
 
-
+.sheltonTools {
+  color: crimson;
+  font-size: 28px;
+}
 
 @media screen and (max-width: 767px) {
-  .footerSection{
+  .footerSection {
     /* border-right: 1px solid rgba(255, 255, 255, 0.685); */
   }
 }
 
 /* Tablets (768px to 1023px) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .footerSection{
+  .footerSection {
     /* border-right: 1px solid rgba(255, 255, 255, 0.685); */
   }
 }
 
 /* Large screens (1024px and above) */
 @media screen and (min-width: 1024px) {
-  .footerSection{
+  .footerSection {
     /* border-right: 1px solid rgba(255, 255, 255, 0.685); */
   }
 }
 
-.footerContent{
+.footerContent {
   transition-duration: 1400ms;
-  color: rgba(255, 255, 255, 0.514)
+  color: rgba(255, 255, 255, 0.514);
 }
 
-.footerContent:hover{
+.footerContent:hover {
   cursor: pointer;
   color: white;
   transition-duration: 400ms;
 }
 
-
-
-
-
-
-
-
-.forMoreProduct{
+.forMoreProduct {
   animation: moveLeftToRight 1500ms linear infinite;
   position: absolute;
   right: 60px;
@@ -231,40 +258,37 @@
   }
 }
 
-
-
-.productTitle{
+.productTitle {
   color: white;
   font-size: 14px;
   transition-duration: 300ms;
 }
 
-.productTitle:hover{
+.productTitle:hover {
   font-size: 14px;
   color: lightskyblue;
   transition-duration: 300ms;
 }
 
-.productBuyNowButton{
+.productBuyNowButton {
   background: white;
   color: black;
   transition-duration: 300ms;
 }
-.productBuyNowButton:hover{
+.productBuyNowButton:hover {
   background: black;
   color: white;
   transition-duration: 500ms;
 }
 
-
-.IndividualProductBuyNowButton{
+.IndividualProductBuyNowButton {
   background: crimson;
   color: white;
   border-radius: 4px;
   border: 2px solid black;
   transition-duration: 300ms;
 }
-.IndividualProductBuyNowButton:hover{
+.IndividualProductBuyNowButton:hover {
   background: black;
   color: crimson;
   border-radius: 4px;
@@ -272,7 +296,7 @@
   transition-duration: 500ms;
 }
 
-.showMoreButton{
+.showMoreButton {
   background: crimson;
   transition-duration: 500ms;
   border: 2px solid white;
@@ -283,15 +307,20 @@
   padding-right: 4px;
 }
 
-.showMoreButton:hover{
+.showMoreButton:hover {
   background: black;
   transition-duration: 500ms;
   border: 2px solid crimson;
-  
 }
 
+.loginButton{
+  background: crimson;
+  transition-duration: 320ms;
+  color: white
+}
 
-
-
-
-
+.loginButton:hover{
+  background: white;
+  transition-duration: 320ms;
+  color:black;
+}

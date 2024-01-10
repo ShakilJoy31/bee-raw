@@ -6,6 +6,7 @@ import {
   useRouter,
 } from 'next/navigation';
 import { FaAngleDoubleRight } from 'react-icons/fa';
+import { IoStar } from 'react-icons/io5';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
@@ -77,7 +78,7 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
 
 
                 <div style={{ position: 'relative' }} className='flex items-center w-32 lg:w-50 md:w-50'>
-                    <h1 className={`hover:cursor-pointer ${DashboardCSS.showMoreButton}`} onClick={() => {handleClickedCategoryForMore(byCategory?.category[0].category) }}>
+                    <h1 className={`hover:cursor-pointer ${DashboardCSS.showMoreButton}`} onClick={() => { handleClickedCategoryForMore(byCategory?.category[0].category) }}>
                         Show more
                     </h1>
                     <span className={`${DashboardCSS.forMoreProduct}`}>
@@ -88,12 +89,12 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
 
             {
                 byCategory?.products?.length < 1 ? <div className='w-full min-h-screen items-center flex justify-center'>
-                <div>
-                    <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
-                    {/* <span className="loading loading-ring loading-lg"></span> */}
-                    <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
-                </div>
-            </div> : <div>
+                    <div>
+                        <span style={{ color: 'crimson' }} className="loading loading-ring w-24 h-24 block mx-auto"></span>
+                        {/* <span className="loading loading-ring loading-lg"></span> */}
+                        <p style={{ fontFamily: 'Lucida Sans Unicode' }} className='text-white flex justify-center'>Loading. Please wait...</p>
+                    </div>
+                </div> : <div>
                     {/* For mobile */}
                     <div className='grid lg:hidden md:hidden grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-[24px] my-6 w-full' style={{ overflow: 'hidden' }}>
 
@@ -117,30 +118,45 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                                 }} className={`${DashboardCSS.imageContainer}`}>
                                     <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                                 </div>
-    
+
                                 <div className=''>
                                     <div className='mt-1'>
                                         <div className="px-1">
+                                        <div className='flex justify-evenly items-center my-2'>
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <span
+                                                    key={value}
+                                                >
+                                                    <IoStar size={25} color={`${value <= (Math.round(product?.comments?.map(comment => comment?.commentAndRating)?.map(getValue => getValue?.overallRatting)?.reduce((accumulator, currentValue) => {
+                                                        if (typeof currentValue === 'number') {
+                                                            return accumulator + currentValue;
+                                                        }
+                                                        return accumulator;
+                                                    }, 0) / ((product?.comments?.map(comment => comment?.commentAndRating))?.length))) ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                                </span>
+                                            ))}
+                                        </div>
+
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                             }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
-    
+
                                             {/* For large screen */}
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                             }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
-    
-                                            
+
+
                                             <div className="flex justify-between items-center">
                                                 <div className='flex justify-between items-center w-full'>
                                                     <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.offerPrice} ৳</p>
-    
-                                                    <p style={{color:'white'}} onClick={() => {
+
+                                                    <p style={{ color: 'white' }} onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.price} ৳</p>
@@ -148,15 +164,17 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                                             </div>
                                             <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                         </div>
-    
-    
+
+
                                         <div onClick={() => handleItemAddToCart(product)} className=''>
-                                        <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
-    
+                                            <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
+
                                         </div>
+
+                                        
                                     </div>
                                 </div>
-    
+
                             </div>)
                         }
                     </div>
@@ -184,30 +202,45 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                                 }} className={`${DashboardCSS.imageContainer}`}>
                                     <figure><img className='lg:h-[220px] md:h-[200px] h-[180px]' src={product?.productPicture[0]} alt="Product Image" style={{ width: '100%', objectFit: 'cover', borderRadius: '0 8px 0 0' }} /></figure>
                                 </div>
-    
+
                                 <div className=''>
                                     <div className='mt-1'>
                                         <div className="px-1">
+                                        <div className='flex justify-evenly items-center my-2'>
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <span
+                                                    key={value}
+                                                >
+                                                    <IoStar size={25} color={`${value <= (Math.round(product?.comments?.map(comment => comment?.commentAndRating)?.map(getValue => getValue?.overallRatting)?.reduce((accumulator, currentValue) => {
+                                                        if (typeof currentValue === 'number') {
+                                                            return accumulator + currentValue;
+                                                        }
+                                                        return accumulator;
+                                                    }, 0) / ((product?.comments?.map(comment => comment?.commentAndRating))?.length))) ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                                </span>
+                                            ))}
+                                        </div>
+                                        
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                             }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] block lg:hidden md:hidden`}>{product.title.slice(0, 45)}</h2>
-    
+
                                             {/* For large screen */}
                                             <h2 onClick={() => {
                                                 router.push(`/products/${product._id}`)
                                                 localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                             }} className={`${DashboardCSS.productTitle} h-[50px] lg:h-[50px] hidden lg:block md:block`}>{product.title.slice(0, 50)}</h2>
-    
-                                            
+
+
                                             <div className="flex justify-between items-center">
                                                 <div className='flex justify-between items-center w-full'>
                                                     <p style={{ textDecoration: 'line-through', color: 'white' }} className='mb-1' onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.offerPrice} ৳</p>
-    
-                                                    <p style={{color:'white'}} onClick={() => {
+
+                                                    <p style={{ color: 'white' }} onClick={() => {
                                                         router.push(`/products/${product._id}`)
                                                         localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));
                                                     }}>{product.price} ৳</p>
@@ -215,15 +248,15 @@ const Page = ({ byCategory, handleClickedCategoryForMore }) => {
                                             </div>
                                             <button onClick={() => handleBuyNowButton(product)} className={`btn border-0 btn-sm my-1 w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Buy Now</button>
                                         </div>
-    
-    
+
+
                                         <div onClick={() => handleItemAddToCart(product)} className=''>
-                                        <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
-    
+                                            <button className={`btn border-0 btn-sm w-full normal-case ${DashboardCSS.productBuyNowButton}`}>Add to cart</button>
+
                                         </div>
                                     </div>
                                 </div>
-    
+
                             </div>)
                         }
                     </div>

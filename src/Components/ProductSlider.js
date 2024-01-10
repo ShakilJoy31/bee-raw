@@ -5,17 +5,23 @@ import React, {
 } from 'react';
 
 import { useRouter } from 'next/navigation';
+import { FaPlus } from 'react-icons/fa';
+import { IoStar } from 'react-icons/io5';
 import { TbAlertOctagonFilled } from 'react-icons/tb';
 
 import { AdminAPI } from '@/APIcalling/adminAPI';
+import { CustomerAPI } from '@/APIcalling/customerAPI';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import IndividualCSS from '../../style/Individual.module.css';
+import MyServiceCSS from '../../style/MyServiceCSS.module.css';
 import {
   ProductsStore,
   UserStore,
 } from '../../userStore';
 import Button from './button';
+import CommentsAndReviews from './CommentsAndReviews';
+import Divider from './Divider';
 
 const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) => {
     const { user, setUser } = UserStore.useContainer();
@@ -30,7 +36,8 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
             setIsEditable(true);
         }
     }, [])
-
+    const [customerService, setCustomerService] = useState(0);
+    const [equipmentPerformance, setEquipmentPerformance] = useState(0);
     setTimeout(function () {
         if (warning) {
             document.getElementById('alReadyExistsOnTheCartModal')?.close();
@@ -93,7 +100,7 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
             router.push('/checkout')
         }
     }
-    
+
     const handleEditByAdmin = () => {
         localStorage.setItem("productToEdit", JSON.stringify(individualProduct));
         router.push('/admin');
@@ -108,6 +115,44 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
             }
         })
     }
+
+    const handleUserWantsToComment = () => {
+        document.getElementById('readyToCommentModal').showModal();
+    }
+    function getCurrentDateTime() {
+        const currentDate = new Date();
+        return currentDate.toLocaleString();
+    }
+    const [comment, setComment] = useState('');
+    const HandlePostingCommentOnTool = async () => {
+        const userComment = {
+            name: 'Anonymous',
+            comment: comment,
+            individualRatting: equipmentPerformance,
+            overallRatting: customerService
+        }
+        await CustomerAPI.addComment(individualProduct._id, userComment).then(async res => {
+            if (res) {
+                const commentTime = getCurrentDateTime();
+                if (res?.comments) {
+                    setIndividualProduct(prevProduct => {
+                        const updatedComments = [...prevProduct.comments, { commentAndRating: userComment, timeOfComment: commentTime }];
+                        return { ...prevProduct, comments: updatedComments };
+                    });
+                } else {
+                    setIndividualProduct(prevProduct => ({
+                        ...prevProduct,
+                        comments: [{ commentAndRating: userComment, timeOfComment: commentTime }]
+                    }));
+                }
+                CustomerAPI.handleGettingProduct(individualProduct?._id).then(res => {
+                    setIndividualProduct(res);
+                    document.getElementById('readyToCommentModal').close();
+                });
+            }
+        });
+    }
+
     return (
         <div data-aos="zoom-in-up">
             <div style={{ marginTop: '25px' }} className='text-white'>
@@ -162,18 +207,55 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                                 <div className='flex items-center justify-evenly bg-slate-500 text-white hover:cursor-pointer'>
                                     <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityDecrease()}><span className='flex justify-center w-[35px]'>-</span></p>
 
-                                    <p style={{borderRight: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse'}}></p>
+                                    <p style={{ borderRight: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
 
                                     <p className=''><span className='flex justify-center w-[35px]'>{individualProduct.quantity}</span></p>
 
-                                    <p style={{borderLeft: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse'}}></p>
+                                    <p style={{ borderLeft: '1px solid white', width: '2px', height: '22px', borderCollapse: 'collapse' }}></p>
 
                                     <p className={`${IndividualCSS.priceIncreasingDecrising}`} onClick={() => quantityIncrease()}><span className='flex justify-center w-[35px]'>+</span></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className={`${IndividualCSS.decissionButton}`}>
+                        {/* The rattings */}
+                        <div className='flex items-center gap-x-2 my-3'>
+                            <h1>Individual Rating:</h1>
+                            <div className='flex justify-evenly items-center'>
+                                {[1, 2, 3, 4, 5].map((value) => (
+                                    <span
+                                        key={value}
+                                    >
+                                        <IoStar size={25} color={`${value <= (Math.round(individualProduct?.comments?.map(comment => comment?.commentAndRating)?.map(getValue => getValue?.individualRatting)?.reduce((accumulator, currentValue) => {
+                                            if (typeof currentValue === 'number') {
+                                                return accumulator + currentValue;
+                                            }
+                                            return accumulator;
+                                        }, 0) / ((individualProduct?.comments?.map(comment => comment?.commentAndRating))?.length))) ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className='flex items-center gap-x-2'>
+                            <h1>Average Rating:</h1>
+                            <div className='flex justify-evenly items-center'>
+                                {[1, 2, 3, 4, 5].map((value) => (
+                                    <span
+                                        key={value}
+                                    >
+                                        <IoStar size={25} color={`${value <= (Math.round(individualProduct?.comments?.map(comment => comment?.commentAndRating)?.map(getValue => getValue?.overallRatting)?.reduce((accumulator, currentValue) => {
+                                            if (typeof currentValue === 'number') {
+                                                return accumulator + currentValue;
+                                            }
+                                            return accumulator;
+                                        }, 0) / ((individualProduct?.comments?.map(comment => comment?.commentAndRating))?.length))) ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className={`${IndividualCSS.decissionButton} gap-x-2`}>
                             <div onClick={handleAddToCartButton}>
                                 <button className={`btn border-0 btn-sm w-[150px] normal-case ${DashboardCSS.IndividualProductBuyNowButton}`}>Add to cart</button>
 
@@ -222,7 +304,28 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
 
 
                 {/* The comments and reviews */}
-                
+                <div>
+                    <div className='flex justify-between m-4 items-center'>
+                        <h1 className=''> <svg className="gradient-text lg:text-2xl text-xl font-bold" width="100%" height="38" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style={{ stopColor: 'white' }} />
+                                    <stop offset="50%" style={{ stopColor: 'magenta' }} />
+                                    <stop offset="100%" style={{ stopColor: 'rgb(28,97,231)' }} />
+                                </linearGradient>
+                            </defs>
+                            <text x="50%" y="30" fill="url(#gradient)" textAnchor="middle">Comments and reviews</text>
+                        </svg></h1>
+
+                        <span className={`${IndividualCSS.plusCommnet} hover:cursor-pointer`} onClick={handleUserWantsToComment}><FaPlus size={25}></FaPlus></span>
+                    </div>
+                    <Divider color='crimson'></Divider>
+                </div>
+                {
+                    individualProduct?.comments?.length > 0 ? <div className='mb-8'>
+                        <CommentsAndReviews individualProduct={individualProduct} setIndividualProduct={setIndividualProduct}></CommentsAndReviews>
+                    </div> : <p className='mt-2 flex justify-center'>Be the first one to comment</p>
+                }
 
 
                 {/* You may also like (Suggestion part........) */}
@@ -335,6 +438,65 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
 
                     </div>
 
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+
+            {/* The modal for comment and review */}
+            <dialog id="readyToCommentModal" className="modal">
+                <div className={`${IndividualCSS.toCommentModal} modal-box`}>
+                    <span onClick={HandlePostingCommentOnTool} style={{ zIndex: '1' }} className={`${IndividualCSS.postingComment} w-[165px]`}><span className='flex justify-center'>Post</span></span>
+
+                    <div>
+                        <h1 className='mb-1'>Leave your comment</h1>
+                        <div className={`flex items-center ${MyServiceCSS.tableRoomInput}`}>
+                            <textarea
+                                onChange={(e) => setComment(e.target.value)}
+                                style={{
+                                    borderRadius: '8px',
+                                    background: 'white',
+                                }}
+                                placeholder={`Type comment as anonymous`}
+                                className={`w-full h-[55px] focus:outline-none border-0 pl-1 text-black`}
+                                type="text"
+                                name=""
+                                id=""
+                            />
+                        </div>
+                    </div>
+
+                    <div className='mb-3'><Divider color='crimson'></Divider></div>
+
+                    <div>
+                        <h3 className="flex justify-center text-white text-xl">We would like to have a ratting for this product.</h3>
+                        <div className='flex justify-evenly items-center'>
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <span
+                                    key={value}
+                                    onClick={() => setEquipmentPerformance(value)}>
+                                    <IoStar size={25} color={`${value <= equipmentPerformance ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='mb-3'><Divider color='slategrey'></Divider></div>
+
+                    <div>
+                        <h3 className="flex justify-center text-white text-xl">We would like to have an overall ratting.</h3>
+                        <div className='flex justify-evenly items-center'>
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <span
+                                    key={value}
+                                    onClick={() => setCustomerService(value)}>
+                                    <IoStar size={25} color={`${value <= customerService ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

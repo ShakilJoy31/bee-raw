@@ -9,8 +9,11 @@ import Footer from '@/Components/Footer';
 
 import DashboardCSS from '../../style/Dashboard.module.css';
 import {
+  AuthenticUser,
   BlurForSafety,
   CategoryWisedProductsStore,
+  CommentPermission,
+  LoggedInUserStore,
   ProductsStore,
   UserStore,
 } from '../../userStore';
@@ -26,37 +29,43 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
-    <BlurForSafety.Provider>
-    <ProductsStore.Provider>
-      <CategoryWisedProductsStore.Provider>
-        <UserStore.Provider>
-          <html lang="en">
-            <body style={{ background: 'black', fontFamily: 'sans-serif' }} className='text-white'>
-              <div className="flex">
-                <div style={{ position: 'fixed', height: '100%' }} className='hidden lg:block'>
-                  <CustomerSidebar></CustomerSidebar>
-                </div>
+    <AuthenticUser.Provider>
+    <CommentPermission.Provider>
+      <LoggedInUserStore.Provider>
+        <BlurForSafety.Provider>
+          <ProductsStore.Provider>
+            <CategoryWisedProductsStore.Provider>
+              <UserStore.Provider>
+                <html lang="en">
+                  <body style={{ background: 'black', fontFamily: 'sans-serif' }} className='text-white'>
+                    <div className="flex">
+                      <div style={{ position: 'fixed', height: '100%' }} className='hidden lg:block'>
+                        <CustomerSidebar></CustomerSidebar>
+                      </div>
 
-                <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
-                  <BeeRawNavbar></BeeRawNavbar>
-                  <div>
-                    {children}
-                  </div>
+                      <div className={`w-full lg:ml-[310px] ${DashboardCSS.sidebarBackground} lg:px-[48px] px-[10px] min-h-screen`}>
+                        <BeeRawNavbar></BeeRawNavbar>
+                        <div>
+                          {children}
+                        </div>
 
-                  <div className='hidden lg:block md:block mb-4'>
-                    <Footer></Footer>
-                  </div>
-                </div>
-              </div>
+                        <div className='hidden lg:block md:block mb-4'>
+                          <Footer></Footer>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className='block lg:hidden md:hidden'>
-                <Footer></Footer>
-              </div>
-            </body>
-          </html>
-        </UserStore.Provider>
-      </CategoryWisedProductsStore.Provider>
-    </ProductsStore.Provider>
-    </BlurForSafety.Provider>
+                    <div className='block lg:hidden md:hidden'>
+                      <Footer></Footer>
+                    </div>
+                  </body>
+                </html>
+              </UserStore.Provider>
+            </CategoryWisedProductsStore.Provider>
+          </ProductsStore.Provider>
+        </BlurForSafety.Provider>
+      </LoggedInUserStore.Provider>
+    </CommentPermission.Provider>
+    </AuthenticUser.Provider>
   )
 }

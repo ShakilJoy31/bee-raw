@@ -8,6 +8,7 @@ import {
   usePathname,
   useRouter,
 } from 'next/navigation';
+import { IoStar } from 'react-icons/io5';
 
 import { CustomerAPI } from '@/APIcalling/customerAPI';
 
@@ -135,6 +136,21 @@ const Page = ({ dataForDynamicComponent }) => {
                             <div className=''>
                                 <div className='mt-1'>
                                     <div className="px-1">
+                                    <div className='flex justify-evenly items-center my-2'>
+                                            {[1, 2, 3, 4, 5].map((value) => (
+                                                <span
+                                                    key={value}
+                                                >
+                                                    <IoStar size={25} color={`${value <= (Math.round(product?.comments?.map(comment => comment?.commentAndRating)?.map(getValue => getValue?.overallRatting)?.reduce((accumulator, currentValue) => {
+                                                        if (typeof currentValue === 'number') {
+                                                            return accumulator + currentValue;
+                                                        }
+                                                        return accumulator;
+                                                    }, 0) / ((product?.comments?.map(comment => comment?.commentAndRating))?.length))) ? 'white' : 'rgba(255, 255, 255, 0.583)'}`}></IoStar>
+                                                </span>
+                                            ))}
+                                        </div>
+
                                         <h2 onClick={() => {
                                             router.push(`/products/${product._id}`)
                                             localStorage.setItem("beeRawCartSingle", JSON.stringify([product]));

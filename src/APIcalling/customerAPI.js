@@ -83,11 +83,101 @@ const userInformationForPlacOrderProduct = async (payload) => {
   }
 };
 
+const addComment = async (toolId, comment) => {
+  const axiosInstance = axios.create({
+    baseURL: BASE_URL
+  });
+  try {
+    const response = await axiosInstance.post(`/add-comment/${toolId}`, comment);
+    return response.data;
+  } catch (error) {
+    // console.error(error);
+    // throw new Error("Failed to add comment");
+  }
+};
+
+// Delete comment bu admin
+const handleDeletingCommentByAdmin = async (toolId, commentId) => {
+  const axiosInstance = axios.create({
+      baseURL: BASE_URL
+  });
+
+  try {
+      const response = await axiosInstance.delete(`${commentDeleteByAdmin}${toolId}/${commentId}`);
+      return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
+const addReviewToComment = async (toolId, getReview) => {
+  console.log(getReview);
+  const axiosInstance = axios.create({
+    baseURL: BASE_URL
+  });
+  try {
+    const response = await axiosInstance.post(`/add-review/${toolId}`, getReview);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    // throw new Error("Failed to add review");
+  }
+};
+
+// Delete review by admin
+const handleDeletingReviewByAdmin = async (toolId, commentId, reviewDataToDelete) => {
+  console.log(reviewDataToDelete);
+  const axiosInstance = axios.create({
+      baseURL: BASE_URL
+  });
+
+  try {
+      const response = await axiosInstance.post(`${reviewDeleteByAdmin}${toolId}/${commentId}`, {reviewDataToDelete: reviewDataToDelete});
+      console.log(response);
+      return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+
+// Authentication for the user. 
+const handleSignin = async (payload) => {
+  const axiosInstance = axios.create({
+    baseURL: BASE_URL
+  });
+  try {
+    const response = await axiosInstance.post('/signup', payload);
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+const handleLoggedInUsers = async () => {
+  const axiosInstance = axios.create({
+    baseURL: BASE_URL
+  });
+  try {
+    const response = await axiosInstance.get('/loggedin-users');
+    return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 
 export const CustomerAPI = {
   handleGettingProducts,
   userInformationForPlacOrderProduct,
   handleGettingProduct,
   getCategorizedProductsForCustomer,
-  handleGettingAllProducts
+  handleGettingAllProducts,
+  addComment,
+  addReviewToComment,
+  handleSignin,
+  handleLoggedInUsers,
+  handleDeletingCommentByAdmin,
+  handleDeletingReviewByAdmin
 }
