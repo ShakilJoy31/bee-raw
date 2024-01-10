@@ -221,6 +221,10 @@ const ProductSlider = ({ individualProduct, setIndividualProduct, clickedFor }) 
                 </div>
 
 
+                {/* The comments and reviews */}
+                
+
+
                 {/* You may also like (Suggestion part........) */}
                 <div className='mb-6'>
                     <h1 style={{ marginBottom: '12px', fontSize: '1.675rem', fontWeight: '700' }}>You may also like</h1>

@@ -4,8 +4,6 @@ export const BASE_URL = 'https://tradesent-server.onrender.com';
 // export const BASE_URL = 'http://localhost:5000';
 
 
-
-
 export const LOGIN_URL = '/customer/login'
 export const REGISTER_URL = '/customer/register'
 export const SENDOTP_URL = '/customer/send-otp'
